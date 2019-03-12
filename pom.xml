@@ -1,0 +1,199 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>se.webinfostudio.game</groupId>
+	<artifactId>etheder</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>etheder-api</module>
+		<module>etheder-engine</module>
+		<module>etheder-model</module>
+		<module>etheder-startdata</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- defines version we use in the project -->
+		<jdk.version>1.8</jdk.version>
+
+		<dropwizard.version>1.3.9</dropwizard.version>
+		<guicey.version>4.2.2</guicey.version>
+		<dropwizard.jobs.version>3.0.0</dropwizard.jobs.version>
+
+		<postgres.version>42.2.5</postgres.version>
+		<apache.common.lang3.version>3.8.1</apache.common.lang3.version>
+
+		<jpa.version>2.2</jpa.version>
+		<validation.api.version>2.0.1.Final</validation.api.version>
+		<jbcrypt.version>0.4</jbcrypt.version>
+
+		<mockito.version>2.23.4</mockito.version>
+		<junit.version>5.3.2</junit.version>
+		<junitPlatform.version>1.3.2</junitPlatform.version>
+		<assertj.version>3.11.1</assertj.version>
+		<h2.version>1.4.197</h2.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Dropwizard -->
+			<dependency>
+				<groupId>io.dropwizard</groupId>
+				<artifactId>dropwizard-bom</artifactId>
+				<version>${dropwizard.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.dropwizard</groupId>
+				<artifactId>dropwizard-core</artifactId>
+				<version>${dropwizard.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.dropwizard</groupId>
+				<artifactId>dropwizard-auth</artifactId>
+				<version>${dropwizard.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.dropwizard</groupId>
+				<artifactId>dropwizard-db</artifactId>
+				<version>${dropwizard.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.dropwizard</groupId>
+				<artifactId>dropwizard-hibernate</artifactId>
+				<version>${dropwizard.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.dropwizard</groupId>
+				<artifactId>dropwizard-testing</artifactId>
+				<version>${dropwizard.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ru.vyarus</groupId>
+				<artifactId>dropwizard-guicey</artifactId>
+				<version>${guicey.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.spinscale.dropwizard</groupId>
+				<artifactId>dropwizard-jobs-core</artifactId>
+				<version>${dropwizard.jobs.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.spinscale.dropwizard</groupId>
+				<artifactId>dropwizard-jobs-guice</artifactId>
+				<version>${dropwizard.jobs.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>se.webinfostudio.game</groupId>
+				<artifactId>etheder-engine</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>se.webinfostudio.game</groupId>
+				<artifactId>etheder-model</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>se.webinfostudio.game</groupId>
+				<artifactId>etheder-startdata</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<!-- driver -->
+			<dependency>
+				<groupId>org.postgresql</groupId>
+				<artifactId>postgresql</artifactId>
+				<version>${postgres.version}</version>
+			</dependency>
+
+			<!-- common -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${apache.common.lang3.version}</version>
+			</dependency>
+
+			<!-- other -->
+			<dependency>
+				<groupId>javax.persistence</groupId>
+				<artifactId>javax.persistence-api</artifactId>
+				<version>${jpa.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>${validation.api.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mindrot</groupId>
+				<artifactId>jbcrypt</artifactId>
+				<version>${jbcrypt.version}</version>
+			</dependency>
+
+			<!-- test -->
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>${mockito.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-engine</artifactId>
+				<version>${junit.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-params</artifactId>
+				<version>${junit.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.vintage</groupId>
+				<artifactId>junit-vintage-engine</artifactId>
+				<version>${junit.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-runner</artifactId>
+				<version>${junitPlatform.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.assertj</groupId>
+				<artifactId>assertj-core</artifactId>
+				<version>${assertj.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.h2database</groupId>
+				<artifactId>h2</artifactId>
+				<version>${h2.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.3</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
