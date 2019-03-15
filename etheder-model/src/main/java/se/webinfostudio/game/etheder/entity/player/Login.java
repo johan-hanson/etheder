@@ -1,6 +1,7 @@
 package se.webinfostudio.game.etheder.entity.player;
 
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,8 +23,7 @@ public class Login extends AbstractGameEntity {
 	@Column(nullable = false, unique = true)
 	private String userName;
 	private String passwordHash;
-	private String passwordSalt;
-	private String token;
+	private UUID token;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date tokenExpireDate;
 	private UserRef user;
@@ -32,8 +32,12 @@ public class Login extends AbstractGameEntity {
 		return passwordHash;
 	}
 
-	public String getPasswordSalt() {
-		return passwordSalt;
+	public UUID getToken() {
+		return token;
+	}
+
+	public Date getTokenExpireDate() {
+		return tokenExpireDate;
 	}
 
 	public UserRef getUser() {
@@ -48,8 +52,12 @@ public class Login extends AbstractGameEntity {
 		this.passwordHash = passwordHash;
 	}
 
-	public void setPasswordSalt(final String passwordSalt) {
-		this.passwordSalt = passwordSalt;
+	public void setToken(final UUID token) {
+		this.token = token;
+	}
+
+	public void setTokenExpireDate(final Date tokenExpireDate) {
+		this.tokenExpireDate = tokenExpireDate;
 	}
 
 	public void setUser(final UserRef user) {
@@ -58,21 +66,5 @@ public class Login extends AbstractGameEntity {
 
 	public void setUserName(final String userName) {
 		this.userName = userName;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-
-	public Date getTokenExpireDate() {
-		return tokenExpireDate;
-	}
-
-	public void setTokenExpireDate(Date tokenExpireDate) {
-		this.tokenExpireDate = tokenExpireDate;
 	}
 }

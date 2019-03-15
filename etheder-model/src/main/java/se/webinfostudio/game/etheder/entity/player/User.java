@@ -4,6 +4,8 @@ import static java.lang.String.format;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -19,7 +21,10 @@ public class User extends AbstractGameEntity implements HasReference<UserRef> {
 
 	private static final long serialVersionUID = 7089932666191926795L;
 
+	@OneToOne
+	@JoinColumn(name = "loginid")
 	private Login login;
+
 	@NotBlank
 	private String firstName;
 	@NotBlank

@@ -16,10 +16,10 @@ import org.mockito.Mock;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import se.webinfostudio.game.etheder.api.model.player.UserModel;
+import se.webinfostudio.game.etheder.api.model.user.UserModel;
 import se.webinfostudio.game.etheder.api.resources.player.UserResource;
-import se.webinfostudio.game.etheder.api.transformer.player.UserModelTransformer;
-import se.webinfostudio.game.etheder.api.transformer.player.UserTransformer;
+import se.webinfostudio.game.etheder.api.transformer.user.UserModelTransformer;
+import se.webinfostudio.game.etheder.api.transformer.user.UserTransformer;
 import se.webinfostudio.game.etheder.entity.player.User;
 import se.webinfostudio.game.etheder.service.player.UserService;
 

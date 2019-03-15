@@ -1,8 +1,8 @@
-package se.webinfostudio.game.etheder.api.transformer.player;
+package se.webinfostudio.game.etheder.api.transformer.user;
 
 import java.util.function.Function;
 
-import se.webinfostudio.game.etheder.api.model.player.UserModel;
+import se.webinfostudio.game.etheder.api.model.user.UserModel;
 import se.webinfostudio.game.etheder.entity.player.User;
 
 /**

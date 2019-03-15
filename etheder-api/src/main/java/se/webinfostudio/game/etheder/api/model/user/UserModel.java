@@ -1,4 +1,4 @@
-package se.webinfostudio.game.etheder.api.model.player;
+package se.webinfostudio.game.etheder.api.model.user;
 
 import javax.validation.constraints.Min;
 

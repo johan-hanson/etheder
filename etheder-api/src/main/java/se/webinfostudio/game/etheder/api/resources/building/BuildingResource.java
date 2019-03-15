@@ -4,6 +4,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.Optional;
 
+import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -31,6 +32,7 @@ import se.webinfostudio.game.etheder.service.building.BuildingService;
  */
 @Path("/building")
 @Produces(MediaType.APPLICATION_JSON)
+@PermitAll
 public class BuildingResource extends AbstractResource {
 
 	private static final Logger LOG = getLogger(BuildingResource.class);

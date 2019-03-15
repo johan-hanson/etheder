@@ -1,5 +1,7 @@
 package se.webinfostudio.game.etheder.entity;
 
+import static java.util.UUID.randomUUID;
+
 import java.util.UUID;
 
 import javax.persistence.Id;
@@ -19,7 +21,7 @@ public abstract class AbstractGameEntity extends AbstractBasicEntity {
 	protected UUID id;
 
 	public AbstractGameEntity() {
-		id = UUID.randomUUID();
+		id = randomUUID();
 	}
 
 	public UUID getId() {

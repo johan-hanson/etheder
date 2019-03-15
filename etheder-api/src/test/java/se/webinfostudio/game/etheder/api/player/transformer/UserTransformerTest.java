@@ -9,8 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 
-import se.webinfostudio.game.etheder.api.model.player.UserModel;
-import se.webinfostudio.game.etheder.api.transformer.player.UserTransformer;
+import se.webinfostudio.game.etheder.api.model.user.UserModel;
+import se.webinfostudio.game.etheder.api.transformer.user.UserTransformer;
 import se.webinfostudio.game.etheder.entity.player.User;
 
 /**

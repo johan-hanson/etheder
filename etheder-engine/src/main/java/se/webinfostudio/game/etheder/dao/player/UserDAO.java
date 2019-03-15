@@ -24,8 +24,18 @@ public class UserDAO extends AbstractDAO<User> {
 		super(sessionFactory);
 	}
 
+	public User create(final User user) {
+		super.currentSession().persist(user.getLogin());
+		return super.persist(user);
+	}
+
 	public Optional<User> findById(final UUID id) {
 		return ofNullable(super.get(id));
+	}
+
+	public Optional<User> findByUserName(final String userName) {
+		return ofNullable(super.query("SELECT u FROM User u WHERE u.login.userName=?un").setParameter("un", userName)
+				.getSingleResult());
 	}
 
 	@Override

@@ -17,6 +17,7 @@ import se.webinfostudio.game.etheder.entity.building.BuildingRef;
 import se.webinfostudio.game.etheder.entity.player.Army;
 import se.webinfostudio.game.etheder.entity.player.ArmyRef;
 import se.webinfostudio.game.etheder.entity.player.City;
+import se.webinfostudio.game.etheder.entity.player.Login;
 import se.webinfostudio.game.etheder.entity.player.Player;
 import se.webinfostudio.game.etheder.entity.player.User;
 import se.webinfostudio.game.etheder.entity.research.Research;
@@ -43,7 +44,7 @@ public class HibernateModule extends DropwizardAwareModule<ApiConfiguration> {
 
 	private final HibernateBundle<ApiConfiguration> hibernate = new HibernateBundle<ApiConfiguration>(
 			Army.class, ArmyRef.class, Building.class, BuildingData.class, BuildingQueue.class, BuildingRef.class,
-			City.class, User.class, Player.class, Research.class, ResearchQueue.class,
+			City.class, User.class, Login.class, Player.class, Research.class, ResearchQueue.class,
 			Unit.class, UnitData.class, UnitQueue.class) {
 		@Override
 		public DataSourceFactory getDataSourceFactory(final ApiConfiguration configuration) {

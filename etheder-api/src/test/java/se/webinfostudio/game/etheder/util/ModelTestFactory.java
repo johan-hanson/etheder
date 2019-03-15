@@ -6,7 +6,7 @@ import se.webinfostudio.game.etheder.api.model.building.BuildingModel;
 import se.webinfostudio.game.etheder.api.model.building.BuildingQueueModel;
 import se.webinfostudio.game.etheder.api.model.player.CityModel;
 import se.webinfostudio.game.etheder.api.model.player.PlayerModel;
-import se.webinfostudio.game.etheder.api.model.player.UserModel;
+import se.webinfostudio.game.etheder.api.model.user.UserModel;
 
 /**
  *

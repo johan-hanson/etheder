@@ -29,7 +29,7 @@ public class UserService {
 
 		// validation against db, if username already exist, email already exist
 
-		return userDAO.persist(user);
+		return userDAO.create(user);
 	}
 
 	public void updatePassword(final String oldPassword, final String newPassword) {
