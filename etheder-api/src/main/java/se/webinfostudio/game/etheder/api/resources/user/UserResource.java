@@ -1,4 +1,4 @@
-package se.webinfostudio.game.etheder.api.resources.player;
+package se.webinfostudio.game.etheder.api.resources.user;
 
 import javax.annotation.security.PermitAll;
 import javax.inject.Inject;

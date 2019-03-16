@@ -10,7 +10,7 @@ import org.hibernate.SessionFactory;
 import com.google.inject.Inject;
 
 import io.dropwizard.hibernate.AbstractDAO;
-import se.webinfostudio.game.etheder.entity.player.User;
+import se.webinfostudio.game.etheder.entity.user.User;
 
 /**
  *
@@ -24,18 +24,32 @@ public class UserDAO extends AbstractDAO<User> {
 		super(sessionFactory);
 	}
 
-	public User create(final User user) {
-		super.currentSession().persist(user.getLogin());
-		return super.persist(user);
-	}
-
 	public Optional<User> findById(final UUID id) {
 		return ofNullable(super.get(id));
 	}
 
-	public Optional<User> findByUserName(final String userName) {
-		return ofNullable(super.query("SELECT u FROM User u WHERE u.login.userName=?un").setParameter("un", userName)
-				.getSingleResult());
+	/**
+	 * Find an {@link User} by its token.
+	 *
+	 * @param token token for the user to find
+	 * @return {@link User} if found else throws NoResultException
+	 */
+	public User findByToken(final UUID token) {
+		return super.query("SELECT u FROM User u WHERE u.login.token=:t")
+				.setParameter("t", token)
+				.getSingleResult();
+	}
+
+	/**
+	 * Find an {@link User} by its userName.
+	 *
+	 * @param userName userName on user to find
+	 * @return {@link User} if found else throws NoResultException
+	 */
+	public User findByUserName(final String userName) {
+		return super.query("SELECT u FROM User u WHERE u.login.userName=:un")
+				.setParameter("un", userName)
+				.getSingleResult();
 	}
 
 	@Override

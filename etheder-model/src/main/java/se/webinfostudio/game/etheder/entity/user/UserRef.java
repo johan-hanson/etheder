@@ -1,4 +1,4 @@
-package se.webinfostudio.game.etheder.entity.player;
+package se.webinfostudio.game.etheder.entity.user;
 
 import java.io.Serializable;
 import java.util.UUID;

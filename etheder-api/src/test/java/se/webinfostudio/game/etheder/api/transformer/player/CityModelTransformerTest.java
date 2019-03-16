@@ -1,4 +1,4 @@
-package se.webinfostudio.game.etheder.api.player.transformer;
+package se.webinfostudio.game.etheder.api.transformer.player;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.MockitoAnnotations.initMocks;

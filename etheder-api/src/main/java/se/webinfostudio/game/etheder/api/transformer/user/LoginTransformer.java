@@ -3,7 +3,7 @@ package se.webinfostudio.game.etheder.api.transformer.user;
 import java.util.function.Function;
 
 import se.webinfostudio.game.etheder.api.model.user.LoginModel;
-import se.webinfostudio.game.etheder.entity.player.Login;
+import se.webinfostudio.game.etheder.entity.user.Login;
 
 /**
  *

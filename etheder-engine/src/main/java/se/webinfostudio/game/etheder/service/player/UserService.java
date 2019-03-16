@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import se.webinfostudio.game.etheder.dao.player.UserDAO;
-import se.webinfostudio.game.etheder.entity.player.User;
+import se.webinfostudio.game.etheder.entity.user.User;
 
 /**
  *
@@ -29,7 +29,7 @@ public class UserService {
 
 		// validation against db, if username already exist, email already exist
 
-		return userDAO.create(user);
+		return userDAO.persist(user);
 	}
 
 	public void updatePassword(final String oldPassword, final String newPassword) {

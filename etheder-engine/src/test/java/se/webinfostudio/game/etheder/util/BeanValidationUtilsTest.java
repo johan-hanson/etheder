@@ -8,7 +8,7 @@ import javax.validation.ConstraintViolationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import se.webinfostudio.game.etheder.entity.player.User;
+import se.webinfostudio.game.etheder.entity.user.User;
 
 public class BeanValidationUtilsTest {
 

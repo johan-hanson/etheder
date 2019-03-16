@@ -1,4 +1,4 @@
-package se.webinfostudio.game.etheder.api.player.transformer;
+package se.webinfostudio.game.etheder.api.transformer.user;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -11,7 +11,7 @@ import org.mockito.InjectMocks;
 
 import se.webinfostudio.game.etheder.api.model.user.UserModel;
 import se.webinfostudio.game.etheder.api.transformer.user.UserTransformer;
-import se.webinfostudio.game.etheder.entity.player.User;
+import se.webinfostudio.game.etheder.entity.user.User;
 
 /**
  *

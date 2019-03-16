@@ -1,0 +1,3 @@
+Don't use @Entity(name="name") use @Table(name="nam")
+
+Use database.inTransaction when doing several database queries in test

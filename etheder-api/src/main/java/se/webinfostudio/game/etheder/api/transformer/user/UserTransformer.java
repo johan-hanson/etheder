@@ -7,8 +7,8 @@ import static org.mindrot.jbcrypt.BCrypt.hashpw;
 import java.util.function.Function;
 
 import se.webinfostudio.game.etheder.api.model.user.UserModel;
-import se.webinfostudio.game.etheder.entity.player.Login;
-import se.webinfostudio.game.etheder.entity.player.User;
+import se.webinfostudio.game.etheder.entity.user.Login;
+import se.webinfostudio.game.etheder.entity.user.User;
 
 /**
  *
@@ -26,7 +26,6 @@ public class UserTransformer implements Function<UserModel, User> {
 		user.setLogin(new Login());
 		user.getLogin().setUserName(userModel.getUserName());
 		user.getLogin().setPasswordHash(hashpw(userModel.getPassword(), gensalt(12)));
-		user.getLogin().setUser(user.toRef());
 		user.setFirstName(userModel.getFirstName());
 		user.setLastName(userModel.getLastName());
 		user.setCountry(userModel.getCountry());

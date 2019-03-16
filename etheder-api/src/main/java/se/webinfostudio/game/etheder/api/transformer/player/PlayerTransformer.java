@@ -6,7 +6,7 @@ import java.util.function.Function;
 
 import se.webinfostudio.game.etheder.api.model.player.PlayerModel;
 import se.webinfostudio.game.etheder.entity.player.Player;
-import se.webinfostudio.game.etheder.entity.player.UserRef;
+import se.webinfostudio.game.etheder.entity.user.UserRef;
 
 /**
  *

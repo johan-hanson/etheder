@@ -18,7 +18,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import se.webinfostudio.game.etheder.dao.player.UserDAO;
-import se.webinfostudio.game.etheder.entity.player.User;
+import se.webinfostudio.game.etheder.entity.user.User;
 
 /**
  *

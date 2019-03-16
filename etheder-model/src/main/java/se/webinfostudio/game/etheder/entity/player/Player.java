@@ -18,6 +18,7 @@ import javax.validation.constraints.NotNull;
 import se.webinfostudio.game.etheder.entity.AbstractGameEntity;
 import se.webinfostudio.game.etheder.entity.HasReference;
 import se.webinfostudio.game.etheder.entity.unit.UnitType;
+import se.webinfostudio.game.etheder.entity.user.UserRef;
 import se.webinfostudio.game.etheder.entity.util.Predicates;
 
 /**

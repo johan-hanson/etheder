@@ -17,14 +17,14 @@ import se.webinfostudio.game.etheder.entity.building.BuildingRef;
 import se.webinfostudio.game.etheder.entity.player.Army;
 import se.webinfostudio.game.etheder.entity.player.ArmyRef;
 import se.webinfostudio.game.etheder.entity.player.City;
-import se.webinfostudio.game.etheder.entity.player.Login;
 import se.webinfostudio.game.etheder.entity.player.Player;
-import se.webinfostudio.game.etheder.entity.player.User;
 import se.webinfostudio.game.etheder.entity.research.Research;
 import se.webinfostudio.game.etheder.entity.research.ResearchQueue;
 import se.webinfostudio.game.etheder.entity.unit.Unit;
 import se.webinfostudio.game.etheder.entity.unit.UnitData;
 import se.webinfostudio.game.etheder.entity.unit.UnitQueue;
+import se.webinfostudio.game.etheder.entity.user.Login;
+import se.webinfostudio.game.etheder.entity.user.User;
 
 /**
  *

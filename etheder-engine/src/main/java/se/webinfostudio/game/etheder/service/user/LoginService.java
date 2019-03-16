@@ -1,4 +1,4 @@
-package se.webinfostudio.game.etheder.service.player;
+package se.webinfostudio.game.etheder.service.user;
 
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
@@ -11,8 +11,8 @@ import java.util.Optional;
 import javax.inject.Inject;
 
 import se.webinfostudio.game.etheder.dao.player.UserDAO;
-import se.webinfostudio.game.etheder.entity.player.Login;
-import se.webinfostudio.game.etheder.entity.player.User;
+import se.webinfostudio.game.etheder.entity.user.Login;
+import se.webinfostudio.game.etheder.entity.user.User;
 
 /**
  *
@@ -29,15 +29,13 @@ public class LoginService {
 	}
 
 	public Optional<Login> login(final Login login) {
-		final Optional<User> userOpt = userDAO.findByUserName(login.getUserName());
-		if (userOpt.isPresent()) {
-			final Login loginDb = userOpt.get().getLogin();
-			if (checkpw(login.getPasswordHash(), loginDb.getPasswordHash())) {
-				loginDb.setToken(randomUUID());
-				loginDb.setTokenExpireDate(new Date());
-				userDAO.persist(userOpt.get());
-				return of(loginDb);
-			}
+		final User user = userDAO.findByUserName(login.getUserName());
+		final Login loginDb = user.getLogin();
+		if (checkpw(login.getPasswordHash(), loginDb.getPasswordHash())) {
+			loginDb.setToken(randomUUID());
+			loginDb.setTokenExpireDate(new Date());
+			userDAO.persist(user);
+			return of(loginDb);
 		}
 		return empty();
 	}

@@ -61,4 +61,4 @@ jobs:
   engineJob: 10min
   
 #Caches
-authCacheConfiguration: maximumSize=1000, expireAfterAccess=10s
+authCacheConfiguration: maximumSize=1000, expireAfterAccess=30s

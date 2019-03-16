@@ -1,11 +1,13 @@
-package se.webinfostudio.game.etheder.entity.player;
+package se.webinfostudio.game.etheder.entity.user;
 
 import static java.lang.String.format;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -16,12 +18,13 @@ import se.webinfostudio.game.etheder.entity.HasReference;
  *
  * @author Johan Hanson
  */
-@Entity(name = "Users")
+@Entity
+@Table(name = "Users")
 public class User extends AbstractGameEntity implements HasReference<UserRef> {
 
 	private static final long serialVersionUID = 7089932666191926795L;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "loginid")
 	private Login login;
 

@@ -6,7 +6,9 @@ import se.webinfostudio.game.etheder.api.model.building.BuildingModel;
 import se.webinfostudio.game.etheder.api.model.building.BuildingQueueModel;
 import se.webinfostudio.game.etheder.api.model.player.CityModel;
 import se.webinfostudio.game.etheder.api.model.player.PlayerModel;
+import se.webinfostudio.game.etheder.api.model.user.LoginModel;
 import se.webinfostudio.game.etheder.api.model.user.UserModel;
+import se.webinfostudio.game.etheder.api.model.user.UserTokenModel;
 
 /**
  *
@@ -39,6 +41,13 @@ public final class ModelTestFactory {
 		return createCityModel(null);
 	}
 
+	public static LoginModel createLoginModel() {
+		return LoginModel.newBuilder()
+				.withUserName("userName")
+				.withPassword("qwerty1234")
+				.build();
+	}
+
 	public static PlayerModel createPlayerModel() {
 		return createPlayerModel(randomUUID().toString());
 	}
@@ -53,6 +62,13 @@ public final class ModelTestFactory {
 
 	public static UserModel createUserModelNew() {
 		return createUserModel(null);
+	}
+
+	public static UserTokenModel createUserTokenModel() {
+		return UserTokenModel.newBuilder()
+				.withToken(randomUUID().toString())
+				.withUserName("userName")
+				.build();
 	}
 
 	private static CityModel createCityModel(final String id) {

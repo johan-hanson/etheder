@@ -1,4 +1,4 @@
-package se.webinfostudio.game.etheder.api.resources.player;
+package se.webinfostudio.game.etheder.api.resources.user;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -17,10 +17,10 @@ import org.mockito.Mock;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import se.webinfostudio.game.etheder.api.model.user.UserModel;
-import se.webinfostudio.game.etheder.api.resources.player.UserResource;
+import se.webinfostudio.game.etheder.api.resources.user.UserResource;
 import se.webinfostudio.game.etheder.api.transformer.user.UserModelTransformer;
 import se.webinfostudio.game.etheder.api.transformer.user.UserTransformer;
-import se.webinfostudio.game.etheder.entity.player.User;
+import se.webinfostudio.game.etheder.entity.user.User;
 import se.webinfostudio.game.etheder.service.player.UserService;
 
 /**

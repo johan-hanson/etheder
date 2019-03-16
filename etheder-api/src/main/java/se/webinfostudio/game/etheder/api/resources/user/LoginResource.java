@@ -1,4 +1,6 @@
-package se.webinfostudio.game.etheder.api.resources.player;
+package se.webinfostudio.game.etheder.api.resources.user;
+
+import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.Optional;
 
@@ -10,6 +12,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.slf4j.Logger;
+
 import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -18,8 +22,8 @@ import se.webinfostudio.game.etheder.api.model.user.LoginModel;
 import se.webinfostudio.game.etheder.api.resources.AbstractResource;
 import se.webinfostudio.game.etheder.api.transformer.user.LoginTransformer;
 import se.webinfostudio.game.etheder.api.transformer.user.UserTokenModelTransformer;
-import se.webinfostudio.game.etheder.entity.player.Login;
-import se.webinfostudio.game.etheder.service.player.LoginService;
+import se.webinfostudio.game.etheder.entity.user.Login;
+import se.webinfostudio.game.etheder.service.user.LoginService;
 
 /**
  *
@@ -29,6 +33,8 @@ import se.webinfostudio.game.etheder.service.player.LoginService;
 @Path("/login")
 @Produces(MediaType.APPLICATION_JSON)
 public class LoginResource extends AbstractResource {
+
+	private static final Logger LOG = getLogger(LoginResource.class);
 
 	private final LoginService loginService;
 	private final LoginTransformer loginTransformer;
@@ -47,6 +53,7 @@ public class LoginResource extends AbstractResource {
 	@Timed
 	@UnitOfWork
 	public Response login(@Valid final LoginModel loginModel) {
+		LOG.info("Run login");
 		final Optional<Login> login = loginService.login(loginTransformer.apply(loginModel));
 		if (login.isPresent()) {
 			return okFlat(userTokenModelTransformer.apply(login.get()));

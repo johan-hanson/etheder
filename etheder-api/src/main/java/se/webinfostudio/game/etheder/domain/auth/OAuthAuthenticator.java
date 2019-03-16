@@ -1,10 +1,21 @@
 package se.webinfostudio.game.etheder.domain.auth;
 
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
+import static java.util.UUID.fromString;
+import static org.slf4j.LoggerFactory.getLogger;
+
 import java.util.Optional;
+
+import javax.persistence.NoResultException;
+
+import org.slf4j.Logger;
 
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
+import io.dropwizard.hibernate.UnitOfWork;
 import se.webinfostudio.game.etheder.dao.player.UserDAO;
+import se.webinfostudio.game.etheder.entity.user.User;
 
 /**
  *
@@ -13,16 +24,27 @@ import se.webinfostudio.game.etheder.dao.player.UserDAO;
  */
 public class OAuthAuthenticator implements Authenticator<String, AuthUser> {
 
+	private static final Logger LOG = getLogger(OAuthAuthenticator.class);
+
 	private final UserDAO userDAO;
 
 	public OAuthAuthenticator(final UserDAO userDAO) {
 		this.userDAO = userDAO;
 	}
 
+	@UnitOfWork
 	@Override
 	public Optional<AuthUser> authenticate(final String credentials) throws AuthenticationException {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			final User user = userDAO.findByToken(fromString(credentials));
+			return of(AuthUser.newBuilder()
+					.withFirstName(user.getFirstName())
+					.withLastName(user.getLastName())
+					.build());
+		} catch (final NoResultException e) {
+			LOG.warn("Token: {} is not valid", credentials);
+		}
+		return empty();
 	}
 
 }

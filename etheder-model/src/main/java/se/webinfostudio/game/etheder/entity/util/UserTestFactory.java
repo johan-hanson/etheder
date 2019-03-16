@@ -4,8 +4,8 @@ import static java.util.UUID.randomUUID;
 
 import java.util.UUID;
 
-import se.webinfostudio.game.etheder.entity.player.Login;
-import se.webinfostudio.game.etheder.entity.player.User;
+import se.webinfostudio.game.etheder.entity.user.Login;
+import se.webinfostudio.game.etheder.entity.user.User;
 
 /**
  *
@@ -18,17 +18,21 @@ public class UserTestFactory {
 
 		private UUID userId = randomUUID();
 		private String userName = "slayer";
+		private String password = "password";
 		private String firstName = "Johan";
 		private String lastName = "Hanson";
 		private String country = "Sweden";
 		private Integer age = 40;
 		private String email = "user@example.org";
+		private UUID token = randomUUID();
 
 		public User build() {
 			final User user = new User();
 			user.setId(userId);
 			user.setLogin(new Login());
 			user.getLogin().setUserName(userName);
+			user.getLogin().setPasswordHash(password);
+			user.getLogin().setToken(token);
 			user.setFirstName(firstName);
 			user.setLastName(lastName);
 			user.setCountry(country);
@@ -59,6 +63,16 @@ public class UserTestFactory {
 
 		public Builder withLastName(final String lastName) {
 			this.lastName = lastName;
+			return this;
+		}
+
+		public Builder withPassword(final String password) {
+			this.password = password;
+			return this;
+		}
+
+		public Builder withToken(final UUID token) {
+			this.token = token;
 			return this;
 		}
 
