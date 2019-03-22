@@ -9,11 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import se.webinfostudio.game.etheder.entity.player.CityRef;
 
@@ -23,18 +20,10 @@ import se.webinfostudio.game.etheder.entity.player.CityRef;
  */
 public class CityServiceTest {
 
-	@BeforeClass
-	public static void setUpClass() {
-	}
-
-	@AfterClass
-	public static void tearDownClass() {
-	}
-
 	private CityService sut;
 
 	@Test
-	public void cityExistInList() {
+	void cityExistInList() {
 		final UUID id = randomUUID();
 		final Set<CityRef> cityList = new HashSet<>();
 		cityList.add(createCity(randomUUID(), "Paris").toRef());
@@ -43,20 +32,16 @@ public class CityServiceTest {
 	}
 
 	@Test
-	public void cityExistInListFalse() {
+	void cityExistInListFalse() {
 		final Set<CityRef> cityList = new HashSet<>();
 		cityList.add(createCity(randomUUID(), "Paris").toRef());
 		cityList.add(createCity(randomUUID(), "London").toRef());
 		assertFalse(sut.cityExistInList(cityList, new CityRef(randomUUID())));
 	}
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		sut = new CityService(null);
-	}
-
-	@After
-	public void tearDown() {
 	}
 
 }

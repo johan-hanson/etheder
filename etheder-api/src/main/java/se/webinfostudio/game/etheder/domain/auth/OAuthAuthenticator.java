@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
 import io.dropwizard.hibernate.UnitOfWork;
-import se.webinfostudio.game.etheder.dao.player.UserDAO;
+import se.webinfostudio.game.etheder.dao.user.UserDAO;
 import se.webinfostudio.game.etheder.entity.user.User;
 
 /**
@@ -36,11 +36,14 @@ public class OAuthAuthenticator implements Authenticator<String, AuthUser> {
 	@Override
 	public Optional<AuthUser> authenticate(final String credentials) throws AuthenticationException {
 		try {
-			final User user = userDAO.findByToken(fromString(credentials));
-			return of(AuthUser.newBuilder()
-					.withFirstName(user.getFirstName())
-					.withLastName(user.getLastName())
-					.build());
+			final Optional<User> user = userDAO.findByToken(fromString(credentials));
+			if (user.isPresent()) {
+				return of(AuthUser.newBuilder()
+						.withFirstName(user.get().getFirstName())
+						.withLastName(user.get().getLastName())
+						.withUserName(user.get().getLogin().getUserName())
+						.build());
+			}
 		} catch (final NoResultException e) {
 			LOG.warn("Token: {} is not valid", credentials);
 		}

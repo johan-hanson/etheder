@@ -1,7 +1,9 @@
 package se.webinfostudio.game.etheder.entity.util;
 
+import static java.time.LocalDateTime.now;
 import static java.util.UUID.randomUUID;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import se.webinfostudio.game.etheder.entity.user.Login;
@@ -25,6 +27,7 @@ public class UserTestFactory {
 		private Integer age = 40;
 		private String email = "user@example.org";
 		private UUID token = randomUUID();
+		private LocalDateTime tokenExpireDate = now();
 
 		public User build() {
 			final User user = new User();
@@ -33,6 +36,7 @@ public class UserTestFactory {
 			user.getLogin().setUserName(userName);
 			user.getLogin().setPasswordHash(password);
 			user.getLogin().setToken(token);
+			user.getLogin().setTokenExpireDate(tokenExpireDate);
 			user.setFirstName(firstName);
 			user.setLastName(lastName);
 			user.setCountry(country);
@@ -73,6 +77,11 @@ public class UserTestFactory {
 
 		public Builder withToken(final UUID token) {
 			this.token = token;
+			return this;
+		}
+
+		public Builder withTokenExpireDate(final LocalDateTime tokenExpireDate) {
+			this.tokenExpireDate = tokenExpireDate;
 			return this;
 		}
 

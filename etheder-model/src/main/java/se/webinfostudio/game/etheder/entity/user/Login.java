@@ -1,13 +1,11 @@
 package se.webinfostudio.game.etheder.entity.user;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import se.webinfostudio.game.etheder.entity.AbstractGameEntity;
 
@@ -26,8 +24,7 @@ public class Login extends AbstractGameEntity {
 	private String userName;
 	private String passwordHash;
 	private UUID token;
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date tokenExpireDate;
+	private LocalDateTime tokenExpireDate;
 
 	public String getPasswordHash() {
 		return passwordHash;
@@ -37,7 +34,7 @@ public class Login extends AbstractGameEntity {
 		return token;
 	}
 
-	public Date getTokenExpireDate() {
+	public LocalDateTime getTokenExpireDate() {
 		return tokenExpireDate;
 	}
 
@@ -53,7 +50,7 @@ public class Login extends AbstractGameEntity {
 		this.token = token;
 	}
 
-	public void setTokenExpireDate(final Date tokenExpireDate) {
+	public void setTokenExpireDate(final LocalDateTime tokenExpireDate) {
 		this.tokenExpireDate = tokenExpireDate;
 	}
 

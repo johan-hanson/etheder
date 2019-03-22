@@ -10,8 +10,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
@@ -30,8 +30,14 @@ public class BuildingServiceTest {
 	@InjectMocks
 	private BuildingService sut;
 
+	@BeforeEach
+	public void setUp() {
+		sut = new BuildingService();
+		initMocks(this);
+	}
+
 	@Test
-	public void findAll() {
+	void findAll() {
 		final Building b = createBuilding();
 
 		when(buildingDAO.findAll()).thenReturn(Arrays.asList(b));
@@ -40,25 +46,13 @@ public class BuildingServiceTest {
 		assertEquals(1, l.size());
 	}
 
-	/**
-	 * .
-	 */
 	@Test
-	public void findById() {
+	void findById() {
 		final Building b = createBuilding();
 		when(buildingDAO.findById(any(UUID.class))).thenReturn(b);
 //		final Optional<Building> b2 = sut.findById(b.getId());
 //		assertNotNull(b2);
 //		assertTrue(b2.isPresent());
 //		assertEquals(b.getId(), b2.get().getId());
-	}
-
-	/**
-	 * .
-	 */
-	@Before
-	public void setUp() {
-		sut = new BuildingService();
-		initMocks(this);
 	}
 }

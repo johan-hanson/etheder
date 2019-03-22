@@ -3,11 +3,12 @@ package se.webinfostudio.game.etheder.dao.building;
 import static org.assertj.core.api.Assertions.assertThat;
 import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createBuildingQueue;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-import io.dropwizard.testing.junit.DAOTestRule;
+import io.dropwizard.testing.junit5.DAOTestExtension;
+import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import se.webinfostudio.game.etheder.dao.TestDAO;
 import se.webinfostudio.game.etheder.entity.building.BuildingData;
 import se.webinfostudio.game.etheder.entity.building.BuildingQueue;
@@ -17,24 +18,24 @@ import se.webinfostudio.game.etheder.entity.building.BuildingQueue;
  * @author Johan Hanson
  *
  */
+@ExtendWith(DropwizardExtensionsSupport.class)
 public class BuildingQueueDAOTest {
 
-	@Rule
-	public DAOTestRule database = DAOTestRule.newBuilder()
+	DAOTestExtension database = DAOTestExtension.newBuilder()
 			.addEntityClass(BuildingQueue.class)
 			.addEntityClass(BuildingData.class).build();
 
 	private BuildingQueueDAO sut;
 	private TestDAO testDAO;
 
-	@Before
-	public void before() {
+	@BeforeEach
+	void before() {
 		sut = new BuildingQueueDAO(database.getSessionFactory());
 		testDAO = new TestDAO(database.getSessionFactory());
 	}
 
 	@Test
-	public void persist() {
+	void persist() {
 		final BuildingQueue buildingQueue = createBuildingQueue();
 		buildingQueue.setBuilding((BuildingData) testDAO.persist(buildingQueue.getBuilding()));
 		final BuildingQueue result = sut.persist(buildingQueue);

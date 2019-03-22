@@ -7,7 +7,7 @@ import static se.webinfostudio.game.etheder.entity.unit.UnitType.INFANTRY;
 
 import java.util.UUID;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import se.webinfostudio.game.etheder.entity.unit.UnitQueue;
 
@@ -17,11 +17,24 @@ import se.webinfostudio.game.etheder.entity.unit.UnitQueue;
  */
 public class ArmyTest {
 
-	/**
-	 * Test of addUnits method, of class Army.
-	 */
 	@Test
-	public void addUnits() {
+	public void testSetDefaultArmy() {
+		final Boolean defaultArmy = TRUE;
+		final Army instance = new Army();
+		instance.setDefaultArmy(defaultArmy);
+		assertThat(instance.getDefaultArmy()).isEqualTo(defaultArmy);
+	}
+
+	@Test
+	public void testSetId() {
+		final UUID id = UUID.randomUUID();
+		final Army instance = new Army();
+		instance.setId(id);
+		assertThat(instance.getId()).isEqualTo(id);
+	}
+
+	@Test
+	void addUnits() {
 		final UnitQueue uq = new UnitQueue();
 		uq.setCity(new CityRef(randomUUID()));
 
@@ -31,77 +44,40 @@ public class ArmyTest {
 		assertThat(army.getNrOfInfantry()).isEqualTo(Integer.valueOf(1100));
 	}
 
-	/**
-	 * Test of setDefaultArmy method, of class Army.
-	 */
 	@Test
-	public void testSetDefaultArmy() {
-		final Boolean defaultArmy = TRUE;
-		final Army instance = new Army();
-		instance.setDefaultArmy(defaultArmy);
-		assertThat(instance.getDefaultArmy()).isEqualTo(defaultArmy);
-	}
-
-	/**
-	 * Test of setId method, of class Army.
-	 */
-	@Test
-	public void testSetId() {
-		final UUID id = UUID.randomUUID();
-		final Army instance = new Army();
-		instance.setId(id);
-		assertThat(instance.getId()).isEqualTo(id);
-	}
-
-	/**
-	 * Test of setName method, of class Army.
-	 */
-	@Test
-	public void testSetName() {
+	void testSetName() {
 		final String name = "My best army";
 		final Army instance = new Army();
 		instance.setName(name);
 		assertThat(instance.getName()).isEqualTo(name);
 	}
 
-	/**
-	 * Test of setNrOfArcher method, of class Army.
-	 */
 	@Test
-	public void testSetNrOfArcher() {
+	void testSetNrOfArcher() {
 		final Integer nrOfArcher = 3000;
 		final Army instance = new Army();
 		instance.setNrOfArcher(nrOfArcher);
 		assertThat(instance.getNrOfArcher()).isEqualTo(nrOfArcher);
 	}
 
-	/**
-	 * Test of setNrOfCatapult method, of class Army.
-	 */
 	@Test
-	public void testSetNrOfCatapult() {
+	void testSetNrOfCatapult() {
 		final Integer nrOfCatapult = 4000;
 		final Army instance = new Army();
 		instance.setNrOfSiege(nrOfCatapult);
 		assertThat(instance.getNrOfSiege()).isEqualTo(nrOfCatapult);
 	}
 
-	/**
-	 * Test of setNrOfCavalry method, of class Army.
-	 */
 	@Test
-	public void testSetNrOfCavalry() {
+	void testSetNrOfCavalry() {
 		final Integer nrOfCavalry = 2000;
 		final Army instance = new Army();
 		instance.setNrOfCavalry(nrOfCavalry);
 		assertThat(instance.getNrOfCavalry()).isEqualTo(nrOfCavalry);
 	}
 
-	/**
-	 * Test of setNrOfInfantry method, of class Army.
-	 */
 	@Test
-	public void testSetNrOfInfantry() {
+	void testSetNrOfInfantry() {
 		final Integer nrOfInfantry = 1000;
 		final Army instance = new Army();
 		instance.setNrOfInfantry(nrOfInfantry);
@@ -112,7 +88,7 @@ public class ArmyTest {
 	 * Test of setPlayer method, of class Army.
 	 */
 	@Test
-	public void testSetPlayer() {
+	void testSetPlayer() {
 		final Player player = new Player();
 		final Army instance = new Army();
 		instance.setPlayer(player);

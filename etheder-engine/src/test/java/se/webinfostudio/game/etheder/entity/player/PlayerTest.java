@@ -5,19 +5,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.UUID;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *
- * @author JOHA
+ * @author Johan Hanson
  */
 public class PlayerTest {
 
-	/**
-	 * Test of setId method, of class UnitQueue.
-	 */
 	@Test
-	public void testPlayer() {
+	void testPlayer() {
 		final UUID id = randomUUID();
 		final Player p = new Player();
 		p.setId(id);

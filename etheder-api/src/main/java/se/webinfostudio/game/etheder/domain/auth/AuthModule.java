@@ -8,7 +8,7 @@ import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.hibernate.UnitOfWorkAwareProxyFactory;
 import ru.vyarus.dropwizard.guice.module.support.DropwizardAwareModule;
 import se.webinfostudio.game.etheder.ApiConfiguration;
-import se.webinfostudio.game.etheder.dao.player.UserDAO;
+import se.webinfostudio.game.etheder.dao.user.UserDAO;
 
 /**
  *

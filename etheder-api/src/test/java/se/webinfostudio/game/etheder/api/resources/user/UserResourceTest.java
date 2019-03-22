@@ -16,12 +16,13 @@ import org.mockito.Mock;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import se.webinfostudio.game.etheder.api.model.user.UserChangePasswordModel;
 import se.webinfostudio.game.etheder.api.model.user.UserModel;
-import se.webinfostudio.game.etheder.api.resources.user.UserResource;
 import se.webinfostudio.game.etheder.api.transformer.user.UserModelTransformer;
 import se.webinfostudio.game.etheder.api.transformer.user.UserTransformer;
+import se.webinfostudio.game.etheder.domain.auth.AuthUser;
 import se.webinfostudio.game.etheder.entity.user.User;
-import se.webinfostudio.game.etheder.service.player.UserService;
+import se.webinfostudio.game.etheder.service.user.UserService;
 
 /**
  *
@@ -49,7 +50,14 @@ public class UserResourceTest {
 
 	@Test
 	void changePassword() {
-		final Response response = sut.changePassword("old", "new");
+		final Response response = sut.changePassword(
+				UserChangePasswordModel.newBuilder()
+						.withOldPassword("old")
+						.withNewPassword("new")
+						.build(),
+				AuthUser.newBuilder()
+						.withUserName("userName")
+						.build());
 
 		assertThat(response.getStatus()).isEqualTo(200);
 	}

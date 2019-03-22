@@ -1,7 +1,7 @@
 package se.webinfostudio.game.etheder.engine.service;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 
 /**
@@ -22,20 +22,14 @@ public class ResearchQueueEngineEngineServiceTest {
 	@InjectMocks
 	private ResearchQueueEngineService sut;
 
-	/**
-	 * .
-	 */
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 //		sut = new ResearchQueueEngineService();
 //		initMocks(this);
 	}
 
-	/**
-	 * .
-	 */
 	@Test
-	public void updateAllQueuesAndCreateResearches() {
+	void updateAllQueuesAndCreateResearches() {
 //		when(researchQueueRepository.insertUpdateNamedQuery(anyString())).thenReturn(10);
 //		final ResearchQueue rq1 = ethederTestFactory.createResearchQueue();
 //		final ResearchQueue rq2 = ethederTestFactory.createResearchQueue(2L, 2L, 2L);

@@ -1,4 +1,4 @@
-package se.webinfostudio.game.etheder.service.player;
+package se.webinfostudio.game.etheder.service.user;
 
 import static se.webinfostudio.game.etheder.util.BeanValidationUtils.validate;
 
@@ -7,7 +7,7 @@ import java.util.Optional;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import se.webinfostudio.game.etheder.dao.player.UserDAO;
+import se.webinfostudio.game.etheder.dao.user.UserDAO;
 import se.webinfostudio.game.etheder.entity.user.User;
 
 /**
@@ -28,11 +28,15 @@ public class UserService {
 		validate(user);
 
 		// validation against db, if username already exist, email already exist
+		// validate password
 
 		return userDAO.persist(user);
 	}
 
-	public void updatePassword(final String oldPassword, final String newPassword) {
+	public void updatePassword(final String userName, final String oldPassword, final String newPassword) {
+		// validate new password
+		// validate old password is correct
+
 //		final Optional<User> persistedUser = userDAO.findById(user.getId());
 //		if (persistedUser.isPresent()) {
 //

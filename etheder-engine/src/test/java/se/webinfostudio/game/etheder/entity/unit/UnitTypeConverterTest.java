@@ -2,11 +2,7 @@ package se.webinfostudio.game.etheder.entity.unit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import se.webinfostudio.game.etheder.entity.converters.UnitTypeConverter;
 
@@ -16,30 +12,8 @@ import se.webinfostudio.game.etheder.entity.converters.UnitTypeConverter;
  */
 public class UnitTypeConverterTest {
 
-	@BeforeClass
-	public static void setUpClass() {
-	}
-
-	@AfterClass
-	public static void tearDownClass() {
-	}
-
-	public UnitTypeConverterTest() {
-	}
-
-	@Before
-	public void setUp() {
-	}
-
-	@After
-	public void tearDown() {
-	}
-
-	/**
-	 * Test of convertToDatabaseColumn method, of class UnitTypeConverter.
-	 */
 	@Test
-	public void testConvertToDatabaseColumnArcher() {
+	void testConvertToDatabaseColumnArcher() {
 		final UnitType attribute = UnitType.ARCHER;
 		final UnitTypeConverter instance = new UnitTypeConverter();
 		final String expResult = "A";
@@ -51,7 +25,7 @@ public class UnitTypeConverterTest {
 	 * Test of convertToDatabaseColumn method, of class UnitTypeConverter.
 	 */
 	@Test
-	public void testConvertToDatabaseColumnCavalry() {
+	void testConvertToDatabaseColumnCavalry() {
 		final UnitType attribute = UnitType.CAVALRY;
 		final UnitTypeConverter instance = new UnitTypeConverter();
 		final String expResult = "C";
@@ -63,7 +37,7 @@ public class UnitTypeConverterTest {
 	 * Test of convertToDatabaseColumn method, of class UnitTypeConverter.
 	 */
 	@Test
-	public void testConvertToDatabaseColumnInfantry() {
+	void testConvertToDatabaseColumnInfantry() {
 		final UnitType attribute = UnitType.INFANTRY;
 		final UnitTypeConverter instance = new UnitTypeConverter();
 		final String expResult = "I";
@@ -75,7 +49,7 @@ public class UnitTypeConverterTest {
 	 * Test of convertToEntityAttribute method, of class UnitTypeConverter.
 	 */
 	@Test
-	public void testConvertToEntityAttribute() {
+	void testConvertToEntityAttribute() {
 		final String dbData = "S";
 		final UnitTypeConverter instance = new UnitTypeConverter();
 		final UnitType expResult = UnitType.SIEGE;

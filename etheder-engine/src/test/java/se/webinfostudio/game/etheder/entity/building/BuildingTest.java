@@ -4,8 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.UUID;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -13,12 +12,8 @@ import org.junit.Test;
  */
 public class BuildingTest {
 
-	@Before
-	public void setUp() throws Exception {
-	}
-
 	@Test
-	public void testBuilding() {
+	void testBuilding() {
 		final Building b = new Building();
 		b.setId(UUID.randomUUID());
 		b.setBuildingData(new BuildingData());

@@ -6,8 +6,8 @@ import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.create
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 
 import se.webinfostudio.game.etheder.entity.research.Research;
@@ -30,7 +30,7 @@ public class ResearchServiceTest {
 	 * Test of findAll method, of class ResearchService.
 	 */
 	@Test
-	public void findAll() {
+	void findAll() {
 		final Research r = EntityTestFactory.createResearch();
 
 //		when(researchRepository.findAll()).thenReturn(Arrays.asList(r));
@@ -43,7 +43,7 @@ public class ResearchServiceTest {
 	 * Test of findById method, of class ResearchService.
 	 */
 	@Test
-	public void findById() {
+	void findById() {
 		final Research r = EntityTestFactory.createResearch();
 //		when(researchRepository.findById(Matchers.anyLong())).thenReturn(r);
 //		final Research r2 = sut.findById(r.getId());
@@ -54,7 +54,7 @@ public class ResearchServiceTest {
 	 * Test of save method, of class ResearchService.
 	 */
 	@Test
-	public void save() {
+	void save() {
 		final Research r1 = createResearch();
 		final Research r2 = createResearch(Long.valueOf(1L), "Stablehourses", UnitType.CAVALRY);
 
@@ -66,8 +66,8 @@ public class ResearchServiceTest {
 	/**
 	 * .
 	 */
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		sut = new ResearchService();
 		initMocks(this);
 	}

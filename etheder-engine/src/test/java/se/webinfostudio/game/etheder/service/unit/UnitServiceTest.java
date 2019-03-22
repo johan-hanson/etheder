@@ -2,8 +2,8 @@ package se.webinfostudio.game.etheder.service.unit;
 
 import static org.mockito.MockitoAnnotations.initMocks;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 
 /**
@@ -19,19 +19,6 @@ public class UnitServiceTest {
 	private UnitService sut;
 
 	/**
-	 * Test of findAll method, of class UnitService.
-	 */
-	@Test
-	public void findAll() {
-//		final Unit u = ethederTestFactory.createUnit();
-//
-//		when(unitRepository.findAll()).thenReturn(Arrays.asList(u));
-//
-//		final List<Unit> l = sut.findAll();
-//		Assert.assertEquals(1, l.size());
-	}
-
-	/**
 	 * Test of findById method, of class UnitService.
 	 */
 	@Test
@@ -43,10 +30,23 @@ public class UnitServiceTest {
 	}
 
 	/**
+	 * Test of findAll method, of class UnitService.
+	 */
+	@Test
+	void findAll() {
+//		final Unit u = ethederTestFactory.createUnit();
+//
+//		when(unitRepository.findAll()).thenReturn(Arrays.asList(u));
+//
+//		final List<Unit> l = sut.findAll();
+//		Assert.assertEquals(1, l.size());
+	}
+
+	/**
 	 * Test of save method, of class UnitService.
 	 */
 	@Test
-	public void save() {
+	void save() {
 //        final Unit b1 = ethederTestFactory.createUnit();
 //        final Unit b2 = ethederTestFactory.createUnit(2L, "Cavlry", UnitType.CAVALRY);
 //
@@ -55,11 +55,8 @@ public class UnitServiceTest {
 //        Assert.assertEquals(2, result.size());
 	}
 
-	/**
-	 * .
-	 */
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		sut = new UnitService();
 		initMocks(this);
 	}

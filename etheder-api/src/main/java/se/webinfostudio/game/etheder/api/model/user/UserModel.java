@@ -3,6 +3,7 @@ package se.webinfostudio.game.etheder.api.model.user;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -91,6 +92,7 @@ public class UserModel {
 	private String userName;
 
 	@NotBlank
+	@Length(min = 8, max = 255, message = "Password must be between 8 and 255 characters")
 	@JsonProperty
 	private String password;
 

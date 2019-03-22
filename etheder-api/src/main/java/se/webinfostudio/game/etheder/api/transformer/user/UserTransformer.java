@@ -1,8 +1,7 @@
 package se.webinfostudio.game.etheder.api.transformer.user;
 
 import static java.util.UUID.fromString;
-import static org.mindrot.jbcrypt.BCrypt.gensalt;
-import static org.mindrot.jbcrypt.BCrypt.hashpw;
+import static se.webinfostudio.game.etheder.util.CryptUtils.hashPassword;
 
 import java.util.function.Function;
 
@@ -25,7 +24,7 @@ public class UserTransformer implements Function<UserModel, User> {
 		}
 		user.setLogin(new Login());
 		user.getLogin().setUserName(userModel.getUserName());
-		user.getLogin().setPasswordHash(hashpw(userModel.getPassword(), gensalt(12)));
+		user.getLogin().setPasswordHash(hashPassword(userModel.getPassword()));
 		user.setFirstName(userModel.getFirstName());
 		user.setLastName(userModel.getLastName());
 		user.setCountry(userModel.getCountry());

@@ -1,7 +1,7 @@
 package se.webinfostudio.game.etheder.engine.service;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 
 /**
@@ -25,22 +25,14 @@ public class UnitQueueEngineServiceTest {
 	@InjectMocks
 	private UnitQueueEngineService sut;
 
-	/**
-	 * .
-	 *
-	 * @throws Exception .
-	 */
-	@Before
-	public void setUp() throws Exception {
+	@BeforeEach
+	void setUp() throws Exception {
 //		sut = new UnitQueueEngineService();
 //		MockitoAnnotations.initMocks(this);
 	}
 
-	/**
-	 * .
-	 */
 	@Test
-	public void testUpdateAllQueuesAndBuildBuildings() {
+	void testUpdateAllQueuesAndBuildBuildings() {
 
 //        when(unitQueueRepository.insertUpdateNamedQuery(Matchers.anyString())).thenReturn(2);
 //        final List<UnitQueue> list = new LinkedList<>();

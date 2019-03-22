@@ -3,34 +3,33 @@ package se.webinfostudio.game.etheder.dao.building;
 import static org.assertj.core.api.Assertions.assertThat;
 import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createBuildingData;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-import io.dropwizard.testing.junit.DAOTestRule;
+import io.dropwizard.testing.junit5.DAOTestExtension;
+import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import se.webinfostudio.game.etheder.entity.building.BuildingData;
 
 /**
- * DAO test classes need JUnit 4 for DAOTestRule to work.
  *
  * @author Johan Hanson
  *
  */
+@ExtendWith(DropwizardExtensionsSupport.class)
 public class BuildingDataDAOTest {
 
-	@Rule
-	public DAOTestRule database = DAOTestRule.newBuilder()
+	DAOTestExtension database = DAOTestExtension.newBuilder()
 			.addEntityClass(BuildingData.class).build();
 
 	private BuildingDataDAO sut;
 
-	@Before
-	public void before() {
+	@BeforeEach
+	void before() {
 		sut = new BuildingDataDAO(database.getSessionFactory());
 	}
 
 	@Test
-	public void findById() {
+	void findById() {
 		final BuildingData buildingData = createBuildingData();
 		sut.persist(buildingData);
 		final BuildingData result = sut.findById(buildingData.getId());
@@ -40,7 +39,7 @@ public class BuildingDataDAOTest {
 	}
 
 	@Test
-	public void persist() {
+	void persist() {
 		final BuildingData buildingData = createBuildingData();
 		final BuildingData result = sut.persist(buildingData);
 

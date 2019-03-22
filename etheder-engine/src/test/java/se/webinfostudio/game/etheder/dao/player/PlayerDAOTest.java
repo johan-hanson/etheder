@@ -3,26 +3,26 @@ package se.webinfostudio.game.etheder.dao.player;
 import static org.assertj.core.api.Assertions.assertThat;
 import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createPlayer;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-import io.dropwizard.testing.junit.DAOTestRule;
+import io.dropwizard.testing.junit5.DAOTestExtension;
+import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import se.webinfostudio.game.etheder.entity.building.Building;
 import se.webinfostudio.game.etheder.entity.building.BuildingData;
 import se.webinfostudio.game.etheder.entity.player.City;
 import se.webinfostudio.game.etheder.entity.player.Player;
 
 /**
- * DAO test classes need JUnit 4 for DAOTestRule to work.
  *
  * @author Johan Hanson
  *
  */
+@ExtendWith(DropwizardExtensionsSupport.class)
 public class PlayerDAOTest {
 
-	@Rule
-	public DAOTestRule database = DAOTestRule.newBuilder()
+	DAOTestExtension database = DAOTestExtension.newBuilder()
 			.addEntityClass(Player.class)
 			.addEntityClass(City.class)
 			.addEntityClass(Building.class)
@@ -31,13 +31,13 @@ public class PlayerDAOTest {
 
 	private PlayerDAO sut;
 
-	@Before
-	public void before() {
+	@BeforeEach
+	void before() {
 		sut = new PlayerDAO(database.getSessionFactory());
 	}
 
 	@Test
-	public void persist() {
+	void persist() {
 		final Player player = createPlayer();
 		final Player result = sut.persist(player);
 

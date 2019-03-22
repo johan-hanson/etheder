@@ -1,4 +1,4 @@
-package se.webinfostudio.game.etheder.service.player;
+package se.webinfostudio.game.etheder.service.user;
 
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
@@ -17,8 +17,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import se.webinfostudio.game.etheder.dao.player.UserDAO;
+import se.webinfostudio.game.etheder.dao.user.UserDAO;
 import se.webinfostudio.game.etheder.entity.user.User;
+import se.webinfostudio.game.etheder.service.user.UserService;
 
 /**
  *
@@ -49,7 +50,7 @@ public class UserServiceTest {
 
 	@Test
 	void updatePassword() {
-		sut.updatePassword("old", "new");
+		sut.updatePassword("userName", "old", "new");
 	}
 
 	@Test

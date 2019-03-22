@@ -7,19 +7,21 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.dropwizard.auth.Auth;
 import io.dropwizard.hibernate.UnitOfWork;
+import se.webinfostudio.game.etheder.api.model.user.UserChangePasswordModel;
 import se.webinfostudio.game.etheder.api.model.user.UserModel;
 import se.webinfostudio.game.etheder.api.resources.AbstractResource;
 import se.webinfostudio.game.etheder.api.transformer.user.UserModelTransformer;
 import se.webinfostudio.game.etheder.api.transformer.user.UserTransformer;
-import se.webinfostudio.game.etheder.service.player.UserService;
+import se.webinfostudio.game.etheder.domain.auth.AuthUser;
+import se.webinfostudio.game.etheder.service.user.UserService;
 
 /**
  *
@@ -46,7 +48,6 @@ public class UserResource extends AbstractResource {
 	/**
 	 * TODO: change to object. Just added annotation so the resource is valid.
 	 *
-	 * @param oldPassword
 	 * @param newPassword
 	 * @return {@link Response}
 	 */
@@ -55,9 +56,10 @@ public class UserResource extends AbstractResource {
 	@UnitOfWork
 	@PermitAll
 	@Path("/change")
-	public Response changePassword(@QueryParam("old") final String oldPassword,
-			@QueryParam("new") final String newPassword) {
-		userService.updatePassword(oldPassword, newPassword);
+	public Response changePassword(@Valid final UserChangePasswordModel userChangePasswordModel,
+			@Auth final AuthUser authUser) {
+		userService.updatePassword(authUser.getUserName(), userChangePasswordModel.getOldPassword(),
+				userChangePasswordModel.getNewPassword());
 		return Response.ok().build();
 	}
 

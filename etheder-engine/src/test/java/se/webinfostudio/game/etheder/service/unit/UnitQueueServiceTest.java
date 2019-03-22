@@ -2,8 +2,8 @@ package se.webinfostudio.game.etheder.service.unit;
 
 import java.util.UUID;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 
@@ -21,11 +21,8 @@ public class UnitQueueServiceTest {
 	@InjectMocks
 	private UnitQueueService sut;
 
-	/**
-	 * .
-	 */
 	@Test
-	public void findByPlayer() {
+	void findByPlayer() {
 //        final UnitQueue uq1 = ethederTestFactory.createUnitQueue();
 //        final UnitQueue uq2 = ethederTestFactory.createUnitQueue(2L, 2L, 2L);
 //        when(unitQueueRepository.findByCity(any(City.class))).thenReturn(Arrays.asList(uq1, uq2));
@@ -33,19 +30,14 @@ public class UnitQueueServiceTest {
 //        Assert.assertEquals(2, list.size());
 	}
 
-	/**
-	 * .
-	 *
-	 * @throws Exception .
-	 */
-	@Before
-	public void setUp() throws Exception {
+	@BeforeEach
+	void setUp() throws Exception {
 		sut = new UnitQueueService();
 		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test
-	public void train() {
+	void train() {
 		sut.train(EntityTestFactory.createUnitData(), UUID.randomUUID(), UUID.randomUUID());
 //        verify(unitQueueRepository).create(any(UnitQueue.class));
 	}

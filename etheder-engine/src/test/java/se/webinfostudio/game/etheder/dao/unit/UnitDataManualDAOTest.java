@@ -5,35 +5,35 @@ import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.create
 
 import java.util.Optional;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-import io.dropwizard.testing.junit.DAOTestRule;
+import io.dropwizard.testing.junit5.DAOTestExtension;
+import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import se.webinfostudio.game.etheder.entity.unit.UnitData;
 
 /**
- * DAO test classes need JUnit 4 for DAOTestRule to work.
  *
  * @author Johan Hanson
  *
  */
+@ExtendWith(DropwizardExtensionsSupport.class)
 public class UnitDataManualDAOTest {
 
-	@Rule
-	public DAOTestRule database = DAOTestRule.newBuilder()
+	DAOTestExtension database = DAOTestExtension.newBuilder()
 			.addEntityClass(UnitData.class)
 			.build();
 
 	private UnitDataManualDAO sut;
 
-	@Before
-	public void before() {
+	@BeforeEach
+	void before() {
 		sut = new UnitDataManualDAO(database.getSessionFactory());
 	}
 
 	@Test
-	public void findById() {
+	void findById() {
 		final UnitData research = createUnitData();
 		sut.persist(research);
 		final Optional<UnitData> result = sut.findById(research.getId());
@@ -43,7 +43,7 @@ public class UnitDataManualDAOTest {
 	}
 
 	@Test
-	public void persist() {
+	void persist() {
 		final UnitData research = createUnitData();
 		final UnitData result = sut.persist(research);
 

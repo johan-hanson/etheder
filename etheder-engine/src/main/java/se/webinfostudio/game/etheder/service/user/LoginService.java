@@ -1,16 +1,16 @@
 package se.webinfostudio.game.etheder.service.user;
 
+import static java.time.LocalDateTime.now;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static java.util.UUID.randomUUID;
-import static org.mindrot.jbcrypt.BCrypt.checkpw;
+import static se.webinfostudio.game.etheder.util.CryptUtils.checkPassword;
 
-import java.util.Date;
 import java.util.Optional;
 
 import javax.inject.Inject;
 
-import se.webinfostudio.game.etheder.dao.player.UserDAO;
+import se.webinfostudio.game.etheder.dao.user.UserDAO;
 import se.webinfostudio.game.etheder.entity.user.Login;
 import se.webinfostudio.game.etheder.entity.user.User;
 
@@ -29,12 +29,15 @@ public class LoginService {
 	}
 
 	public Optional<Login> login(final Login login) {
-		final User user = userDAO.findByUserName(login.getUserName());
-		final Login loginDb = user.getLogin();
-		if (checkpw(login.getPasswordHash(), loginDb.getPasswordHash())) {
+		final Optional<User> user = userDAO.findByUserName(login.getUserName());
+		if (!user.isPresent()) {
+			return empty();
+		}
+		final Login loginDb = user.get().getLogin();
+		if (checkPassword(login.getPasswordHash(), loginDb.getPasswordHash())) {
 			loginDb.setToken(randomUUID());
-			loginDb.setTokenExpireDate(new Date());
-			userDAO.persist(user);
+			loginDb.setTokenExpireDate(now().plusHours(1L));
+			userDAO.persist(user.get());
 			return of(loginDb);
 		}
 		return empty();
