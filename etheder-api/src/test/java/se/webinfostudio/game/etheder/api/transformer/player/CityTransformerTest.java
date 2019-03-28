@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 
 import se.webinfostudio.game.etheder.api.model.player.CityModel;
-import se.webinfostudio.game.etheder.api.transformer.player.CityTransformer;
 import se.webinfostudio.game.etheder.entity.player.City;
 
 /**
@@ -30,7 +29,7 @@ public class CityTransformerTest {
 
 		assertThat(result.getId().toString()).isEqualTo(cityModel.getCityId());
 		assertThat(result.getName()).isEqualTo(cityModel.getName());
-		assertThat(result.getPlayer().getId()).isEqualTo(cityModel.getPlayerId());
+		assertThat(result.getPlayer().getId().toString()).isEqualTo(cityModel.getPlayerId());
 	}
 
 	@Test
@@ -40,7 +39,7 @@ public class CityTransformerTest {
 
 		assertThat(result.getId()).isNull();
 		assertThat(result.getName()).isEqualTo(cityModel.getName());
-		assertThat(result.getPlayer().getId()).isEqualTo(cityModel.getPlayerId());
+		assertThat(result.getPlayer().getId().toString()).isEqualTo(cityModel.getPlayerId());
 	}
 
 	@BeforeEach

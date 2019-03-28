@@ -129,6 +129,7 @@ public final class EntityTestFactory {
 		city.setMerchants(20);
 		city.setStonemasons(20);
 		city.setPopulation(500L);
+		city.setPlayer(new PlayerRef(id));
 		return city;
 	}
 

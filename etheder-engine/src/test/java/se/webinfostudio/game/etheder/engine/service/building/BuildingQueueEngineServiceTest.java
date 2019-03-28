@@ -1,6 +1,7 @@
 package se.webinfostudio.game.etheder.engine.service.building;
 
 import static java.util.Arrays.asList;
+import static java.util.Optional.of;
 import static java.util.UUID.randomUUID;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
@@ -75,8 +76,8 @@ class BuildingQueueEngineServiceTest {
 
 		when(cityDAO.findByRef(new CityRef(city1.getId()))).thenReturn(city1);
 		when(cityDAO.findByRef(new CityRef(city2.getId()))).thenReturn(city2);
-		when(playerDAO.findByRef(new CityRef(city1.getId()))).thenReturn(player1);
-		when(playerDAO.findByRef(new CityRef(city2.getId()))).thenReturn(player2);
+		when(playerDAO.findByCity(new CityRef(city1.getId()))).thenReturn(of(player1));
+		when(playerDAO.findByCity(new CityRef(city2.getId()))).thenReturn(of(player2));
 
 		final Building building1 = createBuilding();
 		final Building building2 = createBuilding(UUID.randomUUID(), "Stable");

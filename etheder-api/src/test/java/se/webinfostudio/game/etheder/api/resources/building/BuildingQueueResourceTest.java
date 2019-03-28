@@ -15,7 +15,6 @@ import org.mockito.Mock;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import se.webinfostudio.game.etheder.api.model.building.BuildingQueueModel;
-import se.webinfostudio.game.etheder.api.resources.building.BuildingQueueResource;
 import se.webinfostudio.game.etheder.api.transformer.building.BuildingQueueModelTransformer;
 import se.webinfostudio.game.etheder.api.transformer.building.BuildingQueueTransformer;
 import se.webinfostudio.game.etheder.entity.building.BuildingQueue;

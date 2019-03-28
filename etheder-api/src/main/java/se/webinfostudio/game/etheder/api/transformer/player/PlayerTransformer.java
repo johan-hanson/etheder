@@ -1,6 +1,7 @@
 package se.webinfostudio.game.etheder.api.transformer.player;
 
 import static java.util.UUID.fromString;
+import static se.webinfostudio.game.etheder.api.transformer.TransformerHelper.createUUIDFromString;
 
 import java.util.function.Function;
 
@@ -18,9 +19,7 @@ public class PlayerTransformer implements Function<PlayerModel, Player> {
 	@Override
 	public Player apply(final PlayerModel playerModel) {
 		final Player player = new Player();
-		if (playerModel.getPlayerId() != null) {
-			player.setId(fromString(playerModel.getPlayerId()));
-		}
+		player.setId(createUUIDFromString(playerModel.getPlayerId()));
 		player.setCountry(playerModel.getCountry());
 		player.setMyUser(new UserRef(fromString(playerModel.getUserId())));
 		return player;

@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createBuildingData;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import io.dropwizard.testing.junit5.DAOTestExtension;
