@@ -28,7 +28,7 @@ public class PlayerModelTransformerTest {
 		final PlayerModel result = sut.apply(player);
 
 		assertThat(result.getPlayerId()).isEqualTo(player.getId().toString());
-		assertThat(result.getUserId()).isEqualTo(player.getMyUser().getId().toString());
+		assertThat(result.getUserId()).isEqualTo(player.getUser().getId().toString());
 		assertThat(result.getCountry()).isEqualTo(player.getCountry());
 	}
 

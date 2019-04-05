@@ -30,7 +30,7 @@ public class PlayerTransformerTest {
 
 		assertThat(result.getCountry()).isEqualTo(playerModel.getCountry());
 		assertThat(result.getId().toString()).isEqualTo(playerModel.getPlayerId());
-		assertThat(result.getMyUser().getId().toString()).isEqualTo(playerModel.getUserId());
+		assertThat(result.getUser().getId().toString()).isEqualTo(playerModel.getUserId());
 	}
 
 	@Test
@@ -40,7 +40,7 @@ public class PlayerTransformerTest {
 
 		assertThat(result.getCountry()).isEqualTo(playerModel.getCountry());
 		assertThat(result.getId()).isNull();
-		assertThat(result.getMyUser().getId().toString()).isEqualTo(playerModel.getUserId());
+		assertThat(result.getUser().getId().toString()).isEqualTo(playerModel.getUserId());
 	}
 
 	@BeforeEach

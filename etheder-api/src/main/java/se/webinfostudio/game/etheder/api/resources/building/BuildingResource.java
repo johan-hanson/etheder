@@ -1,6 +1,7 @@
 package se.webinfostudio.game.etheder.api.resources.building;
 
 import static org.slf4j.LoggerFactory.getLogger;
+import static se.webinfostudio.game.etheder.api.transformer.TransformerHelper.createUUIDFromString;
 
 import java.util.Optional;
 
@@ -19,10 +20,14 @@ import org.slf4j.Logger;
 import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.dropwizard.auth.Auth;
 import io.dropwizard.hibernate.UnitOfWork;
 import se.webinfostudio.game.etheder.api.resources.AbstractResource;
 import se.webinfostudio.game.etheder.api.transformer.building.BuildingModelTransformer;
+import se.webinfostudio.game.etheder.api.transformer.building.BuildingQueueModelTransformer;
+import se.webinfostudio.game.etheder.domain.auth.AuthUser;
 import se.webinfostudio.game.etheder.entity.building.Building;
+import se.webinfostudio.game.etheder.entity.building.BuildingQueue;
 import se.webinfostudio.game.etheder.service.building.BuildingService;
 
 /**
@@ -39,21 +44,33 @@ public class BuildingResource extends AbstractResource {
 
 	private final BuildingService buildingService;
 	private final BuildingModelTransformer buildingModelTransformer;
+	private final BuildingQueueModelTransformer buildingQueueModelTransformer;
 
 	@Inject
 	BuildingResource(final ObjectMapper objectMapper, final BuildingService buildingService,
-			final BuildingModelTransformer buildingModelTransformer) {
+			final BuildingModelTransformer buildingModelTransformer,
+			final BuildingQueueModelTransformer buildingQueueModelTransformer) {
 		super(objectMapper);
 		this.buildingService = buildingService;
 		this.buildingModelTransformer = buildingModelTransformer;
+		this.buildingQueueModelTransformer = buildingQueueModelTransformer;
 	}
 
+	/**
+	 * Creates a building for a city.
+	 *
+	 * @param buildingDataId id of the building to create
+	 * @param cityId         id of the city where the building will be created
+	 * @param user           logged in user
+	 * @return created {@link BuildingQueue}
+	 */
 	@POST
 	@Timed
 	@UnitOfWork
-	public Response create() {
+	public Response create(final Long buildingDataId, final String cityId, @Auth final AuthUser user) {
 		LOG.info("create");
-		return okFlat(buildingModelTransformer.apply(buildingService.createBuilding()));
+		return okFlat(buildingQueueModelTransformer.apply(buildingService.createBuilding(buildingDataId,
+				createUUIDFromString(cityId), createUUIDFromString(user.getUserId()))));
 	}
 
 	@GET

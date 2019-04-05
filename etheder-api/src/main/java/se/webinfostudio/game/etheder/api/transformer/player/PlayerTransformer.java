@@ -21,7 +21,7 @@ public class PlayerTransformer implements Function<PlayerModel, Player> {
 		final Player player = new Player();
 		player.setId(createUUIDFromString(playerModel.getPlayerId()));
 		player.setCountry(playerModel.getCountry());
-		player.setMyUser(new UserRef(fromString(playerModel.getUserId())));
+		player.setUser(new UserRef(fromString(playerModel.getUserId())));
 		return player;
 	}
 }

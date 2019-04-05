@@ -16,6 +16,7 @@ public class AuthUser implements Principal {
 		private List<String> roles;
 		private String firstName;
 		private String lastName;
+		private String userId;
 		private String userName;
 
 		public AuthUser build() {
@@ -24,6 +25,7 @@ public class AuthUser implements Principal {
 			authUser.firstName = firstName;
 			authUser.lastName = lastName;
 			authUser.userName = userName;
+			authUser.userId = userId;
 			return authUser;
 		}
 
@@ -42,6 +44,11 @@ public class AuthUser implements Principal {
 			return this;
 		}
 
+		public Builder withUserId(final String userId) {
+			this.userId = userId;
+			return this;
+		}
+
 		public Builder withUserName(final String userName) {
 			this.userName = userName;
 			return this;
@@ -56,15 +63,24 @@ public class AuthUser implements Principal {
 
 	private String firstName;
 	private String lastName;
+	private String userId;
 	private String userName;
 
 	public String getFirstName() {
 		return firstName;
 	}
 
+	public String getLastName() {
+		return lastName;
+	}
+
 	@Override
 	public String getName() {
 		return format("%s %s", firstName, lastName);
+	}
+
+	public String getUserId() {
+		return userId;
 	}
 
 	public String getUserName() {

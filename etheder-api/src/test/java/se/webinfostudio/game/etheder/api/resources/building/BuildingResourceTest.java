@@ -7,6 +7,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createBuilding;
+import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createBuildingQueue;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -23,8 +24,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import se.webinfostudio.game.etheder.api.resources.building.BuildingResource;
 import se.webinfostudio.game.etheder.api.transformer.building.BuildingModelTransformer;
+import se.webinfostudio.game.etheder.api.transformer.building.BuildingQueueModelTransformer;
+import se.webinfostudio.game.etheder.domain.auth.AuthUser;
 import se.webinfostudio.game.etheder.entity.building.Building;
 import se.webinfostudio.game.etheder.service.building.BuildingService;
 
@@ -47,8 +49,12 @@ public class BuildingResourceTest {
 	void beforeEach() {
 		initMocks(this);
 		final BuildingModelTransformer buildingModelTransformer = new BuildingModelTransformer();
+		final BuildingQueueModelTransformer buildingQueueModelTransformer = new BuildingQueueModelTransformer();
 
-		sut = new BuildingResource(objectMapper, buildingService, buildingModelTransformer);
+		sut = new BuildingResource(objectMapper,
+				buildingService,
+				buildingModelTransformer,
+				buildingQueueModelTransformer);
 
 		// Fix for AbstractResource
 		when(objectMapper.createObjectNode()).thenReturn(new ObjectNode(new JsonNodeFactory(false)));
@@ -57,11 +63,15 @@ public class BuildingResourceTest {
 
 	@Test
 	void create() {
-		when(buildingService.createBuilding()).thenReturn(createBuilding());
+		final UUID cityId = randomUUID();
+		final UUID userId = randomUUID();
+		final AuthUser user = AuthUser.newBuilder().withUserId(userId.toString()).build();
 
-		sut.create();
+		when(buildingService.createBuilding(1L, cityId, userId)).thenReturn(createBuildingQueue());
 
-		verify(buildingService).createBuilding();
+		sut.create(1L, cityId.toString(), user);
+
+		verify(buildingService).createBuilding(1L, cityId, userId);
 	}
 
 	@Test

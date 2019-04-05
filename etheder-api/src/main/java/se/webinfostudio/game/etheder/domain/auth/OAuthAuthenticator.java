@@ -42,10 +42,12 @@ public class OAuthAuthenticator implements Authenticator<String, AuthUser> {
 						.withFirstName(user.get().getFirstName())
 						.withLastName(user.get().getLastName())
 						.withUserName(user.get().getLogin().getUserName())
+						.withUserId(user.get().getId().toString())
 						.build());
 			}
 		} catch (final NoResultException e) {
-			LOG.warn("Token: {} is not valid", credentials);
+			LOG.debug("Token: {} is not valid", credentials);
+			throw new AuthenticationException("User not logged in");
 		}
 		return empty();
 	}

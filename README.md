@@ -2,10 +2,15 @@
 
 ## Prerequisites
 Java 8
+Maven
+PostgreSQL
 
 ### Configuring application
 Application configuration (configuration.yml) contains fields that can be overriden by envType variables. 
 To run locally against docker dependencies set the following envType variables: (Can be set in runtime configuration):
+
+### Build application
+mvn install
 
 ### Running locally in IDE
 

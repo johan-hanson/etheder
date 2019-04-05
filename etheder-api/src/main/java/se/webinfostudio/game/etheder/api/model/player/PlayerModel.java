@@ -1,5 +1,7 @@
 package se.webinfostudio.game.etheder.api.model.player;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlayerModel {
@@ -42,9 +44,11 @@ public class PlayerModel {
 	private String playerId;
 
 	@JsonProperty
+	@NotEmpty
 	private String country;
 
 	@JsonProperty
+	@NotEmpty
 	private String userId;
 
 	public String getCountry() {

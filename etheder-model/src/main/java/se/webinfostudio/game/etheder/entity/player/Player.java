@@ -116,7 +116,7 @@ public class Player extends AbstractGameEntity implements HasReference<PlayerRef
 		return iron;
 	}
 
-	public UserRef getMyUser() {
+	public UserRef getUser() {
 		return user;
 	}
 
@@ -186,7 +186,7 @@ public class Player extends AbstractGameEntity implements HasReference<PlayerRef
 		this.iron = iron;
 	}
 
-	public void setMyUser(final UserRef myUser) {
+	public void setUser(final UserRef myUser) {
 		user = myUser;
 	}
 

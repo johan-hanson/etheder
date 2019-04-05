@@ -3,6 +3,8 @@ package se.webinfostudio.game.etheder.dao.player;
 import static org.assertj.core.api.Assertions.assertThat;
 import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createCity;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,6 +34,17 @@ public class CityDAOTest {
 	@BeforeEach
 	void before() {
 		sut = new CityDAO(database.getSessionFactory());
+	}
+
+	@Test
+	void findById() {
+		final City city = createCity();
+		sut.persist(city);
+
+		final Optional<City> result = sut.findById(city.getId());
+
+		assertThat(result.isPresent()).isTrue();
+		assertThat(result.get().getId()).isEqualTo(city.getId());
 	}
 
 	@Test

@@ -1,7 +1,11 @@
 package se.webinfostudio.game.etheder.dao.player;
 
+import static java.util.UUID.randomUUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createPlayer;
+
+import java.util.Optional;
+import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +26,7 @@ import se.webinfostudio.game.etheder.entity.player.Player;
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class PlayerDAOTest {
 
-	DAOTestExtension database = DAOTestExtension.newBuilder()
+	DAOTestExtension daoTestExtension = DAOTestExtension.newBuilder()
 			.addEntityClass(Player.class)
 			.addEntityClass(City.class)
 			.addEntityClass(Building.class)
@@ -33,7 +37,32 @@ public class PlayerDAOTest {
 
 	@BeforeEach
 	void before() {
-		sut = new PlayerDAO(database.getSessionFactory());
+		sut = new PlayerDAO(daoTestExtension.getSessionFactory());
+	}
+
+	@Test
+	void findByUserId() {
+		final Player player = createPlayer();
+		final UUID userId = player.getUser().getId();
+
+		final Optional<Player> result = daoTestExtension.inTransaction(() -> {
+			sut.persist(player);
+			return sut.findByUserId(userId);
+		});
+
+		assertThat(result.isPresent()).isTrue();
+		assertThat(result.get().getUser().getId()).isEqualTo(userId);
+	}
+
+	@Test
+	void findByUserId_shouldReturnEmpty_whenNoPlayerFound() {
+		final UUID userId = randomUUID();
+
+		final Optional<Player> result = daoTestExtension.inTransaction(() -> {
+			return sut.findByUserId(userId);
+		});
+
+		assertThat(result.isPresent()).isFalse();
 	}
 
 	@Test

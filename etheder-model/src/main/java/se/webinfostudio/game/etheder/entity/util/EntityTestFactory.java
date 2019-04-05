@@ -139,7 +139,7 @@ public final class EntityTestFactory {
 	 * @return {@link Player}
 	 */
 	public static Player createPlayer() {
-		return createPlayer(UUID.randomUUID(), "Johan");
+		return createPlayer(randomUUID(), "Johan");
 	}
 
 	/**
@@ -153,7 +153,7 @@ public final class EntityTestFactory {
 		final Player player = new Player();
 		player.setId(id);
 		player.setCountry(country);
-		player.setMyUser(new UserRef(randomUUID()));
+		player.setUser(new UserRef(randomUUID()));
 		return player;
 	}
 

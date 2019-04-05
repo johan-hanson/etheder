@@ -16,7 +16,7 @@ public class PlayerModelTransformer implements Function<Player, PlayerModel> {
 	public PlayerModel apply(final Player player) {
 		return PlayerModel.newBuilder()
 				.withPlayerId(player.getId().toString())
-				.withUserId(player.getMyUser().getId().toString())
+				.withUserId(player.getUser().getId().toString())
 				.withCountry(player.getCountry()).build();
 	}
 }
