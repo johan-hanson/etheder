@@ -1,5 +1,7 @@
 package se.webinfostudio.game.etheder.dao.unit;
 
+import static java.util.Optional.ofNullable;
+
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -22,7 +24,7 @@ public class UnitDataDAO extends AbstractDAO<UnitData> {
 	}
 
 	public Optional<UnitData> findById(final Long unitId) {
-		return Optional.ofNullable(currentSession().find(UnitData.class, unitId));
+		return ofNullable(currentSession().find(UnitData.class, unitId));
 	}
 
 	@Override

@@ -46,11 +46,11 @@ public class ImportUnitData implements ImportData<UnitData> {
 				unitData.setName(row.getCell(1).getStringCellValue());
 				unitData.setDescription(row.getCell(2).getStringCellValue());
 				unitData.setTicks(Double.valueOf(row.getCell(3).getNumericCellValue()).intValue());
-				unitData.setCostFood(Double.valueOf(row.getCell(4).getNumericCellValue()).intValue());
-				unitData.setCostIron(Double.valueOf(row.getCell(5).getNumericCellValue()).intValue());
-				unitData.setCostWood(Double.valueOf(row.getCell(6).getNumericCellValue()).intValue());
-				unitData.setCostStone(Double.valueOf(row.getCell(7).getNumericCellValue()).intValue());
-				unitData.setCostGold(Double.valueOf(row.getCell(8).getNumericCellValue()).intValue());
+				unitData.setCostFood(Double.valueOf(row.getCell(4).getNumericCellValue()).longValue());
+				unitData.setCostIron(Double.valueOf(row.getCell(5).getNumericCellValue()).longValue());
+				unitData.setCostWood(Double.valueOf(row.getCell(6).getNumericCellValue()).longValue());
+				unitData.setCostStone(Double.valueOf(row.getCell(7).getNumericCellValue()).longValue());
+				unitData.setCostGold(Double.valueOf(row.getCell(8).getNumericCellValue()).longValue());
 				unitData.setUnitType(converter.convertToEntityAttribute(row.getCell(9).getStringCellValue()));
 				unitData.setLevel(Double.valueOf(row.getCell(10).getNumericCellValue()).intValue());
 				unitData.setAttack(Double.valueOf(row.getCell(11).getNumericCellValue()).intValue());

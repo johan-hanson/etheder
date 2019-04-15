@@ -46,11 +46,11 @@ public class ImportResearch implements ImportData<Research> {
 				r.setName(row.getCell(1).getStringCellValue());
 				r.setDescription(row.getCell(2).getStringCellValue());
 				r.setTicks(Double.valueOf(row.getCell(3).getNumericCellValue()).intValue());
-				r.setCostFood(Double.valueOf(row.getCell(4).getNumericCellValue()).intValue());
-				r.setCostIron(Double.valueOf(row.getCell(5).getNumericCellValue()).intValue());
-				r.setCostWood(Double.valueOf(row.getCell(6).getNumericCellValue()).intValue());
-				r.setCostStone(Double.valueOf(row.getCell(7).getNumericCellValue()).intValue());
-				r.setCostGold(Double.valueOf(row.getCell(8).getNumericCellValue()).intValue());
+				r.setCostFood(Double.valueOf(row.getCell(4).getNumericCellValue()).longValue());
+				r.setCostIron(Double.valueOf(row.getCell(5).getNumericCellValue()).longValue());
+				r.setCostWood(Double.valueOf(row.getCell(6).getNumericCellValue()).longValue());
+				r.setCostStone(Double.valueOf(row.getCell(7).getNumericCellValue()).longValue());
+				r.setCostGold(Double.valueOf(row.getCell(8).getNumericCellValue()).longValue());
 				r.setUnitType(converter.convertToEntityAttribute(row.getCell(9).getStringCellValue()));
 				r.setLevel(Double.valueOf(row.getCell(10).getNumericCellValue()).intValue());
 				list.add(r);

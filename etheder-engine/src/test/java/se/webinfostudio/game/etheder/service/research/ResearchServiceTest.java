@@ -1,6 +1,7 @@
 package se.webinfostudio.game.etheder.service.research;
 
 import static org.mockito.MockitoAnnotations.initMocks;
+import static se.webinfostudio.game.etheder.entity.unit.UnitType.CAVALRY;
 import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createResearch;
 
 import java.util.Arrays;
@@ -11,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 
 import se.webinfostudio.game.etheder.entity.research.Research;
-import se.webinfostudio.game.etheder.entity.unit.UnitType;
 import se.webinfostudio.game.etheder.entity.util.EntityTestFactory;
 
 /**
@@ -56,7 +56,11 @@ public class ResearchServiceTest {
 	@Test
 	void save() {
 		final Research r1 = createResearch();
-		final Research r2 = createResearch(Long.valueOf(1L), "Stablehourses", UnitType.CAVALRY);
+		final Research r2 = EntityTestFactory.buildResearch()
+				.withId(1L)
+				.withName("Stablehourses")
+				.withUnitType(CAVALRY)
+				.build();
 
 		final List<Research> result = sut.save(Arrays.asList(r1, r2));
 //		verify(researchRepository, times(2)).create(Matchers.any(Research.class));

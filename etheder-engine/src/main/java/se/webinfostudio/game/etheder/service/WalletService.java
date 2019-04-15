@@ -32,6 +32,9 @@ public class WalletService {
 		if (player.getStone() < gameEntity.getCostStone()) {
 			return false;
 		}
+		if (player.getGold() < gameEntity.getCostGold()) {
+			return false;
+		}
 		return true;
 	}
 
@@ -47,6 +50,7 @@ public class WalletService {
 			player.setWood(player.getWood() - dataEntity.getCostWood());
 			player.setIron(player.getIron() - dataEntity.getCostIron());
 			player.setStone(player.getStone() - dataEntity.getCostStone());
+			player.setGold(player.getGold() - dataEntity.getCostGold());
 		} else {
 			throw new IllegalArgumentException("Player do not affored the cost");
 		}

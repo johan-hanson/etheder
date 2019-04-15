@@ -1,5 +1,9 @@
 package se.webinfostudio.game.etheder.dao.building;
 
+import static java.util.Optional.ofNullable;
+
+import java.util.Optional;
+
 import org.hibernate.SessionFactory;
 
 import com.google.inject.Inject;
@@ -19,8 +23,8 @@ public class BuildingDataDAO extends AbstractDAO<BuildingData> {
 		super(sessionFactory);
 	}
 
-	public BuildingData findById(final Long buildingId) {
-		return currentSession().find(BuildingData.class, buildingId);
+	public Optional<BuildingData> findById(final Long buildingId) {
+		return ofNullable(currentSession().find(BuildingData.class, buildingId));
 	}
 
 	@Override

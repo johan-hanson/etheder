@@ -3,6 +3,8 @@ package se.webinfostudio.game.etheder.dao.building;
 import static org.assertj.core.api.Assertions.assertThat;
 import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createBuildingData;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,10 +35,11 @@ public class BuildingDataDAOTest {
 	void findById() {
 		final BuildingData buildingData = createBuildingData();
 		sut.persist(buildingData);
-		final BuildingData result = sut.findById(buildingData.getId());
+		final Optional<BuildingData> result = sut.findById(buildingData.getId());
 
-		assertThat(result.getId()).isEqualTo(buildingData.getId());
-		assertThat(result.getName()).isEqualTo(buildingData.getName());
+		assertThat(result.isPresent()).isTrue();
+		assertThat(result.get().getId()).isEqualTo(buildingData.getId());
+		assertThat(result.get().getName()).isEqualTo(buildingData.getName());
 	}
 
 	@Test

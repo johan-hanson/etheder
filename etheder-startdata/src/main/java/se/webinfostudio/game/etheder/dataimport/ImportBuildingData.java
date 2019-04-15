@@ -46,11 +46,11 @@ public class ImportBuildingData implements ImportData<BuildingData> {
 				b.setName(row.getCell(1).getStringCellValue());
 				b.setDescription(row.getCell(2).getStringCellValue());
 				b.setTicks(Double.valueOf(row.getCell(3).getNumericCellValue()).intValue());
-				b.setCostFood(Double.valueOf(row.getCell(4).getNumericCellValue()).intValue());
-				b.setCostIron(Double.valueOf(row.getCell(5).getNumericCellValue()).intValue());
-				b.setCostWood(Double.valueOf(row.getCell(6).getNumericCellValue()).intValue());
-				b.setCostStone(Double.valueOf(row.getCell(7).getNumericCellValue()).intValue());
-				b.setCostGold(Double.valueOf(row.getCell(8).getNumericCellValue()).intValue());
+				b.setCostFood(Double.valueOf(row.getCell(4).getNumericCellValue()).longValue());
+				b.setCostIron(Double.valueOf(row.getCell(5).getNumericCellValue()).longValue());
+				b.setCostWood(Double.valueOf(row.getCell(6).getNumericCellValue()).longValue());
+				b.setCostStone(Double.valueOf(row.getCell(7).getNumericCellValue()).longValue());
+				b.setCostGold(Double.valueOf(row.getCell(8).getNumericCellValue()).longValue());
 				b.setUnitType(converter.convertToEntityAttribute(row.getCell(9).getStringCellValue()));
 				b.setMaxNumber(Double.valueOf(row.getCell(10).getNumericCellValue()).intValue());
 				b.setPopulationCapacity(Double.valueOf(row.getCell(11).getNumericCellValue()).intValue());

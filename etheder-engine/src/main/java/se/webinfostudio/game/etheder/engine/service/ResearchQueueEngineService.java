@@ -11,7 +11,6 @@ import org.hibernate.Session;
 import org.slf4j.Logger;
 
 import se.webinfostudio.game.etheder.engine.dao.player.PlayerDAO;
-import se.webinfostudio.game.etheder.engine.dao.research.ResearchDAO;
 import se.webinfostudio.game.etheder.engine.dao.research.ResearchQueueDAO;
 import se.webinfostudio.game.etheder.entity.player.Player;
 import se.webinfostudio.game.etheder.entity.research.Research;
@@ -30,14 +29,10 @@ public class ResearchQueueEngineService {
 	private final PlayerDAO playerDAO;
 
 	@Inject
-	private final ResearchDAO researchDAO;
-
-	@Inject
 	private final ResearchQueueDAO researchQueueDAO;
 
 	public ResearchQueueEngineService(final Session session) {
 		researchQueueDAO = new ResearchQueueDAO(session);
-		researchDAO = new ResearchDAO(session);
 		playerDAO = new PlayerDAO(session);
 	}
 
@@ -53,7 +48,7 @@ public class ResearchQueueEngineService {
 			final List<ResearchQueue> researchQueues = researchQueueDAO.findAllFinished();
 			researchQueues.forEach(rq -> {
 				final Player player = playerDAO.findByRef(rq.getPlayer());
-				final Research research = researchDAO.findByRef(rq.getResearch());
+				final Research research = rq.getResearch();
 				player.addTechLevel(research.getUnitType());
 				playerDAO.persist(player);
 				researchQueueDAO.remove(rq);

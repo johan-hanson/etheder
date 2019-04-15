@@ -39,7 +39,7 @@ public class UnitTest {
 
 	@Test
 	void testSetCostFood() {
-		final Integer cost = 800;
+		final Long cost = 800L;
 		final Unit instance = createUnit();
 		instance.getUnitData().setCostFood(cost);
 		assertThat(instance.getUnitData().getCostFood()).isEqualTo(cost);
@@ -47,7 +47,7 @@ public class UnitTest {
 
 	@Test
 	void testSetCostGold() {
-		final Integer cost = 1800;
+		final Long cost = 1800L;
 		final Unit instance = createUnit();
 		instance.getUnitData().setCostGold(cost);
 		assertThat(instance.getUnitData().getCostGold()).isEqualTo(cost);
@@ -55,7 +55,7 @@ public class UnitTest {
 
 	@Test
 	void testSetCostIron() {
-		final Integer cost = 1200;
+		final Long cost = 1200L;
 		final Unit instance = createUnit();
 		instance.getUnitData().setCostIron(cost);
 		assertThat(instance.getUnitData().getCostIron()).isEqualTo(cost);
@@ -63,7 +63,7 @@ public class UnitTest {
 
 	@Test
 	void testSetCostStone() {
-		final Integer cost = 1800;
+		final Long cost = 1800L;
 		final Unit instance = createUnit();
 		instance.getUnitData().setCostStone(cost);
 		assertThat(instance.getUnitData().getCostStone()).isEqualTo(cost);
@@ -71,7 +71,7 @@ public class UnitTest {
 
 	@Test
 	void testSetCostWood() {
-		final Integer cost = 1500;
+		final Long cost = 1500L;
 		final Unit instance = createUnit();
 		instance.getUnitData().setCostWood(cost);
 		assertThat(instance.getUnitData().getCostWood()).isEqualTo(cost);

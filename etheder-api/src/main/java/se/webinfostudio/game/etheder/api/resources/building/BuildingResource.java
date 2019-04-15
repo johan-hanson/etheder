@@ -1,14 +1,12 @@
 package se.webinfostudio.game.etheder.api.resources.building;
 
 import static org.slf4j.LoggerFactory.getLogger;
-import static se.webinfostudio.game.etheder.api.transformer.TransformerHelper.createUUIDFromString;
 
 import java.util.Optional;
 
 import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -24,10 +22,9 @@ import io.dropwizard.auth.Auth;
 import io.dropwizard.hibernate.UnitOfWork;
 import se.webinfostudio.game.etheder.api.resources.AbstractResource;
 import se.webinfostudio.game.etheder.api.transformer.building.BuildingModelTransformer;
-import se.webinfostudio.game.etheder.api.transformer.building.BuildingQueueModelTransformer;
 import se.webinfostudio.game.etheder.domain.auth.AuthUser;
 import se.webinfostudio.game.etheder.entity.building.Building;
-import se.webinfostudio.game.etheder.entity.building.BuildingQueue;
+import se.webinfostudio.game.etheder.entity.player.City;
 import se.webinfostudio.game.etheder.service.building.BuildingService;
 
 /**
@@ -44,33 +41,13 @@ public class BuildingResource extends AbstractResource {
 
 	private final BuildingService buildingService;
 	private final BuildingModelTransformer buildingModelTransformer;
-	private final BuildingQueueModelTransformer buildingQueueModelTransformer;
 
 	@Inject
 	BuildingResource(final ObjectMapper objectMapper, final BuildingService buildingService,
-			final BuildingModelTransformer buildingModelTransformer,
-			final BuildingQueueModelTransformer buildingQueueModelTransformer) {
+			final BuildingModelTransformer buildingModelTransformer) {
 		super(objectMapper);
 		this.buildingService = buildingService;
 		this.buildingModelTransformer = buildingModelTransformer;
-		this.buildingQueueModelTransformer = buildingQueueModelTransformer;
-	}
-
-	/**
-	 * Creates a building for a city.
-	 *
-	 * @param buildingDataId id of the building to create
-	 * @param cityId         id of the city where the building will be created
-	 * @param user           logged in user
-	 * @return created {@link BuildingQueue}
-	 */
-	@POST
-	@Timed
-	@UnitOfWork
-	public Response create(final Long buildingDataId, final String cityId, @Auth final AuthUser user) {
-		LOG.info("create");
-		return okFlat(buildingQueueModelTransformer.apply(buildingService.createBuilding(buildingDataId,
-				createUUIDFromString(cityId), createUUIDFromString(user.getUserId()))));
 	}
 
 	@GET
@@ -88,10 +65,16 @@ public class BuildingResource extends AbstractResource {
 		return notFound("Building not found");
 	}
 
+	/**
+	 * Lists all buildings in a {@link City}.
+	 *
+	 * @return a list of {@link Building}s
+	 */
 	@GET
 	@Timed
 	@UnitOfWork
-	public Response listAll() {
+	@Path("/list/{city}")
+	public Response listAll(@PathParam("cityId") final String cityId, @Auth final AuthUser user) {
 		LOG.info("List all buildings");
 		return buildingService.findAll().stream().map(building -> buildingModelTransformer.apply(building))
 				.collect(okFlat("buildings"));

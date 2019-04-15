@@ -25,11 +25,11 @@ public abstract class AbstractDataEntity extends AbstractBasicEntity {
 	@NotNull
 	private String name;
 	private String description;
-	private Integer costIron;
-	private Integer costWood;
-	private Integer costStone;
-	private Integer costFood;
-	private Integer costGold;
+	private Long costIron;
+	private Long costWood;
+	private Long costStone;
+	private Long costFood;
+	private Long costGold;
 
 	/**
 	 * Ticks it takes to construct the building.
@@ -39,23 +39,23 @@ public abstract class AbstractDataEntity extends AbstractBasicEntity {
 	@Enumerated(EnumType.STRING)
 	private UnitType unitType;
 
-	public Integer getCostFood() {
+	public Long getCostFood() {
 		return costFood;
 	}
 
-	public Integer getCostGold() {
+	public Long getCostGold() {
 		return costGold;
 	}
 
-	public Integer getCostIron() {
+	public Long getCostIron() {
 		return costIron;
 	}
 
-	public Integer getCostStone() {
+	public Long getCostStone() {
 		return costStone;
 	}
 
-	public Integer getCostWood() {
+	public Long getCostWood() {
 		return costWood;
 	}
 
@@ -79,23 +79,23 @@ public abstract class AbstractDataEntity extends AbstractBasicEntity {
 		return unitType;
 	}
 
-	public void setCostFood(final Integer costFood) {
+	public void setCostFood(final Long costFood) {
 		this.costFood = costFood;
 	}
 
-	public void setCostGold(final Integer costGold) {
+	public void setCostGold(final Long costGold) {
 		this.costGold = costGold;
 	}
 
-	public void setCostIron(final Integer costIron) {
+	public void setCostIron(final Long costIron) {
 		this.costIron = costIron;
 	}
 
-	public void setCostStone(final Integer costStone) {
+	public void setCostStone(final Long costStone) {
 		this.costStone = costStone;
 	}
 
-	public void setCostWood(final Integer costWood) {
+	public void setCostWood(final Long costWood) {
 		this.costWood = costWood;
 	}
 
