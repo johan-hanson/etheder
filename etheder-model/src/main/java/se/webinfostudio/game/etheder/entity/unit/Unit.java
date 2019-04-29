@@ -1,7 +1,5 @@
 package se.webinfostudio.game.etheder.entity.unit;
 
-import java.io.Serializable;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -11,12 +9,12 @@ import se.webinfostudio.game.etheder.entity.AbstractGameEntity;
 import se.webinfostudio.game.etheder.entity.HasReference;
 
 /**
- * A unique entity for an unit.
+ * A unique entity for an unit. Not anymore...
  *
  * @author Johan Hanson
  */
 @Entity
-public class Unit extends AbstractGameEntity implements Serializable, HasReference<UnitRef> {
+public class Unit extends AbstractGameEntity implements HasReference<UnitRef> {
 
 	private static final long serialVersionUID = -8789282115358229337L;
 
@@ -24,29 +22,27 @@ public class Unit extends AbstractGameEntity implements Serializable, HasReferen
 	private Integer defensive;
 	private Integer armour;
 	private Integer speed;
+	private Integer strength;
+	private Integer toughness;
+	private Integer initiative;
+	private Integer weaponskill;
 	private Integer health;
+	private Integer hitPoints;
+	private Integer minPower;
+	private Integer maxPower;
 
 	@NotNull
 	@OneToOne(cascade = CascadeType.PERSIST)
 	private UnitData unitData;
 
-	/**
-	 * @return the armour
-	 */
 	public Integer getArmour() {
 		return armour;
 	}
 
-	/**
-	 * @return the attack
-	 */
 	public Integer getAttack() {
 		return attack;
 	}
 
-	/**
-	 * @return the defensive
-	 */
 	public Integer getDefensive() {
 		return defensive;
 	}
@@ -55,9 +51,6 @@ public class Unit extends AbstractGameEntity implements Serializable, HasReferen
 		return health;
 	}
 
-	/**
-	 * @return the speed
-	 */
 	public Integer getSpeed() {
 		return speed;
 	}
@@ -66,23 +59,14 @@ public class Unit extends AbstractGameEntity implements Serializable, HasReferen
 		return unitData;
 	}
 
-	/**
-	 * @param armour the armour to set
-	 */
 	public void setArmour(final Integer armour) {
 		this.armour = armour;
 	}
 
-	/**
-	 * @param attack the attack to set
-	 */
 	public void setAttack(final Integer attack) {
 		this.attack = attack;
 	}
 
-	/**
-	 * @param defensive the defensive to set
-	 */
 	public void setDefensive(final Integer defensive) {
 		this.defensive = defensive;
 	}
@@ -91,9 +75,6 @@ public class Unit extends AbstractGameEntity implements Serializable, HasReferen
 		this.health = health;
 	}
 
-	/**
-	 * @param speed the speed to set
-	 */
 	public void setSpeed(final Integer speed) {
 		this.speed = speed;
 	}

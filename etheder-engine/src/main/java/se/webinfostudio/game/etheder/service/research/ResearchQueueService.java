@@ -95,7 +95,7 @@ public class ResearchQueueService {
 	private void validatePlayerIsPlayer(final UUID playerId, final Player player) {
 		if (!playerId.equals(player.getId())) {
 			throw new RuntimeException(
-					format("Player %s is not logged on player %s", playerId, player.getId().toString()));
+					format("Player %s is not logged on as player %s", playerId, player.getId().toString()));
 		}
 	}
 

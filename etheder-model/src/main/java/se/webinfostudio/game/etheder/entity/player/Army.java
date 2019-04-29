@@ -7,7 +7,7 @@ import javax.validation.constraints.Min;
 
 import se.webinfostudio.game.etheder.entity.AbstractGameEntity;
 import se.webinfostudio.game.etheder.entity.HasReference;
-import se.webinfostudio.game.etheder.entity.unit.UnitType;
+import se.webinfostudio.game.etheder.entity.core.UnitType;
 
 /**
  *

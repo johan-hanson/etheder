@@ -55,9 +55,12 @@ public class BuildingQueueService {
 
 		validateCityBelongsToPlayer(cityId, userId, city, player);
 
+		// Check if building can be built techlevel stuff, to be decided
+
 		final BuildingData buildingData = findBuildingData(buildingQueue.getBuilding().getId());
 
-		// Check if building can be built techlevel stuff, to decided
+		// check if buildingqueue for this building already exists, depends if multiple
+		// buildings can be created
 
 		walletService.pay(player, buildingData);
 

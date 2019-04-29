@@ -25,9 +25,9 @@ import se.webinfostudio.game.etheder.dao.player.CityDAO;
 import se.webinfostudio.game.etheder.dao.player.PlayerDAO;
 import se.webinfostudio.game.etheder.entity.building.BuildingData;
 import se.webinfostudio.game.etheder.entity.building.BuildingQueue;
+import se.webinfostudio.game.etheder.entity.core.UnitType;
 import se.webinfostudio.game.etheder.entity.player.City;
 import se.webinfostudio.game.etheder.entity.player.Player;
-import se.webinfostudio.game.etheder.entity.unit.UnitType;
 import se.webinfostudio.game.etheder.service.WalletService;
 
 /**

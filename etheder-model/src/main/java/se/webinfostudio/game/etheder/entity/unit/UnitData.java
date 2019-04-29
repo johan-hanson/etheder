@@ -23,6 +23,10 @@ public class UnitData extends AbstractDataEntity {
 
 	@Column(name = "unitLevel")
 	private Integer level;
+	private Integer timeToProduce;
+	private Integer travelTime;
+	private boolean canFly;
+	private boolean canShotFlyingUnits;
 
 	public UnitData() {
 	}

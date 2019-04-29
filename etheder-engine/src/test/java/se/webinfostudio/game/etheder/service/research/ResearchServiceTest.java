@@ -1,7 +1,7 @@
 package se.webinfostudio.game.etheder.service.research;
 
 import static org.mockito.MockitoAnnotations.initMocks;
-import static se.webinfostudio.game.etheder.entity.unit.UnitType.CAVALRY;
+import static se.webinfostudio.game.etheder.entity.core.UnitType.CAVALRY;
 import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createResearch;
 
 import java.util.Arrays;

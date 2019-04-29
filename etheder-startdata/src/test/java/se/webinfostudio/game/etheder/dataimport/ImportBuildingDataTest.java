@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 import se.webinfostudio.game.etheder.entity.building.BuildingData;
-import se.webinfostudio.game.etheder.entity.unit.UnitType;
+import se.webinfostudio.game.etheder.entity.core.UnitType;
 
 /**
  *

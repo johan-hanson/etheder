@@ -3,7 +3,7 @@ package se.webinfostudio.game.etheder.entity.player;
 import static java.lang.Boolean.TRUE;
 import static java.util.UUID.randomUUID;
 import static org.assertj.core.api.Assertions.assertThat;
-import static se.webinfostudio.game.etheder.entity.unit.UnitType.INFANTRY;
+import static se.webinfostudio.game.etheder.entity.core.UnitType.INFANTRY;
 
 import java.util.UUID;
 

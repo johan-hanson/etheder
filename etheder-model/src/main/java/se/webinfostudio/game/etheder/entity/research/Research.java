@@ -1,7 +1,5 @@
 package se.webinfostudio.game.etheder.entity.research;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -14,7 +12,7 @@ import se.webinfostudio.game.etheder.entity.HasReference;
  * @author Johan Hanson
  */
 @Entity
-public class Research extends AbstractDataEntity implements Serializable, HasReference<ResearchRef> {
+public class Research extends AbstractDataEntity implements HasReference<ResearchRef> {
 
 	private static final long serialVersionUID = -2576482587380432119L;
 

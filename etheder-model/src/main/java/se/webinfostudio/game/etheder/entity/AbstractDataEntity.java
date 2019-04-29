@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
-import se.webinfostudio.game.etheder.entity.unit.UnitType;
+import se.webinfostudio.game.etheder.entity.core.UnitType;
 
 /**
  * Superclass for the data classses. The data classes is created from a
@@ -35,6 +35,7 @@ public abstract class AbstractDataEntity extends AbstractBasicEntity {
 	 * Ticks it takes to construct the building.
 	 */
 	private Integer ticks;
+
 //    @Convert(converter = UnitTypeConverter.class)
 	@Enumerated(EnumType.STRING)
 	private UnitType unitType;

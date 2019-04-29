@@ -1,13 +1,14 @@
 package se.webinfostudio.game.etheder.entity.util;
 
 import static java.util.UUID.randomUUID;
-import static se.webinfostudio.game.etheder.entity.unit.UnitType.ARCHER;
+import static se.webinfostudio.game.etheder.entity.core.UnitType.ARCHER;
 
 import java.util.UUID;
 
 import se.webinfostudio.game.etheder.entity.building.Building;
 import se.webinfostudio.game.etheder.entity.building.BuildingData;
 import se.webinfostudio.game.etheder.entity.building.BuildingQueue;
+import se.webinfostudio.game.etheder.entity.core.UnitType;
 import se.webinfostudio.game.etheder.entity.player.Army;
 import se.webinfostudio.game.etheder.entity.player.City;
 import se.webinfostudio.game.etheder.entity.player.CityRef;
@@ -18,7 +19,6 @@ import se.webinfostudio.game.etheder.entity.research.ResearchQueue;
 import se.webinfostudio.game.etheder.entity.unit.Unit;
 import se.webinfostudio.game.etheder.entity.unit.UnitData;
 import se.webinfostudio.game.etheder.entity.unit.UnitQueue;
-import se.webinfostudio.game.etheder.entity.unit.UnitType;
 import se.webinfostudio.game.etheder.entity.user.User;
 
 /**

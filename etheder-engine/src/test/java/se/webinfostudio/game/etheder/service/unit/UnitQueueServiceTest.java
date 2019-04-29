@@ -6,7 +6,7 @@ import static java.util.UUID.randomUUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.when;
-import static se.webinfostudio.game.etheder.entity.unit.UnitType.INFANTRY;
+import static se.webinfostudio.game.etheder.entity.core.UnitType.INFANTRY;
 import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createCity;
 import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createPlayer;
 import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createUnitData;

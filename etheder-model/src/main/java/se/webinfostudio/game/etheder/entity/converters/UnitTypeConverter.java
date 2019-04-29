@@ -3,7 +3,7 @@ package se.webinfostudio.game.etheder.entity.converters;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import se.webinfostudio.game.etheder.entity.unit.UnitType;
+import se.webinfostudio.game.etheder.entity.core.UnitType;
 
 /**
  * http://nurkiewicz.blogspot.se/2013/06/mapping-enums-done-right-with-convert.html
@@ -29,6 +29,12 @@ public class UnitTypeConverter implements AttributeConverter<UnitType, String> {
 			return UnitType.ARCHER;
 		case "S":
 			return UnitType.SIEGE;
+		case "H":
+			return UnitType.HERO;
+		case "M":
+			return UnitType.MONSTER;
+		case "T":
+			return UnitType.TRANSPORT;
 		case "NS":
 			return UnitType.NOT_SPCIFIED;
 		default:

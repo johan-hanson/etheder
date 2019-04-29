@@ -1,7 +1,5 @@
 package se.webinfostudio.game.etheder.entity.building;
 
-import java.io.Serializable;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -15,7 +13,7 @@ import se.webinfostudio.game.etheder.entity.HasReference;
  * @author Johan Hanson
  */
 @Entity(name = "building")
-public class Building extends AbstractGameEntity implements Serializable, HasReference<BuildingRef> {
+public class Building extends AbstractGameEntity implements HasReference<BuildingRef> {
 
 	private static final long serialVersionUID = -1375711736439804175L;
 

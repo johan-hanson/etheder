@@ -1,9 +1,9 @@
 package se.webinfostudio.game.etheder.entity.util;
 
-import static se.webinfostudio.game.etheder.entity.unit.UnitType.INFANTRY;
+import static se.webinfostudio.game.etheder.entity.core.UnitType.INFANTRY;
 
 import se.webinfostudio.game.etheder.entity.building.BuildingData;
-import se.webinfostudio.game.etheder.entity.unit.UnitType;
+import se.webinfostudio.game.etheder.entity.core.UnitType;
 
 /**
  *
