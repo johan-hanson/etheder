@@ -1,8 +1,5 @@
 package se.webinfostudio.game.etheder.entity.unit;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-
 import se.webinfostudio.game.etheder.entity.AbstractDataEntity;
 
 /**
@@ -10,7 +7,6 @@ import se.webinfostudio.game.etheder.entity.AbstractDataEntity;
  *
  * @author Johan Hanson <johan@webinfostudio.se>
  */
-@Entity
 public class UnitData extends AbstractDataEntity {
 
 	private static final long serialVersionUID = 6357384312861762046L;
@@ -21,7 +17,6 @@ public class UnitData extends AbstractDataEntity {
 	private Integer speed;
 	private Integer health;
 
-	@Column(name = "unitLevel")
 	private Integer level;
 	private Integer timeToProduce;
 	private Integer travelTime;

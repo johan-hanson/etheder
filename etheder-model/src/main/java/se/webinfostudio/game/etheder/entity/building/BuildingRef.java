@@ -2,8 +2,6 @@ package se.webinfostudio.game.etheder.entity.building;
 
 import java.util.UUID;
 
-import javax.persistence.Embeddable;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -13,7 +11,6 @@ import se.webinfostudio.game.etheder.entity.EntityReference;
  *
  * @author Johan Hanson
  */
-@Embeddable
 public class BuildingRef implements EntityReference {
 
 	private static final long serialVersionUID = -12292231919018382L;

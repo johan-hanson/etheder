@@ -5,7 +5,6 @@ import static org.slf4j.LoggerFactory.getLogger;
 import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.Session;
 import org.slf4j.Logger;
 
 import se.webinfostudio.game.etheder.engine.dao.building.BuildingDAO;
@@ -32,6 +31,13 @@ public class BuildingQueueEngineService {
 
 	private final PlayerDAO playerDAO;
 
+	public BuildingQueueEngineService() {
+		buildingQueueDAO = new BuildingQueueDAO();
+		buildingDAO = new BuildingDAO();
+		cityDAO = new CityDAO();
+		playerDAO = new PlayerDAO();
+	}
+
 	public BuildingQueueEngineService(final BuildingQueueDAO buildingQueueDAO,
 			final BuildingDAO buildingDAO,
 			final CityDAO cityDAO,
@@ -41,13 +47,6 @@ public class BuildingQueueEngineService {
 		this.buildingDAO = buildingDAO;
 		this.cityDAO = cityDAO;
 		this.playerDAO = playerDAO;
-	}
-
-	public BuildingQueueEngineService(final Session session) {
-		buildingQueueDAO = new BuildingQueueDAO(session);
-		buildingDAO = new BuildingDAO(session);
-		cityDAO = new CityDAO(session);
-		playerDAO = new PlayerDAO(session);
 	}
 
 	/**
@@ -64,9 +63,9 @@ public class BuildingQueueEngineService {
 				final City city = cityDAO.findByRef(bq.getCity());
 				final Optional<Player> player = playerDAO.findByCity(bq.getCity());
 				city.addBuilding(buildingDAO.createBuilding(bq.getBuilding()));
-				player.ifPresent(p -> playerDAO.persist(p));
+//				player.ifPresent(p -> playerDAO.persist(p));
 //				player.addTechLevel(bq.getBuilding().getUnitType());
-				cityDAO.persist(city);
+//				cityDAO.persist(city);
 				buildingQueueDAO.remove(bq);
 			});
 

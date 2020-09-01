@@ -2,15 +2,6 @@ package se.webinfostudio.game.etheder.entity.user;
 
 import static java.lang.String.format;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import org.hibernate.validator.constraints.NotBlank;
-
 import se.webinfostudio.game.etheder.entity.AbstractGameEntity;
 import se.webinfostudio.game.etheder.entity.HasReference;
 
@@ -18,23 +9,16 @@ import se.webinfostudio.game.etheder.entity.HasReference;
  *
  * @author Johan Hanson
  */
-@Entity
-@Table(name = "Users")
 public class User extends AbstractGameEntity implements HasReference<UserRef> {
 
 	private static final long serialVersionUID = 7089932666191926795L;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "loginid")
 	private Login login;
 
-	@NotBlank
 	private String firstName;
-	@NotBlank
 	private String lastName;
 	private String country;
 	private Integer age;
-	@Column(nullable = false, unique = true)
 	private String email;
 
 	public Integer getAge() {

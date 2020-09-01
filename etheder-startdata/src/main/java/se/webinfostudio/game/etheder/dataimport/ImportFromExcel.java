@@ -2,9 +2,9 @@ package se.webinfostudio.game.etheder.dataimport;
 
 import javax.inject.Inject;
 
-import se.webinfostudio.game.etheder.service.BuildingDataService;
-import se.webinfostudio.game.etheder.service.ResearchService;
-import se.webinfostudio.game.etheder.service.UnitDataService;
+import se.webinfostudio.game.etheder.service.BuildingDataImportService;
+import se.webinfostudio.game.etheder.service.ResearchImportService;
+import se.webinfostudio.game.etheder.service.UnitDataImportService;
 
 /**
  *
@@ -15,19 +15,19 @@ public class ImportFromExcel {
 	public static final String EXCEL_FILE_NAME = "StartData.xlsx";
 
 	@Inject
-	private BuildingDataService buildingDataService;
+	private BuildingDataImportService buildingDataService;
 
 	@Inject
 	private ImportBuildingData importBuildingData;
 
 	@Inject
-	private UnitDataService unitDataService;
+	private UnitDataImportService unitDataService;
 
 	@Inject
 	private ImportUnitData importUnitData;
 
 	@Inject
-	private ResearchService researchService;
+	private ResearchImportService researchService;
 
 	@Inject
 	private ImportResearch importResearch;

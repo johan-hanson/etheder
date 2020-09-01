@@ -2,8 +2,6 @@ package se.webinfostudio.game.etheder.engine.dao.building;
 
 import java.util.List;
 
-import org.hibernate.Session;
-
 import se.webinfostudio.game.etheder.engine.dao.AbstractDAO;
 import se.webinfostudio.game.etheder.entity.building.BuildingQueue;
 
@@ -15,8 +13,8 @@ import se.webinfostudio.game.etheder.entity.building.BuildingQueue;
  */
 public class BuildingQueueDAO extends AbstractDAO<BuildingQueue> {
 
-	public BuildingQueueDAO(final Session session) {
-		super(session, BuildingQueue.class);
+	public BuildingQueueDAO() {
+		super(BuildingQueue.class);
 	}
 
 	/**

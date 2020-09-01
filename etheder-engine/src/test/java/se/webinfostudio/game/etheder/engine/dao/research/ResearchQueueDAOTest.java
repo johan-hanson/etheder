@@ -8,10 +8,8 @@ import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.create
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import io.dropwizard.testing.junit5.DAOTestExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import se.webinfostudio.game.etheder.dao.TestDAO;
 import se.webinfostudio.game.etheder.entity.research.Research;
@@ -25,34 +23,26 @@ import se.webinfostudio.game.etheder.entity.research.ResearchQueue;
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class ResearchQueueDAOTest {
 
-	DAOTestExtension database = DAOTestExtension.newBuilder()
-			.addEntityClass(ResearchQueue.class)
-			.addEntityClass(Research.class).build();
-
 	private ResearchQueueDAO sut;
 	private TestDAO testDAO;
 
 	@BeforeEach
 	void before() {
-		sut = new ResearchQueueDAO(database.getSessionFactory().getCurrentSession());
-		testDAO = new TestDAO(database.getSessionFactory());
+		sut = new ResearchQueueDAO();
+		testDAO = new TestDAO();
 	}
 
-	@Test
 	void decreaseTicks() {
 		final Research research = createResearch();
 		testDAO.persist(research);
 		final ResearchQueue researchQueue = createResearchQueue();
 		researchQueue.setResearch(research);
 		testDAO.persist(researchQueue);
-		final int result = database.inTransaction(() -> {
-			return sut.decreaseTicks();
-		});
+		final int result = sut.decreaseTicks();
 
 		assertThat(result).isEqualTo(1);
 	}
 
-	@Test
 	void findAllFinished() {
 		final Research research1 = buildResearch()
 				.withId(1L)
@@ -69,9 +59,7 @@ public class ResearchQueueDAOTest {
 		testDAO.persist(research2);
 		testDAO.persist(researchQueue1);
 		testDAO.persist(researchQueue2);
-		final List<ResearchQueue> result = database.inTransaction(() -> {
-			return sut.findAllFinished();
-		});
+		final List<ResearchQueue> result = sut.findAllFinished();
 
 		assertThat(result).hasSize(1);
 	}

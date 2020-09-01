@@ -7,13 +7,10 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.Optional;
 
-import javax.persistence.NoResultException;
-
 import org.slf4j.Logger;
 
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
-import io.dropwizard.hibernate.UnitOfWork;
 import se.webinfostudio.game.etheder.dao.user.UserDAO;
 import se.webinfostudio.game.etheder.entity.user.User;
 
@@ -32,7 +29,6 @@ public class OAuthAuthenticator implements Authenticator<String, AuthUser> {
 		this.userDAO = userDAO;
 	}
 
-	@UnitOfWork
 	@Override
 	public Optional<AuthUser> authenticate(final String credentials) throws AuthenticationException {
 		try {
@@ -45,7 +41,7 @@ public class OAuthAuthenticator implements Authenticator<String, AuthUser> {
 						.withUserId(user.get().getId().toString())
 						.build());
 			}
-		} catch (final NoResultException e) {
+		} catch (final Exception e) {
 			LOG.debug("Token: {} is not valid", credentials);
 			throw new AuthenticationException("User not logged in");
 		}

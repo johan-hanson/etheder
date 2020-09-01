@@ -1,7 +1,5 @@
 package se.webinfostudio.game.etheder.api.model.user;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -38,11 +36,9 @@ public class UserChangePasswordModel {
 		return new Builder();
 	}
 
-	@NotBlank
 	@JsonProperty
 	private String oldPassword;
 
-	@NotBlank
 	@JsonProperty
 	private String newPassword;
 

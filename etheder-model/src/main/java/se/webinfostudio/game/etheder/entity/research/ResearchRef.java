@@ -7,8 +7,6 @@ package se.webinfostudio.game.etheder.entity.research;
 
 import java.io.Serializable;
 
-import javax.persistence.Embeddable;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -18,7 +16,6 @@ import se.webinfostudio.game.etheder.entity.EntityDataReference;
  *
  * @author Johan Hanson
  */
-@Embeddable
 public class ResearchRef implements EntityDataReference, Serializable {
 
 	private static final long serialVersionUID = -5900707831354769403L;

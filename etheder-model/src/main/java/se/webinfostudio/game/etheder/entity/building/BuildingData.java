@@ -1,7 +1,5 @@
 package se.webinfostudio.game.etheder.entity.building;
 
-import javax.persistence.Entity;
-
 import se.webinfostudio.game.etheder.entity.AbstractDataEntity;
 
 /**
@@ -9,7 +7,6 @@ import se.webinfostudio.game.etheder.entity.AbstractDataEntity;
  *
  * @author Johan Hanson <johan@webinfostudio.se>
  */
-@Entity
 public class BuildingData extends AbstractDataEntity {
 
 	private static final long serialVersionUID = 7439857429174113731L;

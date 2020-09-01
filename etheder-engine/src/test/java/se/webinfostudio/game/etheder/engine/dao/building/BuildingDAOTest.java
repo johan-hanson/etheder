@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import io.dropwizard.testing.junit5.DAOTestExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import se.webinfostudio.game.etheder.dao.TestDAO;
 import se.webinfostudio.game.etheder.entity.building.Building;
@@ -21,17 +20,13 @@ import se.webinfostudio.game.etheder.entity.building.BuildingData;
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class BuildingDAOTest {
 
-	DAOTestExtension database = DAOTestExtension.newBuilder()
-			.addEntityClass(Building.class)
-			.addEntityClass(BuildingData.class).build();
-
 	private BuildingDAO sut;
 	private TestDAO testDAO;
 
 	@BeforeEach
 	void before() {
-		sut = new BuildingDAO(database.getSessionFactory().getCurrentSession());
-		testDAO = new TestDAO(database.getSessionFactory());
+		sut = new BuildingDAO();
+		testDAO = new TestDAO();
 	}
 
 	@Test

@@ -17,7 +17,6 @@ import org.slf4j.Logger;
 import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.dropwizard.hibernate.UnitOfWork;
 import se.webinfostudio.game.etheder.api.model.user.LoginModel;
 import se.webinfostudio.game.etheder.api.resources.AbstractResource;
 import se.webinfostudio.game.etheder.api.transformer.user.LoginTransformer;
@@ -51,7 +50,6 @@ public class LoginResource extends AbstractResource {
 
 	@POST
 	@Timed
-	@UnitOfWork
 	public Response login(@Valid final LoginModel loginModel) {
 		LOG.info("Run login");
 		final Optional<Login> login = loginService.login(loginTransformer.apply(loginModel));

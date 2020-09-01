@@ -8,14 +8,11 @@ import java.util.List;
 import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import io.dropwizard.testing.junit5.DAOTestExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import se.webinfostudio.game.etheder.dao.TestDAO;
 import se.webinfostudio.game.etheder.entity.building.Building;
-import se.webinfostudio.game.etheder.entity.building.BuildingData;
 
 /**
  *
@@ -25,20 +22,15 @@ import se.webinfostudio.game.etheder.entity.building.BuildingData;
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class BuildingDAOTest {
 
-	DAOTestExtension database = DAOTestExtension.newBuilder()
-			.addEntityClass(Building.class)
-			.addEntityClass(BuildingData.class).build();
-
 	private BuildingDAO sut;
 	private TestDAO testDAO;
 
 	@BeforeEach
 	public void before() {
-		sut = new BuildingDAO(database.getSessionFactory());
-		testDAO = new TestDAO(database.getSessionFactory());
+		sut = new BuildingDAO();
+		testDAO = new TestDAO();
 	}
 
-	@Test
 	void create() {
 		final Building building = createBuilding();
 		final UUID id = sut.create(building);
@@ -46,23 +38,14 @@ public class BuildingDAOTest {
 		assertThat(id).isEqualTo(building.getId());
 	}
 
-	@Test
 	void findAll() {
 		final Building building1 = createBuilding();
 		final Building building2 = createBuilding(randomUUID(), "Stable");
-		final List<Building> result = database.inTransaction(() -> {
-			final BuildingData buildingData = (BuildingData) testDAO.persist(building1.getBuildingData());
-			building1.setBuildingData(buildingData);
-			building2.setBuildingData(buildingData);
-			sut.create(building1);
-			sut.create(building2);
-			return sut.findAll();
-		});
+		final List<Building> result = sut.findAll();
 
 		assertThat(result).hasSize(2);
 	}
 
-	@Test
 	void findById() {
 		final Building building = createBuilding();
 		final UUID id = sut.create(building);

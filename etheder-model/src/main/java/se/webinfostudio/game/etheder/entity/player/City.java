@@ -3,11 +3,6 @@ package se.webinfostudio.game.etheder.entity.player;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.validation.constraints.Min;
 
 import se.webinfostudio.game.etheder.entity.AbstractGameEntity;
@@ -20,7 +15,6 @@ import se.webinfostudio.game.etheder.entity.building.BuildingRef;
  *
  * @author Johan Hanson
  */
-@Entity
 public class City extends AbstractGameEntity implements HasReference<CityRef> {
 
 	private static final long serialVersionUID = 9221556338368338916L;
@@ -29,8 +23,6 @@ public class City extends AbstractGameEntity implements HasReference<CityRef> {
 
 	private PlayerRef player;
 
-	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "City_BuildingList", joinColumns = @JoinColumn(name = "city_id"))
 	private Set<BuildingRef> buildingList = new HashSet<>();
 
 	/**
@@ -39,8 +31,6 @@ public class City extends AbstractGameEntity implements HasReference<CityRef> {
 //	@NotNull
 	private ArmyRef defaultArmy;
 
-	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "City_ArmyList")
 	private Set<ArmyRef> armyList = new HashSet<>();
 
 	@Min(0)

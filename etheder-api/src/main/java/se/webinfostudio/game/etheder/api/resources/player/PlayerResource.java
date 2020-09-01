@@ -12,7 +12,6 @@ import javax.ws.rs.core.Response;
 import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.dropwizard.hibernate.UnitOfWork;
 import se.webinfostudio.game.etheder.api.model.player.PlayerModel;
 import se.webinfostudio.game.etheder.api.resources.AbstractResource;
 import se.webinfostudio.game.etheder.api.transformer.player.PlayerModelTransformer;
@@ -43,7 +42,6 @@ public class PlayerResource extends AbstractResource {
 
 	@POST
 	@Timed
-	@UnitOfWork
 	public Response createPlayer(@Valid final PlayerModel playerModel) {
 		return okFlat(
 				playerModelTransformer.apply(playerService.createPlayer(playerTransformer.apply(playerModel))));
@@ -51,7 +49,6 @@ public class PlayerResource extends AbstractResource {
 
 	@PUT
 	@Timed
-	@UnitOfWork
 	public Response updatePlayer(@Valid final PlayerModel playerModel) {
 		return okFlat(
 				playerModelTransformer.apply(playerService.updatePlayer(playerTransformer.apply(playerModel))));

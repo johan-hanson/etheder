@@ -15,7 +15,6 @@ import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.dropwizard.auth.Auth;
-import io.dropwizard.hibernate.UnitOfWork;
 import se.webinfostudio.game.etheder.api.model.research.ResearchQueueModel;
 import se.webinfostudio.game.etheder.api.resources.AbstractResource;
 import se.webinfostudio.game.etheder.api.transformer.research.ResearchQueueModelTransformer;
@@ -58,7 +57,6 @@ public class ResearchQueueResource extends AbstractResource {
 	 */
 	@POST
 	@Timed
-	@UnitOfWork
 	public Response create(@Valid final ResearchQueueModel researchQueueModel, @Auth final AuthUser user) {
 		return okFlat(researchQueueModelTransformer.apply(researchQueueService.createResearchQueue(
 				researchQueueTransformer.apply(researchQueueModel), createUUIDFromString(user.getUserId()))));

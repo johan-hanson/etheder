@@ -1,8 +1,5 @@
 package se.webinfostudio.game.etheder.entity.unit;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import se.webinfostudio.game.etheder.entity.AbstractGameEntity;
@@ -13,7 +10,6 @@ import se.webinfostudio.game.etheder.entity.HasReference;
  *
  * @author Johan Hanson
  */
-@Entity
 public class Unit extends AbstractGameEntity implements HasReference<UnitRef> {
 
 	private static final long serialVersionUID = -8789282115358229337L;
@@ -32,7 +28,6 @@ public class Unit extends AbstractGameEntity implements HasReference<UnitRef> {
 	private Integer maxPower;
 
 	@NotNull
-	@OneToOne(cascade = CascadeType.PERSIST)
 	private UnitData unitData;
 
 	public Integer getArmour() {

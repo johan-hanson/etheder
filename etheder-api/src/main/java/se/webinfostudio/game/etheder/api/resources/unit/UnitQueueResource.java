@@ -17,7 +17,6 @@ import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.dropwizard.auth.Auth;
-import io.dropwizard.hibernate.UnitOfWork;
 import se.webinfostudio.game.etheder.api.model.unit.UnitQueueModel;
 import se.webinfostudio.game.etheder.api.resources.AbstractResource;
 import se.webinfostudio.game.etheder.api.transformer.unit.UnitQueueModelTransformer;
@@ -51,7 +50,6 @@ public class UnitQueueResource extends AbstractResource {
 
 	@POST
 	@Timed
-	@UnitOfWork
 	public Response create(@Valid final UnitQueueModel unitQueueModel, @Auth final AuthUser user) {
 		return okFlat(unitQueueModelTransformer
 				.apply(unitQueueService.createUnitQueue(unitQueueTransformer.apply(unitQueueModel),
@@ -60,7 +58,6 @@ public class UnitQueueResource extends AbstractResource {
 
 	@GET
 	@Timed
-	@UnitOfWork
 	@Path("/list/{cityId}")
 	public Response listQueues(@PathParam("cityId") final String cityId, @Auth final AuthUser user) {
 		return okFlat(unitQueueModelTransformer

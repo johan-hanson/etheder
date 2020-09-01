@@ -1,8 +1,5 @@
 package se.webinfostudio.game.etheder.entity.player;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 
 import se.webinfostudio.game.etheder.entity.AbstractGameEntity;
@@ -13,7 +10,6 @@ import se.webinfostudio.game.etheder.entity.core.UnitType;
  *
  * @author Johan Hanson
  */
-@Entity
 public class Army extends AbstractGameEntity implements HasReference<ArmyRef> {
 
 	private static final long serialVersionUID = 596060513989334677L;
@@ -24,7 +20,6 @@ public class Army extends AbstractGameEntity implements HasReference<ArmyRef> {
 	public static final String DEFAULT_NAME = "Default army";
 
 	private String name;
-	@ManyToOne(fetch = FetchType.LAZY)
 	private Player player;
 	private Boolean defaultArmy;
 	@Min(0)

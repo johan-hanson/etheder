@@ -6,13 +6,9 @@ import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.create
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import io.dropwizard.testing.junit5.DAOTestExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
-import se.webinfostudio.game.etheder.entity.building.Building;
-import se.webinfostudio.game.etheder.entity.building.BuildingData;
 import se.webinfostudio.game.etheder.entity.player.City;
 
 /**
@@ -23,20 +19,13 @@ import se.webinfostudio.game.etheder.entity.player.City;
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class CityDAOTest {
 
-	DAOTestExtension database = DAOTestExtension.newBuilder()
-			.addEntityClass(City.class)
-			.addEntityClass(Building.class)
-			.addEntityClass(BuildingData.class)
-			.build();
-
 	private CityDAO sut;
 
 	@BeforeEach
 	void before() {
-		sut = new CityDAO(database.getSessionFactory());
+		sut = new CityDAO();
 	}
 
-	@Test
 	void findById() {
 		final City city = createCity();
 		sut.persist(city);
@@ -47,7 +36,6 @@ public class CityDAOTest {
 		assertThat(result.get().getId()).isEqualTo(city.getId());
 	}
 
-	@Test
 	void persist() {
 		final City city = createCity();
 		final City result = sut.persist(city);

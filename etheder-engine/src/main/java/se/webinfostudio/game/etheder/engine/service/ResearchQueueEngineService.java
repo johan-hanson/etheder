@@ -7,7 +7,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.hibernate.Session;
 import org.slf4j.Logger;
 
 import se.webinfostudio.game.etheder.engine.dao.player.PlayerDAO;
@@ -31,9 +30,9 @@ public class ResearchQueueEngineService {
 	@Inject
 	private final ResearchQueueDAO researchQueueDAO;
 
-	public ResearchQueueEngineService(final Session session) {
-		researchQueueDAO = new ResearchQueueDAO(session);
-		playerDAO = new PlayerDAO(session);
+	public ResearchQueueEngineService() {
+		researchQueueDAO = new ResearchQueueDAO();
+		playerDAO = new PlayerDAO();
 	}
 
 	/**

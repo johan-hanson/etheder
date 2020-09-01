@@ -6,7 +6,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.cache.CacheBuilderSpec;
+import com.github.benmanes.caffeine.cache.CaffeineSpec;
 
 import de.spinscale.dropwizard.jobs.JobConfiguration;
 import io.dropwizard.Configuration;
@@ -25,7 +25,15 @@ public class ApiConfiguration extends Configuration implements JobConfiguration 
 	private Map<String, String> jobs;
 
 	@JsonProperty("authCacheConfiguration")
-	private CacheBuilderSpec authCacheConfiguration;
+	private CaffeineSpec authCacheConfiguration;
+
+	public CaffeineSpec getAuthCacheConfiguration() {
+		return authCacheConfiguration;
+	}
+
+	public DataSourceFactory getDatabase() {
+		return database;
+	}
 
 	@JsonProperty("database")
 	public DataSourceFactory getDataSourceFactory() {
@@ -48,14 +56,6 @@ public class ApiConfiguration extends Configuration implements JobConfiguration 
 
 	public void setJobs(final Map<String, String> jobs) {
 		this.jobs = jobs;
-	}
-
-	public CacheBuilderSpec getAuthCacheConfiguration() {
-		return authCacheConfiguration;
-	}
-
-	public void setAuthCacheConfiguration(CacheBuilderSpec authCacheConfiguration) {
-		this.authCacheConfiguration = authCacheConfiguration;
 	}
 
 }

@@ -5,8 +5,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.hibernate.Session;
-
 import se.webinfostudio.game.etheder.engine.dao.player.ArmyDAO;
 import se.webinfostudio.game.etheder.engine.dao.player.CityDAO;
 import se.webinfostudio.game.etheder.engine.dao.unit.UnitQueueDAO;
@@ -30,10 +28,10 @@ public class UnitQueueEngineService {
 	@Inject
 	private final CityDAO cityDAO;
 
-	public UnitQueueEngineService(final Session session) {
-		unitQueueDAOy = new UnitQueueDAO(session);
-		armyDAO = new ArmyDAO(session);
-		cityDAO = new CityDAO(session);
+	public UnitQueueEngineService() {
+		unitQueueDAOy = new UnitQueueDAO();
+		armyDAO = new ArmyDAO();
+		cityDAO = new CityDAO();
 	}
 
 	/**

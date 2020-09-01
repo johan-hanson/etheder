@@ -2,7 +2,6 @@ package se.webinfostudio.game.etheder;
 
 import static ru.vyarus.dropwizard.guice.GuiceBundle.builder;
 import static se.webinfostudio.game.etheder.base.BaseModule.baseModule;
-import static se.webinfostudio.game.etheder.base.HibernateModule.hibernateModule;
 import static se.webinfostudio.game.etheder.domain.auth.AuthModule.authModule;
 
 import java.util.logging.LogManager;
@@ -19,6 +18,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import ru.vyarus.dropwizard.guice.module.installer.feature.jersey.provider.JerseyProviderInstaller;
 import ru.vyarus.dropwizard.guice.module.installer.feature.web.WebFilterInstaller;
+import ru.vyarus.guicey.jdbi3.JdbiBundle;
 
 /**
  *
@@ -46,10 +46,11 @@ public class ApiApplication extends Application<ApiConfiguration> {
 
 		bootstrap.addBundle(builder().modules(
 				baseModule(),
-				authModule(),
-				hibernateModule(bootstrap))
+				authModule())
+				.bundles(JdbiBundle.<ApiConfiguration>forDatabase((conf, env) -> conf.getDatabase()))
 				.installers(JerseyProviderInstaller.class, WebFilterInstaller.class)
-				.enableAutoConfig(ApiApplication.class.getPackage().getName()).searchCommands().build());
+				.enableAutoConfig(ApiApplication.class.getPackage().getName())
+				.searchCommands().build());
 
 		// force dropwizard-jobs using main metrics registry for all jobs
 		SharedMetricRegistries.add(Job.DROPWIZARD_JOBS_KEY, bootstrap.getMetricRegistry());
@@ -57,6 +58,10 @@ public class ApiApplication extends Application<ApiConfiguration> {
 
 	@Override
 	public void run(final ApiConfiguration configuration, final Environment environment) throws Exception {
+//		final JdbiFactory factory = new JdbiFactory();
+//		final Jdbi jdbi = factory.build(environment, configuration.getDataSourceFactory(), "postgresql");
+//		environment.jersey().register(new UserResource(jdbi));
+
 //		final TestHealthCheck healthCheck = new TestHealthCheck(configuration.getTest());
 //		environment.healthChecks().register("test", healthCheck);
 

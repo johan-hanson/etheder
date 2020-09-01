@@ -24,7 +24,7 @@ public class BuildingManualDAOTest {
 
 	@BeforeEach
 	void before() {
-		sut = new BuildingDAO(database.getSessionFactory());
+		sut = new BuildingDAO();
 	}
 
 }

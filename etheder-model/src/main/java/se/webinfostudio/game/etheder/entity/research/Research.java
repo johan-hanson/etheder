@@ -1,8 +1,5 @@
 package se.webinfostudio.game.etheder.entity.research;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-
 import se.webinfostudio.game.etheder.entity.AbstractDataEntity;
 import se.webinfostudio.game.etheder.entity.HasReference;
 
@@ -11,12 +8,10 @@ import se.webinfostudio.game.etheder.entity.HasReference;
  *
  * @author Johan Hanson
  */
-@Entity
 public class Research extends AbstractDataEntity implements HasReference<ResearchRef> {
 
 	private static final long serialVersionUID = -2576482587380432119L;
 
-	@Column(name = "researchLevel")
 	private Integer level;
 
 	public Integer getLevel() {

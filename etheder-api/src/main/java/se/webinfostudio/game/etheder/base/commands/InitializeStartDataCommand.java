@@ -32,7 +32,7 @@ public final class InitializeStartDataCommand extends EnvironmentCommand<ApiConf
 	}
 
 	// Used for test since constructor injector not working
-	void setImortFromExcel(final ImportFromExcel importFromExcel) {
+	void setImportFromExcel(final ImportFromExcel importFromExcel) {
 		this.importFromExcel = importFromExcel;
 	}
 }

@@ -1,8 +1,5 @@
 package se.webinfostudio.game.etheder.dao;
 
-import org.hibernate.SessionFactory;
-
-import io.dropwizard.hibernate.AbstractDAO;
 import se.webinfostudio.game.etheder.entity.AbstractBasicEntity;
 
 /**
@@ -11,14 +8,13 @@ import se.webinfostudio.game.etheder.entity.AbstractBasicEntity;
  * @author Johan Hanson
  *
  */
-public class TestDAO extends AbstractDAO<AbstractBasicEntity> {
+public class TestDAO {
 
-	public TestDAO(final SessionFactory sessionFactory) {
-		super(sessionFactory);
+	public TestDAO() {
 	}
 
-	@Override
 	public AbstractBasicEntity persist(final AbstractBasicEntity entity) {
-		return super.persist(entity);
+//		return super.persist(entity);
+		return entity;
 	}
 }

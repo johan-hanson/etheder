@@ -18,23 +18,26 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- defines version we use in the project -->
-		<jdk.version>1.8</jdk.version>
+		<jdk.version>11</jdk.version>
+        <java.version>11</java.version>
 
-		<dropwizard.version>1.3.9</dropwizard.version>
-		<guicey.version>4.2.2</guicey.version>
+		<dropwizard.version>2.0.12</dropwizard.version>
+		<guicey.version>5.0.1</guicey.version>
+		<guicey.bom.version>5.0.1-1</guicey.bom.version>
 		<dropwizard.jobs.version>3.0.0</dropwizard.jobs.version>
 
 		<postgres.version>42.2.5</postgres.version>
 		<apache.common.lang3.version>3.8.1</apache.common.lang3.version>
 
-		<jpa.version>2.2</jpa.version>
 		<validation.api.version>2.0.1.Final</validation.api.version>
 		<jbcrypt.version>0.4</jbcrypt.version>
 
+		<!-- Test -->
 		<mockito.version>2.23.4</mockito.version>
-		<junit.version>5.3.2</junit.version>
-		<junitPlatform.version>1.3.2</junitPlatform.version>
+		<junit.version>5.6.2</junit.version>
+		<junitPlatform.version>1.6.2</junitPlatform.version>
 		<assertj.version>3.11.1</assertj.version>
 		<h2.version>1.4.197</h2.version>
 	</properties>
@@ -64,7 +67,7 @@
 			</dependency>
 			<dependency>
 				<groupId>io.dropwizard</groupId>
-				<artifactId>dropwizard-hibernate</artifactId>
+				<artifactId>dropwizard-jdbi3</artifactId>
 				<version>${dropwizard.version}</version>
 			</dependency>
 			<dependency>
@@ -76,6 +79,13 @@
 				<groupId>ru.vyarus</groupId>
 				<artifactId>dropwizard-guicey</artifactId>
 				<version>${guicey.version}</version>
+			</dependency>
+			<dependency>
+				 <groupId>ru.vyarus.guicey</groupId>
+            	<artifactId>guicey-bom</artifactId>
+            	<version>${guicey.bom.version}</version>
+            	<type>pom</type>
+            	<scope>import</scope>
 			</dependency>
 			<dependency>
 				<groupId>de.spinscale.dropwizard</groupId>
@@ -120,11 +130,6 @@
 
 			<!-- other -->
 			<dependency>
-				<groupId>javax.persistence</groupId>
-				<artifactId>javax.persistence-api</artifactId>
-				<version>${jpa.version}</version>
-			</dependency>
-			<dependency>
 				<groupId>javax.validation</groupId>
 				<artifactId>validation-api</artifactId>
 				<version>${validation.api.version}</version>
@@ -149,11 +154,6 @@
 			<dependency>
 				<groupId>org.junit.jupiter</groupId>
 				<artifactId>junit-jupiter-params</artifactId>
-				<version>${junit.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.junit.vintage</groupId>
-				<artifactId>junit-vintage-engine</artifactId>
 				<version>${junit.version}</version>
 			</dependency>
 			<dependency>

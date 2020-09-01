@@ -19,7 +19,6 @@ import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.dropwizard.auth.Auth;
-import io.dropwizard.hibernate.UnitOfWork;
 import se.webinfostudio.game.etheder.api.resources.AbstractResource;
 import se.webinfostudio.game.etheder.api.transformer.building.BuildingModelTransformer;
 import se.webinfostudio.game.etheder.domain.auth.AuthUser;
@@ -53,7 +52,6 @@ public class BuildingResource extends AbstractResource {
 	@GET
 	@Path("/{id}")
 	@Timed
-	@UnitOfWork
 	public Response getBuilding(@PathParam("id") final String id) {
 		LOG.info("findBuilding, id: {}", id);
 		// Validate input
@@ -72,7 +70,6 @@ public class BuildingResource extends AbstractResource {
 	 */
 	@GET
 	@Timed
-	@UnitOfWork
 	@Path("/list/{city}")
 	public Response listAll(@PathParam("cityId") final String cityId, @Auth final AuthUser user) {
 		LOG.info("List all buildings");

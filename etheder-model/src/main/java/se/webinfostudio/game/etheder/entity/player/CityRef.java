@@ -3,8 +3,6 @@ package se.webinfostudio.game.etheder.entity.player;
 import java.io.Serializable;
 import java.util.UUID;
 
-import javax.persistence.Embeddable;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -15,7 +13,6 @@ import se.webinfostudio.game.etheder.entity.EntityReference;
  *
  * @author Johan Hanson
  */
-@Embeddable
 public class CityRef implements EntityReference, Serializable {
 
 	private static final long serialVersionUID = -913536209118789936L;

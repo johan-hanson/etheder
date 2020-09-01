@@ -1,13 +1,11 @@
 package se.webinfostudio.game.etheder.entity;
 
-import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author Johan Hanson
  */
-@MappedSuperclass
 public abstract class AbstractQueueEntity extends AbstractGameEntity {
 
 	private static final long serialVersionUID = 4087861525169429546L;

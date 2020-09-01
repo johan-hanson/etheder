@@ -38,7 +38,7 @@ public class InitializeStartDataCommandTest {
 	@BeforeEach
 	void beforeEach() {
 		initMocks(this);
-		sut.setImortFromExcel(importFromExcel);
+		sut.setImportFromExcel(importFromExcel);
 	}
 
 	@Test

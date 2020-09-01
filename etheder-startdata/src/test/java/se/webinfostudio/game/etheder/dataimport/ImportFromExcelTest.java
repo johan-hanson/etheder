@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import se.webinfostudio.game.etheder.service.BuildingDataService;
-import se.webinfostudio.game.etheder.service.ResearchService;
-import se.webinfostudio.game.etheder.service.UnitDataService;
+import se.webinfostudio.game.etheder.service.BuildingDataImportService;
+import se.webinfostudio.game.etheder.service.ResearchImportService;
+import se.webinfostudio.game.etheder.service.UnitDataImportService;
 
 /**
  * Test if the excel file is in project
@@ -26,19 +26,19 @@ public class ImportFromExcelTest {
 	private ImportFromExcel sut;
 
 	@Mock
-	private BuildingDataService buildingDataService;
+	private BuildingDataImportService buildingDataService;
 
 	@Mock
 	private ImportBuildingData importBuildingData;
 
 	@Mock
-	private UnitDataService unitDataService;
+	private UnitDataImportService unitDataService;
 
 	@Mock
 	private ImportUnitData importUnitData;
 
 	@Mock
-	private ResearchService researchService;
+	private ResearchImportService researchService;
 
 	@Mock
 	private ImportResearch importResearch;

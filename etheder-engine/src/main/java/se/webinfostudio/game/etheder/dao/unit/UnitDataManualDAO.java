@@ -2,27 +2,18 @@ package se.webinfostudio.game.etheder.dao.unit;
 
 import java.util.Optional;
 
-import org.hibernate.SessionFactory;
-
-import com.google.inject.Inject;
-
-import se.webinfostudio.game.etheder.dao.AbstractManualDAO;
 import se.webinfostudio.game.etheder.entity.unit.UnitData;
 
-public class UnitDataManualDAO extends AbstractManualDAO<UnitData> {
-
-	@Inject
-	public UnitDataManualDAO(final SessionFactory sessionFactory) {
-		super(sessionFactory, UnitData.class);
-	}
+public class UnitDataManualDAO {
 
 	public Optional<UnitData> findById(final Long unitId) {
-		return Optional.ofNullable(getSession().find(UnitData.class, unitId));
+//		return Optional.ofNullable(getSession().find(UnitData.class, unitId));
+		return Optional.empty();
 	}
 
-	@Override
 	public UnitData persist(final UnitData unitData) {
-		return super.persist(unitData);
+//		return super.persist(unitData);
+		return null;
 	}
 
 }

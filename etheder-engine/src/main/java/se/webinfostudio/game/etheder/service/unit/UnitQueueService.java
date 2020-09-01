@@ -60,7 +60,7 @@ public class UnitQueueService {
 		walletService.pay(player, unitData);
 
 		unitQueue.setTicks(unitData.getTicks());
-		unitQueueDAO.persist(unitQueue);
+//		sunitQueueDAO.persist(unitQueue);
 		playerDAO.persist(player);
 		return unitQueue;
 	}

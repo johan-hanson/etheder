@@ -4,14 +4,6 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -25,9 +17,8 @@ import se.webinfostudio.game.etheder.entity.util.Predicates;
  *
  * @author Johan Hanson
  */
-@Entity
-@NamedQueries({
-		@NamedQuery(name = "Player.findByCity", query = "select p from Player p join p.cityList l WHERE l.cityId=?1") })
+//@NamedQueries({
+//		@NamedQuery(name = "Player.findByCity", query = "select p from Player p join p.cityList l WHERE l.cityId=?1") })
 public class Player extends AbstractGameEntity implements HasReference<PlayerRef> {
 
 	private static final long serialVersionUID = -6185373648803217614L;
@@ -35,11 +26,8 @@ public class Player extends AbstractGameEntity implements HasReference<PlayerRef
 	private String country;
 
 	@NotNull
-	@Embedded
 	private UserRef user;
 
-	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "Player_CITYLIST", joinColumns = @JoinColumn(name = "playerid"))
 	private Set<CityRef> cityList = new HashSet<>();
 
 	@Min(0)
@@ -116,10 +104,6 @@ public class Player extends AbstractGameEntity implements HasReference<PlayerRef
 		return iron;
 	}
 
-	public UserRef getUser() {
-		return user;
-	}
-
 	public Integer getSiegeTechLevel() {
 		return siegeTechLevel;
 	}
@@ -148,6 +132,10 @@ public class Player extends AbstractGameEntity implements HasReference<PlayerRef
 			techLevel = 0;
 		}
 		return techLevel;
+	}
+
+	public UserRef getUser() {
+		return user;
 	}
 
 	public Long getWood() {
@@ -186,16 +174,16 @@ public class Player extends AbstractGameEntity implements HasReference<PlayerRef
 		this.iron = iron;
 	}
 
-	public void setUser(final UserRef myUser) {
-		user = myUser;
-	}
-
 	public void setSiegeTechLevel(final Integer siegeTechLevel) {
 		this.siegeTechLevel = siegeTechLevel;
 	}
 
 	public void setStone(final Long stone) {
 		this.stone = stone;
+	}
+
+	public void setUser(final UserRef myUser) {
+		user = myUser;
 	}
 
 	public void setWood(final Long wood) {

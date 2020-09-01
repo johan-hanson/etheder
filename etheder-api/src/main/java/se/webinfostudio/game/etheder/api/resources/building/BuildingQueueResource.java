@@ -15,7 +15,6 @@ import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.dropwizard.auth.Auth;
-import io.dropwizard.hibernate.UnitOfWork;
 import se.webinfostudio.game.etheder.api.model.building.BuildingQueueModel;
 import se.webinfostudio.game.etheder.api.resources.AbstractResource;
 import se.webinfostudio.game.etheder.api.transformer.building.BuildingQueueModelTransformer;
@@ -58,7 +57,6 @@ public class BuildingQueueResource extends AbstractResource {
 	 */
 	@POST
 	@Timed
-	@UnitOfWork
 	public Response create(@Valid final BuildingQueueModel buildingQueueModel, @Auth final AuthUser user) {
 		return okFlat(buildingQueueModelTransformer.apply(buildingQueueService.createBuildingQueue(
 				buildingQueueTransformer.apply(buildingQueueModel), createUUIDFromString(user.getUserId()))));

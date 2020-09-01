@@ -3,8 +3,6 @@ package se.webinfostudio.game.etheder.entity.user;
 import java.io.Serializable;
 import java.util.UUID;
 
-import javax.persistence.Embeddable;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -14,7 +12,6 @@ import se.webinfostudio.game.etheder.entity.EntityReference;
  *
  * @author Johan Hanson
  */
-@Embeddable
 public class UserRef implements EntityReference, Serializable {
 
 	private static final long serialVersionUID = 2108887887337659264L;

@@ -14,7 +14,6 @@ import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.dropwizard.auth.Auth;
-import io.dropwizard.hibernate.UnitOfWork;
 import se.webinfostudio.game.etheder.api.model.user.UserChangePasswordModel;
 import se.webinfostudio.game.etheder.api.model.user.UserModel;
 import se.webinfostudio.game.etheder.api.resources.AbstractResource;
@@ -53,7 +52,6 @@ public class UserResource extends AbstractResource {
 	 */
 	@PUT
 	@Timed
-	@UnitOfWork
 	@PermitAll
 	@Path("/change")
 	public Response changePassword(@Valid final UserChangePasswordModel userChangePasswordModel,
@@ -65,14 +63,12 @@ public class UserResource extends AbstractResource {
 
 	@POST
 	@Timed
-	@UnitOfWork
 	public Response create(@Valid final UserModel userModel) {
 		return okFlat(userModelTransformer.apply(userService.createUser(userTransformer.apply(userModel))));
 	}
 
 	@PUT
 	@Timed
-	@UnitOfWork
 	@PermitAll
 	public Response update(@Valid final UserModel userModel) {
 		return okFlat(userModelTransformer.apply(userService.updateUser(userTransformer.apply(userModel))));

@@ -1,9 +1,5 @@
 package se.webinfostudio.game.etheder.entity;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
 import se.webinfostudio.game.etheder.entity.core.UnitType;
@@ -14,12 +10,10 @@ import se.webinfostudio.game.etheder.entity.core.UnitType;
  *
  * @author Johan Hanson
  */
-@MappedSuperclass
 public abstract class AbstractDataEntity extends AbstractBasicEntity {
 
 	private static final long serialVersionUID = 448993716831201568L;
 
-	@Id
 	private Long id;
 
 	@NotNull
@@ -37,7 +31,6 @@ public abstract class AbstractDataEntity extends AbstractBasicEntity {
 	private Integer ticks;
 
 //    @Convert(converter = UnitTypeConverter.class)
-	@Enumerated(EnumType.STRING)
 	private UnitType unitType;
 
 	public Long getCostFood() {

@@ -11,7 +11,6 @@ import javax.ws.rs.core.Response;
 import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.dropwizard.hibernate.UnitOfWork;
 import se.webinfostudio.game.etheder.api.model.player.CityModel;
 import se.webinfostudio.game.etheder.api.resources.AbstractResource;
 import se.webinfostudio.game.etheder.api.transformer.player.CityModelTransformer;
@@ -42,7 +41,6 @@ public class CityResource extends AbstractResource {
 
 	@POST
 	@Timed
-	@UnitOfWork
 	public Response create(@Valid final CityModel cityModel) {
 		return okFlat(cityModelTransformer.apply(cityService.createCity(cityTransformer.apply(cityModel))));
 	}

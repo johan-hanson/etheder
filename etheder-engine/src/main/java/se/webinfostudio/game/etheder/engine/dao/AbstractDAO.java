@@ -1,25 +1,19 @@
 package se.webinfostudio.game.etheder.engine.dao;
 
-import static java.util.Objects.requireNonNull;
 import static org.apache.commons.lang3.Validate.notNull;
 
+import java.util.Collections;
 import java.util.List;
-
-import javax.persistence.TypedQuery;
-
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
 
 import se.webinfostudio.game.etheder.entity.AbstractBasicEntity;
 import se.webinfostudio.game.etheder.entity.EntityBasicReference;
 
+@Deprecated
 public abstract class AbstractDAO<E extends AbstractBasicEntity> {
 
-	private final Session session;
 	private final Class<E> entityClass;
 
-	public AbstractDAO(final Session session, final Class<E> entityClass) {
-		this.session = session;
+	public AbstractDAO(final Class<E> entityClass) {
 		this.entityClass = entityClass;
 	}
 
@@ -27,19 +21,20 @@ public abstract class AbstractDAO<E extends AbstractBasicEntity> {
 		notNull(r);
 
 		try {
-			return session.find(entityClass, r.getId());
+//			return session.find(entityClass, r.getId());
+			return null;
 		} catch (final IllegalArgumentException e) {
 			return null;
 		}
 	}
 
-	public E persist(final E entity) throws HibernateException {
-		session.saveOrUpdate(requireNonNull(entity));
+	public E persist(final E entity) {
+//		session.saveOrUpdate(requireNonNull(entity));
 		return entity;
 	}
 
 	public void remove(final E entity) {
-		session.remove(requireNonNull(entity));
+//		session.remove(requireNonNull(entity));
 	}
 
 	/**
@@ -50,16 +45,13 @@ public abstract class AbstractDAO<E extends AbstractBasicEntity> {
 	 * @return a list of entities T
 	 */
 	protected List<E> findByNamedQuery(final String namedQuery, final Object... params) {
-		final TypedQuery<E> typedQuery = session.createNamedQuery(namedQuery, entityClass);
-		int index = 1;
-		for (final Object param : params) {
-			typedQuery.setParameter(index++, param);
-		}
-		return typedQuery.getResultList();
-	}
-
-	protected Session getSession() {
-		return session;
+//		final TypedQuery<E> typedQuery = session.createNamedQuery(namedQuery, entityClass);
+//		int index = 1;
+//		for (final Object param : params) {
+//			typedQuery.setParameter(index++, param);
+//		}
+//		return typedQuery.getResultList();
+		return Collections.emptyList();
 	}
 
 	/**
@@ -69,6 +61,7 @@ public abstract class AbstractDAO<E extends AbstractBasicEntity> {
 	 * @return number of rows inserted/updated
 	 */
 	protected int insertUpdateNamedQuery(final String namedQuery) {
-		return session.createNamedQuery(namedQuery).executeUpdate();
+//		return session.createNamedQuery(namedQuery).executeUpdate();
+		return -1;
 	}
 }

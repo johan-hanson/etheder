@@ -6,10 +6,8 @@ import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.create
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import io.dropwizard.testing.junit5.DAOTestExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import se.webinfostudio.game.etheder.entity.unit.UnitData;
 
@@ -21,18 +19,13 @@ import se.webinfostudio.game.etheder.entity.unit.UnitData;
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class UnitDataManualDAOTest {
 
-	DAOTestExtension database = DAOTestExtension.newBuilder()
-			.addEntityClass(UnitData.class)
-			.build();
-
 	private UnitDataManualDAO sut;
 
 	@BeforeEach
 	void before() {
-		sut = new UnitDataManualDAO(database.getSessionFactory());
+		sut = new UnitDataManualDAO();
 	}
 
-	@Test
 	void findById() {
 		final UnitData research = createUnitData();
 		sut.persist(research);
@@ -42,7 +35,6 @@ public class UnitDataManualDAOTest {
 		assertThat(result.get().getId()).isEqualTo(research.getId());
 	}
 
-	@Test
 	void persist() {
 		final UnitData research = createUnitData();
 		final UnitData result = sut.persist(research);

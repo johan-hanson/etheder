@@ -2,12 +2,8 @@ package se.webinfostudio.game.etheder.engine;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.slf4j.Logger;
 
 import se.webinfostudio.game.etheder.engine.service.PlayerEngineService;
@@ -32,47 +28,25 @@ public class EngineService {
 
 	private PlayerEngineService playerEngineService;
 
-	private final SessionFactory sessionFactory;
-
-	@Inject
-	public EngineService(final SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
+	public EngineService() {
 	}
 
 	/**
 	 * Runs the engine service.
 	 */
 	public void runService() {
-		final Session session = initialize();
 
 		try {
 			run();
 		} finally {
-			closeSession(session);
 		}
 
 	}
 
-	private void closeSession(final Session session) {
-		final Transaction transaction = session.getTransaction();
-		if (transaction.getRollbackOnly()) {
-			transaction.rollback();
-		} else {
-			transaction.commit();
-		}
-		session.close();
-	}
-
-	private Session initialize() {
-		final Session session = sessionFactory.openSession();
-
-		buildingQueueEngineService = new BuildingQueueEngineService(session);
-		researchQueueEngineService = new ResearchQueueEngineService(session);
-		unitQueueEngineService = new UnitQueueEngineService(session);
-
-		session.beginTransaction();
-
-		return session;
+	private void initialize() {
+		buildingQueueEngineService = new BuildingQueueEngineService();
+		researchQueueEngineService = new ResearchQueueEngineService();
+		unitQueueEngineService = new UnitQueueEngineService();
 	}
 
 	private void run() {

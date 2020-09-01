@@ -1,7 +1,5 @@
 package se.webinfostudio.game.etheder.engine.dao.research;
 
-import org.hibernate.Session;
-
 import se.webinfostudio.game.etheder.engine.dao.AbstractDAO;
 import se.webinfostudio.game.etheder.entity.research.Research;
 
@@ -12,8 +10,8 @@ import se.webinfostudio.game.etheder.entity.research.Research;
  */
 public class ResearchDAO extends AbstractDAO<Research> {
 
-	public ResearchDAO(final Session session) {
-		super(session, Research.class);
+	public ResearchDAO() {
+		super(Research.class);
 	}
 
 }

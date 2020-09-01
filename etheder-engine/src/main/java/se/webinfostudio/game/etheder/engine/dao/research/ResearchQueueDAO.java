@@ -2,8 +2,6 @@ package se.webinfostudio.game.etheder.engine.dao.research;
 
 import java.util.List;
 
-import org.hibernate.Session;
-
 import se.webinfostudio.game.etheder.engine.dao.AbstractDAO;
 import se.webinfostudio.game.etheder.entity.building.BuildingQueue;
 import se.webinfostudio.game.etheder.entity.research.ResearchQueue;
@@ -15,8 +13,8 @@ import se.webinfostudio.game.etheder.entity.research.ResearchQueue;
  */
 public class ResearchQueueDAO extends AbstractDAO<ResearchQueue> {
 
-	public ResearchQueueDAO(final Session session) {
-		super(session, ResearchQueue.class);
+	public ResearchQueueDAO() {
+		super(ResearchQueue.class);
 	}
 
 	/**

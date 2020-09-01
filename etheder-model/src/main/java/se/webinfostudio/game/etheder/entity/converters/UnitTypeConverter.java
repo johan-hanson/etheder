@@ -1,8 +1,5 @@
 package se.webinfostudio.game.etheder.entity.converters;
 
-import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
-
 import se.webinfostudio.game.etheder.entity.core.UnitType;
 
 /**
@@ -10,15 +7,12 @@ import se.webinfostudio.game.etheder.entity.core.UnitType;
  *
  * @author Johan Hanson
  */
-@Converter(autoApply = true)
-public class UnitTypeConverter implements AttributeConverter<UnitType, String> {
+public class UnitTypeConverter /* implements AttributeConverter<UnitType, String> */ {
 
-	@Override
 	public String convertToDatabaseColumn(final UnitType attribute) {
 		return attribute.getLabel();
 	}
 
-	@Override
 	public UnitType convertToEntityAttribute(final String dbData) {
 		switch (dbData) {
 		case "I":

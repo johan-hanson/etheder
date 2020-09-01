@@ -4,8 +4,6 @@ import com.google.inject.Provides;
 import com.google.inject.Singleton;
 
 import io.dropwizard.auth.CachingAuthenticator;
-import io.dropwizard.hibernate.HibernateBundle;
-import io.dropwizard.hibernate.UnitOfWorkAwareProxyFactory;
 import ru.vyarus.dropwizard.guice.module.support.DropwizardAwareModule;
 import se.webinfostudio.game.etheder.ApiConfiguration;
 import se.webinfostudio.game.etheder.dao.user.UserDAO;
@@ -27,10 +25,9 @@ public class AuthModule extends DropwizardAwareModule<ApiConfiguration> {
 
 	@Provides
 	@Singleton
-	protected OAuthAuthenticator providesAuthenticator(final HibernateBundle<ApiConfiguration> hibernateBundle) {
-		final UserDAO dao = new UserDAO(hibernateBundle.getSessionFactory());
-		return new UnitOfWorkAwareProxyFactory(hibernateBundle)
-				.create(OAuthAuthenticator.class, UserDAO.class, dao);
+	protected OAuthAuthenticator providesAuthenticator() {
+		final UserDAO dao = new UserDAO();
+		return new OAuthAuthenticator(dao);
 	}
 
 	@Provides

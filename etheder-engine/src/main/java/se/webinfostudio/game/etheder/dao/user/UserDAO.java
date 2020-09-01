@@ -1,15 +1,8 @@
 package se.webinfostudio.game.etheder.dao.user;
 
-import static java.util.Optional.ofNullable;
-
 import java.util.Optional;
 import java.util.UUID;
 
-import org.hibernate.SessionFactory;
-
-import com.google.inject.Inject;
-
-import io.dropwizard.hibernate.AbstractDAO;
 import se.webinfostudio.game.etheder.entity.user.User;
 
 /**
@@ -17,11 +10,9 @@ import se.webinfostudio.game.etheder.entity.user.User;
  * @author Johan Hanson
  *
  */
-public class UserDAO extends AbstractDAO<User> {
+public class UserDAO {
 
-	@Inject
-	public UserDAO(final SessionFactory sessionFactory) {
-		super(sessionFactory);
+	public UserDAO() {
 	}
 
 	/**
@@ -31,15 +22,17 @@ public class UserDAO extends AbstractDAO<User> {
 	 * @return {@link User} if found else throws NoResultException
 	 */
 	public Optional<User> findByEmail(final String email) {
-		return super.query("SELECT u FROM User u WHERE u.email=:e")
-				.setParameter("e", email)
-				.getResultList()
-				.stream()
-				.findFirst();
+//		return super.query("SELECT u FROM User u WHERE u.email=:e")
+//				.setParameter("e", email)
+//				.getResultList()
+//				.stream()
+//				.findFirst();
+		return Optional.empty();
 	}
 
 	public Optional<User> findById(final UUID id) {
-		return ofNullable(super.get(id));
+//		return ofNullable(super.get(id));
+		return Optional.empty();
 	}
 
 	/**
@@ -49,11 +42,12 @@ public class UserDAO extends AbstractDAO<User> {
 	 * @return {@link User} if found else throws NoResultException
 	 */
 	public Optional<User> findByToken(final UUID token) {
-		return super.query("SELECT u FROM User u WHERE u.login.token=:t")
-				.setParameter("t", token)
-				.getResultList()
-				.stream()
-				.findFirst();
+//		return super.query("SELECT u FROM User u WHERE u.login.token=:t")
+//				.setParameter("t", token)
+//				.getResultList()
+//				.stream()
+//				.findFirst();
+		return Optional.empty();
 	}
 
 	/**
@@ -63,15 +57,16 @@ public class UserDAO extends AbstractDAO<User> {
 	 * @return {@link User} if found else throws NoResultException
 	 */
 	public Optional<User> findByUserName(final String userName) {
-		return super.query("SELECT u FROM User u WHERE u.login.userName=:un")
-				.setParameter("un", userName)
-				.getResultList()
-				.stream()
-				.findFirst();
+//		return super.query("SELECT u FROM User u WHERE u.login.userName=:un")
+//				.setParameter("un", userName)
+//				.getResultList()
+//				.stream()
+//				.findFirst();
+		return Optional.empty();
 	}
 
-	@Override
 	public User persist(final User user) {
-		return super.persist(user);
+//		return super.persist(user);
+		return null;
 	}
 }

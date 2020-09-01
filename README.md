@@ -1,9 +1,13 @@
 # Etheder
 
 ## Prerequisites
-Java 8
+Java 11
 Maven
 PostgreSQL
+Docker
+
+### Start PostgreSQL
+docker run -d  --mount source=postgres-vol,target=/var/lib/pgsql/data --name postgresql_database -e POSTGRESQL_USER=etheder -e POSTGRESQL_PASSWORD=Ethederpass -e POSTGRESQL_DATABASE=etheder -p 5432:5432 centos/postgresql-96-centos7
 
 ### Configuring application
 Application configuration (configuration.yml) contains fields that can be overriden by envType variables. 
