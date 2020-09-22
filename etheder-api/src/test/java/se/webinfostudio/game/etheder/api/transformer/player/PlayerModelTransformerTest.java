@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 
 import se.webinfostudio.game.etheder.api.model.player.PlayerModel;
-import se.webinfostudio.game.etheder.api.transformer.player.PlayerModelTransformer;
 import se.webinfostudio.game.etheder.entity.player.Player;
 
 /**
@@ -28,7 +27,7 @@ public class PlayerModelTransformerTest {
 		final PlayerModel result = sut.apply(player);
 
 		assertThat(result.getPlayerId()).isEqualTo(player.getId().toString());
-		assertThat(result.getUserId()).isEqualTo(player.getUser().getId().toString());
+		assertThat(result.getUserId()).isEqualTo(player.getUserId().toString());
 		assertThat(result.getCountry()).isEqualTo(player.getCountry());
 	}
 

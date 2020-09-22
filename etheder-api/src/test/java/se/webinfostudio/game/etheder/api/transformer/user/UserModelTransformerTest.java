@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 
 import se.webinfostudio.game.etheder.api.model.user.UserModel;
-import se.webinfostudio.game.etheder.api.transformer.user.UserModelTransformer;
 import se.webinfostudio.game.etheder.entity.user.User;
 
 /**
@@ -33,7 +32,6 @@ public class UserModelTransformerTest {
 		assertThat(result.getFirstName()).isEqualTo(user.getFirstName());
 		assertThat(result.getLastName()).isEqualTo(user.getLastName());
 		assertThat(result.getUserId()).isEqualTo(user.getId().toString());
-		assertThat(result.getUserName()).isEqualTo(user.getLogin().getUserName());
 	}
 
 	@BeforeEach

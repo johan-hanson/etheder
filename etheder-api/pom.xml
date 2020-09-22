@@ -16,12 +16,20 @@
 	<dependencies>
 		<dependency>
 			<groupId>se.webinfostudio.game</groupId>
+			<artifactId>etheder-engine</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>se.webinfostudio.game</groupId>
 			<artifactId>etheder-startdata</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>io.dropwizard</groupId>
 			<artifactId>dropwizard-auth</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.dropwizard</groupId>
+			<artifactId>dropwizard-jersey</artifactId>
 		</dependency>
 
 		<dependency>

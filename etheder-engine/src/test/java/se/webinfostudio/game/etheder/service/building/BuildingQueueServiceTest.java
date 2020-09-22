@@ -19,15 +19,15 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import se.webinfostudio.game.etheder.dao.building.BuildingDataDAO;
-import se.webinfostudio.game.etheder.dao.building.BuildingQueueDAO;
-import se.webinfostudio.game.etheder.dao.player.CityDAO;
-import se.webinfostudio.game.etheder.dao.player.PlayerDAO;
 import se.webinfostudio.game.etheder.entity.building.BuildingData;
 import se.webinfostudio.game.etheder.entity.building.BuildingQueue;
 import se.webinfostudio.game.etheder.entity.core.UnitType;
 import se.webinfostudio.game.etheder.entity.player.City;
 import se.webinfostudio.game.etheder.entity.player.Player;
+import se.webinfostudio.game.etheder.repository.building.BuildingDataRepository;
+import se.webinfostudio.game.etheder.repository.building.BuildingQueueRepository;
+import se.webinfostudio.game.etheder.repository.player.CityRepository;
+import se.webinfostudio.game.etheder.repository.player.PlayerRepository;
 import se.webinfostudio.game.etheder.service.WalletService;
 
 /**
@@ -37,16 +37,16 @@ import se.webinfostudio.game.etheder.service.WalletService;
 public class BuildingQueueServiceTest {
 
 	@Mock
-	private BuildingDataDAO buildingDataDAO;
+	private BuildingDataRepository buildingDataRepository;
 
 	@Mock
-	private BuildingQueueDAO buildingQueueDAO;
+	private BuildingQueueRepository buildingQueueRepository;
 
 	@Mock
-	private CityDAO cityDAO;
+	private CityRepository cityRepository;
 
 	@Mock
-	private PlayerDAO playerDAO;
+	private PlayerRepository playerRepository;
 
 	@Mock
 	private WalletService walletService;
@@ -56,6 +56,7 @@ public class BuildingQueueServiceTest {
 
 	@BeforeEach
 	void beforeEach() {
+		sut = new BuildingQueueService();
 		initMocks(this);
 	}
 
@@ -67,18 +68,18 @@ public class BuildingQueueServiceTest {
 		final City city = createCity(cityId, "Paris");
 		final BuildingData buildingData = createBuildingData(buildingDataId, "Barracks", UnitType.INFANTRY);
 		final Player player = createPlayer();
-		city.setPlayer(player.toRef());
+		city.setPlayerId(player.toRef().getId());
 		final BuildingQueue buildingQueue = createBuildingQueue(cityId, cityId, buildingDataId);
 
-		when(cityDAO.findById(cityId)).thenReturn(of(city));
-		when(playerDAO.findByUserId(userId)).thenReturn(of(player));
-		when(buildingDataDAO.findById(buildingDataId)).thenReturn(of(buildingData));
+		when(cityRepository.findById(cityId)).thenReturn(city);
+		when(playerRepository.findByUserId(userId)).thenReturn(of(player));
+		when(buildingDataRepository.findById(buildingDataId)).thenReturn(buildingData);
 
 		final BuildingQueue result = sut.createBuildingQueue(buildingQueue, userId);
 
-		assertThat(result.getBuilding().getId()).isEqualTo(buildingDataId);
+		assertThat(result.getBuildingId()).isEqualTo(buildingDataId);
 		assertThat(result.getTicks()).isEqualTo(buildingData.getTicks());
-		assertThat(result.getCity()).isEqualTo(city.toRef());
+		assertThat(result.getCityId()).isEqualTo(city.toRef().getId());
 	}
 
 	@Test
@@ -89,21 +90,10 @@ public class BuildingQueueServiceTest {
 		final Player player = createPlayer();
 		final BuildingQueue buildingQueue = createBuildingQueue();
 
-		when(cityDAO.findById(cityId)).thenReturn(of(city));
-		when(playerDAO.findByUserId(userId)).thenReturn(of(player));
+		when(cityRepository.findById(cityId)).thenReturn(city);
+		when(playerRepository.findByUserId(userId)).thenReturn(of(player));
 
-		assertThatThrownBy(() -> sut.createBuildingQueue(buildingQueue, userId));
-	}
-
-	@Test
-	void createBuilding_shouldThrowRuntimeException_whenCityNotFound() {
-		final UUID cityId = randomUUID();
-		final UUID userId = randomUUID();
-		final BuildingQueue buildingQueue = createBuildingQueue();
-
-		when(cityDAO.findById(cityId)).thenReturn(empty());
-
-		assertThatThrownBy(() -> sut.createBuildingQueue(buildingQueue, userId));
+		assertThatThrownBy(() -> sut.createBuildingQueue(buildingQueue, userId)).isInstanceOf(RuntimeException.class);
 	}
 
 	@Test
@@ -113,10 +103,10 @@ public class BuildingQueueServiceTest {
 		final City city = createCity(cityId, "Paris");
 		final BuildingQueue buildingQueue = createBuildingQueue();
 
-		when(cityDAO.findById(cityId)).thenReturn(of(city));
-		when(playerDAO.findByUserId(userId)).thenReturn(empty());
+		when(cityRepository.findById(cityId)).thenReturn(city);
+		when(playerRepository.findByUserId(userId)).thenReturn(empty());
 
-		assertThatThrownBy(() -> sut.createBuildingQueue(buildingQueue, userId));
+		assertThatThrownBy(() -> sut.createBuildingQueue(buildingQueue, userId)).isInstanceOf(RuntimeException.class);
 	}
 
 	@Test

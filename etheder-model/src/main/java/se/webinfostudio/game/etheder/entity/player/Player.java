@@ -3,6 +3,7 @@ package se.webinfostudio.game.etheder.entity.player;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -10,7 +11,6 @@ import javax.validation.constraints.NotNull;
 import se.webinfostudio.game.etheder.entity.AbstractGameEntity;
 import se.webinfostudio.game.etheder.entity.HasReference;
 import se.webinfostudio.game.etheder.entity.core.UnitType;
-import se.webinfostudio.game.etheder.entity.user.UserRef;
 import se.webinfostudio.game.etheder.entity.util.Predicates;
 
 /**
@@ -25,8 +25,10 @@ public class Player extends AbstractGameEntity implements HasReference<PlayerRef
 
 	private String country;
 
+	private String name;
+
 	@NotNull
-	private UserRef user;
+	private UUID userId;
 
 	private Set<CityRef> cityList = new HashSet<>();
 
@@ -134,10 +136,6 @@ public class Player extends AbstractGameEntity implements HasReference<PlayerRef
 		return techLevel;
 	}
 
-	public UserRef getUser() {
-		return user;
-	}
-
 	public Long getWood() {
 		return wood;
 	}
@@ -182,10 +180,6 @@ public class Player extends AbstractGameEntity implements HasReference<PlayerRef
 		this.stone = stone;
 	}
 
-	public void setUser(final UserRef myUser) {
-		user = myUser;
-	}
-
 	public void setWood(final Long wood) {
 		this.wood = wood;
 	}
@@ -199,5 +193,21 @@ public class Player extends AbstractGameEntity implements HasReference<PlayerRef
 	public String toString() {
 		final StringBuilder sb = new StringBuilder(11).append("Player: ").append(id);
 		return sb.toString();
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(final String name) {
+		this.name = name;
+	}
+
+	public UUID getUserId() {
+		return userId;
+	}
+
+	public void setUserId(final UUID userId) {
+		this.userId = userId;
 	}
 }

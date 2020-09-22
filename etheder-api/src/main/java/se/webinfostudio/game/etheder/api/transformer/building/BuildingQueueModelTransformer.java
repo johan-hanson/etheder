@@ -16,10 +16,10 @@ public class BuildingQueueModelTransformer implements Function<BuildingQueue, Bu
 	public BuildingQueueModel apply(final BuildingQueue buildingQueue) {
 		return BuildingQueueModel.newBuilder()
 				.withBuildingQueueId(buildingQueue.getId().toString())
-				.withBuildingId(buildingQueue.getBuilding().getId())
-				.withBuildingName(buildingQueue.getBuilding().getName())
-				.withCityId(buildingQueue.getCity().getId().toString())
-				.withDescription(buildingQueue.getBuilding().getDescription())
+				.withBuildingId(buildingQueue.getBuildingId())
+//				.withBuildingName(buildingQueue.getBuilding().getName())
+				.withCityId(buildingQueue.getCityId().toString())
+//				.withDescription(buildingQueue.getBuilding().getDescription())
 				.build();
 	}
 

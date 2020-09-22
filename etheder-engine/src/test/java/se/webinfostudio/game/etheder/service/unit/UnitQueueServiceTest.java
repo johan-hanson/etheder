@@ -75,7 +75,7 @@ public class UnitQueueServiceTest {
 		final City city = createCity(cityId, "Paris");
 		final UnitData unitData = createUnitData("Swordsman", INFANTRY);
 		final Player player = createPlayer();
-		city.setPlayer(player.toRef());
+		city.setPlayerId(player.getId());
 		final UnitQueue unitQueue = EntityTestFactory.createUnitQueue(randomUUID(), cityId, unitDataId);
 
 		when(cityDAO.findById(cityId)).thenReturn(of(city));

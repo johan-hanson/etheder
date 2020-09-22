@@ -6,7 +6,8 @@ import com.google.inject.Singleton;
 import io.dropwizard.auth.CachingAuthenticator;
 import ru.vyarus.dropwizard.guice.module.support.DropwizardAwareModule;
 import se.webinfostudio.game.etheder.ApiConfiguration;
-import se.webinfostudio.game.etheder.dao.user.UserDAO;
+import se.webinfostudio.game.etheder.repository.user.LoginRepository;
+import se.webinfostudio.game.etheder.repository.user.UserRepository;
 
 /**
  *
@@ -25,9 +26,10 @@ public class AuthModule extends DropwizardAwareModule<ApiConfiguration> {
 
 	@Provides
 	@Singleton
-	protected OAuthAuthenticator providesAuthenticator() {
-		final UserDAO dao = new UserDAO();
-		return new OAuthAuthenticator(dao);
+	protected OAuthAuthenticator providesAuthenticator(
+			final LoginRepository loginRepository,
+			final UserRepository userRepository) {
+		return new OAuthAuthenticator(loginRepository, userRepository);
 	}
 
 	@Provides

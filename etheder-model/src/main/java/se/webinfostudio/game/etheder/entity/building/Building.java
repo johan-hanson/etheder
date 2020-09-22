@@ -12,15 +12,7 @@ public class Building extends AbstractGameEntity implements HasReference<Buildin
 
 	private static final long serialVersionUID = -1375711736439804175L;
 
-	private BuildingData buildingData;
-
-	public BuildingData getBuildingData() {
-		return buildingData;
-	}
-
-	public void setBuildingData(final BuildingData buildingData) {
-		this.buildingData = buildingData;
-	}
+	private Long buildingDataId;
 
 	@Override
 	public BuildingRef toRef() {
@@ -31,6 +23,14 @@ public class Building extends AbstractGameEntity implements HasReference<Buildin
 	public String toString() {
 		final StringBuilder sb = new StringBuilder(13).append("Building: ").append(id);
 		return sb.toString();
+	}
+
+	public Long getBuildingDataId() {
+		return buildingDataId;
+	}
+
+	public void setBuildingDataId(Long buildingDataId) {
+		this.buildingDataId = buildingDataId;
 	}
 
 }

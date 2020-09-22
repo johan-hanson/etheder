@@ -1,6 +1,7 @@
 package se.webinfostudio.game.etheder.service.building;
 
 import static java.lang.String.format;
+import static java.util.Optional.ofNullable;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,14 +10,14 @@ import java.util.UUID;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import se.webinfostudio.game.etheder.dao.building.BuildingDataDAO;
-import se.webinfostudio.game.etheder.dao.building.BuildingQueueDAO;
-import se.webinfostudio.game.etheder.dao.player.CityDAO;
-import se.webinfostudio.game.etheder.dao.player.PlayerDAO;
 import se.webinfostudio.game.etheder.entity.building.BuildingData;
 import se.webinfostudio.game.etheder.entity.building.BuildingQueue;
 import se.webinfostudio.game.etheder.entity.player.City;
 import se.webinfostudio.game.etheder.entity.player.Player;
+import se.webinfostudio.game.etheder.repository.building.BuildingDataRepository;
+import se.webinfostudio.game.etheder.repository.building.BuildingQueueRepository;
+import se.webinfostudio.game.etheder.repository.player.CityRepository;
+import se.webinfostudio.game.etheder.repository.player.PlayerRepository;
 import se.webinfostudio.game.etheder.service.WalletService;
 
 /**
@@ -27,16 +28,16 @@ import se.webinfostudio.game.etheder.service.WalletService;
 public class BuildingQueueService {
 
 	@Inject
-	private BuildingDataDAO buildingDataDAO;
+	private BuildingDataRepository buildingDataRepository;
 
 	@Inject
-	private BuildingQueueDAO buildingQueueDAO;
+	private BuildingQueueRepository buildingQueueRepository;
 
 	@Inject
-	private CityDAO cityDAO;
+	private CityRepository cityRepository;
 
 	@Inject
-	private PlayerDAO playerDAO;
+	private PlayerRepository playerRepository;
 
 	@Inject
 	private WalletService walletService;
@@ -49,15 +50,14 @@ public class BuildingQueueService {
 	 * @return the created {@link BuildingQueue}
 	 */
 	public BuildingQueue createBuildingQueue(final BuildingQueue buildingQueue, final UUID userId) {
-		final UUID cityId = buildingQueue.getCity().getId();
-		final City city = findCity(cityId);
+		final City city = findCity(buildingQueue.getCityId());
 		final Player player = findPlayer(userId);
 
-		validateCityBelongsToPlayer(cityId, userId, city, player);
+		validateCityBelongsToPlayer(buildingQueue.getCityId(), userId, city, player);
 
 		// Check if building can be built techlevel stuff, to be decided
 
-		final BuildingData buildingData = findBuildingData(buildingQueue.getBuilding().getId());
+		final BuildingData buildingData = buildingDataRepository.findById(buildingQueue.getBuildingId());
 
 		// check if buildingqueue for this building already exists, depends if multiple
 		// buildings can be created
@@ -65,9 +65,8 @@ public class BuildingQueueService {
 		walletService.pay(player, buildingData);
 
 		buildingQueue.setTicks(buildingData.getTicks());
-		buildingQueue.setBuilding(buildingData);
-		buildingQueueDAO.persist(buildingQueue);
-		playerDAO.persist(player);
+		buildingQueueRepository.create(buildingQueue);
+//		playerDAO.persist(player);
 		return buildingQueue;
 	}
 
@@ -82,17 +81,8 @@ public class BuildingQueueService {
 		return null;
 	}
 
-	private BuildingData findBuildingData(final Long buildingId) {
-		final Optional<BuildingData> buildingData = buildingDataDAO.findById(buildingId);
-
-		if (!buildingData.isPresent()) {
-			throw new RuntimeException("BuildingData not found: " + buildingId);
-		}
-		return buildingData.get();
-	}
-
 	private City findCity(final UUID cityId) {
-		final Optional<City> city = cityDAO.findById(cityId);
+		final Optional<City> city = ofNullable(cityRepository.findById(cityId));
 
 		if (!city.isPresent()) {
 			throw new RuntimeException("City not found: " + cityId.toString());
@@ -101,7 +91,7 @@ public class BuildingQueueService {
 	}
 
 	private Player findPlayer(final UUID userId) {
-		final Optional<Player> player = playerDAO.findByUserId(userId);
+		final Optional<Player> player = playerRepository.findByUserId(userId);
 
 		if (!player.isPresent()) {
 			throw new RuntimeException("Player not found for user: " + userId);
@@ -109,7 +99,10 @@ public class BuildingQueueService {
 		return player.get();
 	}
 
-	private void validateCityBelongsToPlayer(final UUID cityId, final UUID userId, final City city,
+	private void validateCityBelongsToPlayer(
+			final UUID cityId,
+			final UUID userId,
+			final City city,
 			final Player player) {
 		if (!city.getPlayer().getId().equals(player.getId())) {
 			throw new RuntimeException(

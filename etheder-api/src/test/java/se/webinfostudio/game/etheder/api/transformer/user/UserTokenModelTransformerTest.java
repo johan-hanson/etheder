@@ -3,7 +3,7 @@ package se.webinfostudio.game.etheder.api.transformer.user;
 import static java.util.UUID.randomUUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.MockitoAnnotations.initMocks;
-import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createUser;
+import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createLogin;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ public class UserTokenModelTransformerTest {
 
 	@Test
 	void apply() {
-		final Login login = createUser().getLogin();
+		final Login login = createLogin();
 		login.setToken(randomUUID());
 		final UserTokenModel result = sut.apply(login);
 

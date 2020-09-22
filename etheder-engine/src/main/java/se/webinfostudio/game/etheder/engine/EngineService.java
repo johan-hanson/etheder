@@ -2,14 +2,16 @@ package se.webinfostudio.game.etheder.engine;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.slf4j.Logger;
 
+import ru.vyarus.guicey.jdbi3.tx.InTransaction;
 import se.webinfostudio.game.etheder.engine.service.PlayerEngineService;
-import se.webinfostudio.game.etheder.engine.service.ResearchQueueEngineService;
 import se.webinfostudio.game.etheder.engine.service.UnitQueueEngineService;
 import se.webinfostudio.game.etheder.engine.service.building.BuildingQueueEngineService;
+import se.webinfostudio.game.etheder.engine.service.research.ResearchQueueEngineService;
 
 /**
  *
@@ -20,12 +22,16 @@ public class EngineService {
 
 	private static final Logger LOGGER = getLogger(EngineService.class);
 
+	@Inject
 	private BuildingQueueEngineService buildingQueueEngineService;
 
+	@Inject
 	private ResearchQueueEngineService researchQueueEngineService;
 
+	@Inject
 	private UnitQueueEngineService unitQueueEngineService;
 
+	@Inject
 	private PlayerEngineService playerEngineService;
 
 	public EngineService() {
@@ -38,17 +44,15 @@ public class EngineService {
 
 		try {
 			run();
+		} catch (final Exception e) {
+			LOGGER.warn("Exception in engine service", e);
 		} finally {
+			LOGGER.info("runService finished");
 		}
 
 	}
 
-	private void initialize() {
-		buildingQueueEngineService = new BuildingQueueEngineService();
-		researchQueueEngineService = new ResearchQueueEngineService();
-		unitQueueEngineService = new UnitQueueEngineService();
-	}
-
+	@InTransaction
 	private void run() {
 		// here goes the order of the engine
 		// i.e.
@@ -59,9 +63,8 @@ public class EngineService {
 		LOGGER.info("Before units");
 		unitQueueEngineService.updateAllQueuesAndCreateUnits();
 
-//		playerEngineService.updateResources();
+		playerEngineService.updateResources();
 
-		LOGGER.info("runService finished");
 		// travel armies
 		// fight
 	}

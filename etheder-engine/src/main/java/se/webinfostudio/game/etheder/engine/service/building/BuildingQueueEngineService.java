@@ -3,17 +3,21 @@ package se.webinfostudio.game.etheder.engine.service.building;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.List;
-import java.util.Optional;
+
+import javax.inject.Inject;
 
 import org.slf4j.Logger;
 
-import se.webinfostudio.game.etheder.engine.dao.building.BuildingDAO;
-import se.webinfostudio.game.etheder.engine.dao.building.BuildingQueueDAO;
-import se.webinfostudio.game.etheder.engine.dao.player.CityDAO;
-import se.webinfostudio.game.etheder.engine.dao.player.PlayerDAO;
+import se.webinfostudio.game.etheder.entity.building.Building;
+import se.webinfostudio.game.etheder.entity.building.BuildingData;
 import se.webinfostudio.game.etheder.entity.building.BuildingQueue;
 import se.webinfostudio.game.etheder.entity.player.City;
 import se.webinfostudio.game.etheder.entity.player.Player;
+import se.webinfostudio.game.etheder.repository.building.BuildingDataRepository;
+import se.webinfostudio.game.etheder.repository.building.BuildingQueueRepository;
+import se.webinfostudio.game.etheder.repository.building.BuildingRepository;
+import se.webinfostudio.game.etheder.repository.player.CityRepository;
+import se.webinfostudio.game.etheder.repository.player.PlayerRepository;
 
 /**
  *
@@ -23,31 +27,20 @@ public class BuildingQueueEngineService {
 
 	private final static Logger LOGGER = getLogger(BuildingQueueEngineService.class);
 
-	private final BuildingQueueDAO buildingQueueDAO;
+	@Inject
+	private BuildingDataRepository buildingDataRepository;
 
-	private final BuildingDAO buildingDAO;
+	@Inject
+	private BuildingQueueRepository buildingQueueRepository;
 
-	private final CityDAO cityDAO;
+	@Inject
+	private BuildingRepository buildingRepository;
 
-	private final PlayerDAO playerDAO;
+	@Inject
+	private CityRepository cityRepository;
 
-	public BuildingQueueEngineService() {
-		buildingQueueDAO = new BuildingQueueDAO();
-		buildingDAO = new BuildingDAO();
-		cityDAO = new CityDAO();
-		playerDAO = new PlayerDAO();
-	}
-
-	public BuildingQueueEngineService(final BuildingQueueDAO buildingQueueDAO,
-			final BuildingDAO buildingDAO,
-			final CityDAO cityDAO,
-			final PlayerDAO playerDAO) {
-		// Temporary solution until I fix better DAO
-		this.buildingQueueDAO = buildingQueueDAO;
-		this.buildingDAO = buildingDAO;
-		this.cityDAO = cityDAO;
-		this.playerDAO = playerDAO;
-	}
+	@Inject
+	private PlayerRepository playerRepository;
 
 	/**
 	 * Updates all queues. If a building is finished the building gets added to the
@@ -55,21 +48,31 @@ public class BuildingQueueEngineService {
 	 */
 	public void updateAllQueuesAndBuildBuildings() {
 		LOGGER.info("Start updateAllQueuesAndBuildBuildings");
-		final int nrOfRowsUpdated = buildingQueueDAO.decreaseTicks();
+		final int nrOfRowsUpdated = buildingQueueRepository.decreaseTicks();
 		if (nrOfRowsUpdated > 0) {
-			final List<BuildingQueue> buildingQueues = buildingQueueDAO.findAllFinished();
+			final List<BuildingQueue> buildingQueues = buildingQueueRepository.findAllFinished();
 
 			buildingQueues.forEach(bq -> {
-				final City city = cityDAO.findByRef(bq.getCity());
-				final Optional<Player> player = playerDAO.findByCity(bq.getCity());
-				city.addBuilding(buildingDAO.createBuilding(bq.getBuilding()));
-//				player.ifPresent(p -> playerDAO.persist(p));
-//				player.addTechLevel(bq.getBuilding().getUnitType());
-//				cityDAO.persist(city);
-				buildingQueueDAO.remove(bq);
+				final City city = cityRepository.findById(bq.getCityId());
+				final Player player = playerRepository.findById(city.getPlayerId());
+				final BuildingData buildingData = buildingDataRepository.findById(bq.getBuildingId());
+				final Building building = createBuilding(buildingData.getId());
+				buildingRepository.create(building);
+				city.addBuilding(building);
+				player.addTechLevel(buildingData.getUnitType());
+
+				playerRepository.update(player);
+				cityRepository.update(city);
+				buildingQueueRepository.remove(bq.getId());
 			});
 
 		}
 		LOGGER.info("End updateAllQueuesAndBuildBuildings");
+	}
+
+	private Building createBuilding(final Long buildingId) {
+		final Building building = new Building();
+		building.setBuildingDataId(buildingId);
+		return building;
 	}
 }

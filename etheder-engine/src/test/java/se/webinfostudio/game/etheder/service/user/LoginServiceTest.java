@@ -1,10 +1,9 @@
 package se.webinfostudio.game.etheder.service.user;
 
-import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
-import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.buildUser;
+import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.buildLogin;
 import static se.webinfostudio.game.etheder.util.CryptUtils.hashPassword;
 
 import java.util.Optional;
@@ -13,16 +12,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
-import se.webinfostudio.game.etheder.dao.user.UserDAO;
 import se.webinfostudio.game.etheder.entity.user.Login;
-import se.webinfostudio.game.etheder.entity.user.User;
+import se.webinfostudio.game.etheder.repository.user.LoginRepository;
 
 public class LoginServiceTest {
 
 	private LoginService sut;
 
 	@Mock
-	private UserDAO userDAO;
+	private LoginRepository loginRepository;
 
 	private final String userName = "userName";
 	private final String password = "password";
@@ -31,21 +29,21 @@ public class LoginServiceTest {
 	void beforeEach() {
 		initMocks(this);
 
-		sut = new LoginService(userDAO);
+		sut = new LoginService(loginRepository);
 	}
 
 	@Test
 	void login() {
-		final Login login = new Login();
-		login.setUserName(userName);
-		login.setPasswordHash(password);
-
-		final User user = buildUser()
+		final Login login = buildLogin()
+				.withUserName(userName)
+				.withPassword(password)
+				.build();
+		final Login loginDb = buildLogin()
 				.withUserName(userName)
 				.withPassword(hashPassword(password))
 				.build();
 
-		when(userDAO.findByUserName(userName)).thenReturn(of(user));
+		when(loginRepository.findByUserName(userName)).thenReturn(Optional.of(loginDb));
 
 		final Optional<Login> result = sut.login(login);
 
@@ -56,16 +54,28 @@ public class LoginServiceTest {
 
 	@Test
 	void login_shouldReturnEmpty_whenPasswordIsIncorrect() {
-		final Login login = new Login();
-		login.setUserName(userName);
-		login.setPasswordHash("badpassword");
-
-		final User user = buildUser()
+		final Login login = buildLogin()
+				.withUserName(userName)
+				.withPassword("badPassword")
+				.build();
+		final Login loginDb = buildLogin()
 				.withUserName(userName)
 				.withPassword(hashPassword(password))
 				.build();
 
-		when(userDAO.findByUserName(userName)).thenReturn(of(user));
+		when(loginRepository.findByUserName(userName)).thenReturn(Optional.of(loginDb));
+
+		final Optional<Login> result = sut.login(login);
+
+		assertThat(result.isPresent()).isFalse();
+	}
+
+	@Test
+	void login_shouldReturnEmpty_whenNoUserFound() {
+		final Login login = buildLogin()
+				.withUserName(userName)
+				.withPassword("badPassword")
+				.build();
 
 		final Optional<Login> result = sut.login(login);
 

@@ -1,7 +1,6 @@
 package se.webinfostudio.game.etheder.entity.util;
 
 import static java.util.UUID.randomUUID;
-import static se.webinfostudio.game.etheder.entity.core.UnitType.ARCHER;
 
 import java.util.UUID;
 
@@ -13,12 +12,12 @@ import se.webinfostudio.game.etheder.entity.player.Army;
 import se.webinfostudio.game.etheder.entity.player.City;
 import se.webinfostudio.game.etheder.entity.player.CityRef;
 import se.webinfostudio.game.etheder.entity.player.Player;
-import se.webinfostudio.game.etheder.entity.player.PlayerRef;
 import se.webinfostudio.game.etheder.entity.research.Research;
 import se.webinfostudio.game.etheder.entity.research.ResearchQueue;
 import se.webinfostudio.game.etheder.entity.unit.Unit;
 import se.webinfostudio.game.etheder.entity.unit.UnitData;
 import se.webinfostudio.game.etheder.entity.unit.UnitQueue;
+import se.webinfostudio.game.etheder.entity.user.Login;
 import se.webinfostudio.game.etheder.entity.user.User;
 
 /**
@@ -29,6 +28,10 @@ public final class EntityTestFactory {
 
 	public static BuildingDataTestFactory.Builder buildBuildingData() {
 		return BuildingDataTestFactory.newBuilder();
+	}
+
+	public static LoginTestFactory.Builder buildLogin() {
+		return LoginTestFactory.newBuilder();
 	}
 
 	public static PlayerTestFactory.Builder buildPlayer() {
@@ -62,15 +65,13 @@ public final class EntityTestFactory {
 	 * @return {@link Building}
 	 */
 	public static Building createBuilding() {
-		return createBuilding(randomUUID(), "Barracks");
+		return createBuilding(randomUUID());
 	}
 
-	public static Building createBuilding(final UUID id, final String name) {
+	public static Building createBuilding(final UUID id) {
 		final Building b = new Building();
 		b.setId(id);
-		b.setBuildingData(new BuildingData());
-		b.getBuildingData().setId(1L);
-		b.getBuildingData().setName(name);
+		b.setBuildingDataId(1L);
 		return b;
 	}
 
@@ -96,8 +97,8 @@ public final class EntityTestFactory {
 		final BuildingQueue bq = new BuildingQueue();
 		bq.setId(queueId);
 		bq.setTicks(10);
-		bq.setCity(new CityRef(cityId));
-		bq.setBuilding(createBuildingData(buildingId, "inf", UnitType.INFANTRY));
+		bq.setCityId(cityId);
+		bq.setBuildingId(buildingId);
 		return bq;
 	}
 
@@ -115,8 +116,12 @@ public final class EntityTestFactory {
 		city.setMerchants(20);
 		city.setStonemasons(20);
 		city.setPopulation(500L);
-		city.setPlayer(new PlayerRef(id));
+		city.setPlayerId(id);
 		return city;
+	}
+
+	public static Login createLogin() {
+		return LoginTestFactory.newBuilder().build();
 	}
 
 	public static Player createPlayer() {
@@ -127,6 +132,16 @@ public final class EntityTestFactory {
 		return ResearchTestFactory.newBuilder().build();
 	}
 
+	public static Research createResearch(final Long id, final String name, final Integer level,
+			final UnitType unitType) {
+		return buildResearch()
+				.withId(id)
+				.withName(name)
+				.withLeveel(level)
+				.withUnitType(unitType)
+				.build();
+	}
+
 	public static ResearchQueue createResearchQueue() {
 		return createResearchQueue(randomUUID(), randomUUID(), Long.valueOf(1L));
 	}
@@ -135,12 +150,8 @@ public final class EntityTestFactory {
 		final ResearchQueue rq = new ResearchQueue();
 		rq.setId(queueId);
 		rq.setTicks(10);
-		rq.setPlayer(new PlayerRef(playerId));
-		rq.setResearch(buildResearch()
-				.withId(researchId)
-				.withName("Research1")
-				.withUnitType(ARCHER)
-				.build());
+		rq.setPlayerId(playerId);
+		rq.setResearchId(researchId);
 		return rq;
 	}
 

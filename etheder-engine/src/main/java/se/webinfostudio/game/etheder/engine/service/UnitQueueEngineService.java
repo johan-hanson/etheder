@@ -20,19 +20,13 @@ import se.webinfostudio.game.etheder.entity.unit.UnitQueue;
 public class UnitQueueEngineService {
 
 	@Inject
-	private final ArmyDAO armyDAO;
+	private ArmyDAO armyDAO;
 
 	@Inject
-	private final UnitQueueDAO unitQueueDAOy;
+	private UnitQueueDAO unitQueueDAOy;
 
 	@Inject
-	private final CityDAO cityDAO;
-
-	public UnitQueueEngineService() {
-		unitQueueDAOy = new UnitQueueDAO();
-		armyDAO = new ArmyDAO();
-		cityDAO = new CityDAO();
-	}
+	private CityDAO cityDAO;
 
 	/**
 	 * Updates all queues and creates the units if the queue has reached 0 ticks

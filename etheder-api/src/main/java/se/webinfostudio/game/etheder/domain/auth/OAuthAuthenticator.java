@@ -11,8 +11,10 @@ import org.slf4j.Logger;
 
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
-import se.webinfostudio.game.etheder.dao.user.UserDAO;
+import se.webinfostudio.game.etheder.entity.user.Login;
 import se.webinfostudio.game.etheder.entity.user.User;
+import se.webinfostudio.game.etheder.repository.user.LoginRepository;
+import se.webinfostudio.game.etheder.repository.user.UserRepository;
 
 /**
  *
@@ -23,22 +25,26 @@ public class OAuthAuthenticator implements Authenticator<String, AuthUser> {
 
 	private static final Logger LOG = getLogger(OAuthAuthenticator.class);
 
-	private final UserDAO userDAO;
+	private final LoginRepository loginRepository;
 
-	public OAuthAuthenticator(final UserDAO userDAO) {
-		this.userDAO = userDAO;
+	private final UserRepository userRepository;
+
+	public OAuthAuthenticator(final LoginRepository loginRepository, final UserRepository userRepository) {
+		this.loginRepository = loginRepository;
+		this.userRepository = userRepository;
 	}
 
 	@Override
 	public Optional<AuthUser> authenticate(final String credentials) throws AuthenticationException {
 		try {
-			final Optional<User> user = userDAO.findByToken(fromString(credentials));
-			if (user.isPresent()) {
+			final Optional<Login> login = loginRepository.findByToken(fromString(credentials));
+			if (login.isPresent()) {
+				final User user = userRepository.findByLoginId(login.get().getId());
 				return of(AuthUser.newBuilder()
-						.withFirstName(user.get().getFirstName())
-						.withLastName(user.get().getLastName())
-						.withUserName(user.get().getLogin().getUserName())
-						.withUserId(user.get().getId().toString())
+						.withFirstName(user.getFirstName())
+						.withLastName(user.getLastName())
+						.withUserName(login.get().getUserName())
+						.withUserId(user.getId().toString())
 						.build());
 			}
 		} catch (final Exception e) {

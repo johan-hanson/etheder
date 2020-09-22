@@ -18,9 +18,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import se.webinfostudio.game.etheder.api.model.user.UserChangePasswordModel;
 import se.webinfostudio.game.etheder.api.model.user.UserModel;
+import se.webinfostudio.game.etheder.api.transformer.user.LoginUserTransformer;
 import se.webinfostudio.game.etheder.api.transformer.user.UserModelTransformer;
 import se.webinfostudio.game.etheder.api.transformer.user.UserTransformer;
 import se.webinfostudio.game.etheder.domain.auth.AuthUser;
+import se.webinfostudio.game.etheder.entity.user.Login;
 import se.webinfostudio.game.etheder.entity.user.User;
 import se.webinfostudio.game.etheder.service.user.UserService;
 
@@ -36,6 +38,7 @@ public class UserResourceTest {
 
 	@Mock
 	private UserService userService;
+
 	@Mock
 	private ObjectMapper objectMapper;
 
@@ -44,8 +47,9 @@ public class UserResourceTest {
 		initMocks(this);
 		final UserModelTransformer userModelTransformer = new UserModelTransformer();
 		final UserTransformer userTransformer = new UserTransformer();
+		final LoginUserTransformer loginUserTransformer = new LoginUserTransformer();
 
-		sut = new UserResource(objectMapper, userService, userTransformer, userModelTransformer);
+		sut = new UserResource(objectMapper, userService, userTransformer, userModelTransformer, loginUserTransformer);
 	}
 
 	@Test
@@ -67,7 +71,7 @@ public class UserResourceTest {
 		final UserModel userModel = createUserModel();
 		final User user = createUser();
 
-		when(userService.createUser(any(User.class))).thenReturn(user);
+		when(userService.createUser(any(Login.class), any(User.class))).thenReturn(user);
 
 		final Response response = sut.create(userModel);
 

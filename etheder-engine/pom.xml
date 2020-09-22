@@ -16,7 +16,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>se.webinfostudio.game</groupId>
-			<artifactId>etheder-model</artifactId>
+			<artifactId>etheder-jdbi</artifactId>
 		</dependency>
 
 		<dependency>

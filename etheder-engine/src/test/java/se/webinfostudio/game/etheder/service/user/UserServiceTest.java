@@ -10,16 +10,20 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.buildUser;
+import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createLogin;
 import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createUser;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import se.webinfostudio.game.etheder.dao.user.UserDAO;
+import se.webinfostudio.game.etheder.entity.user.Login;
 import se.webinfostudio.game.etheder.entity.user.User;
-import se.webinfostudio.game.etheder.service.user.UserService;
+import se.webinfostudio.game.etheder.repository.user.LoginRepository;
+import se.webinfostudio.game.etheder.repository.user.UserRepository;
 
 /**
  *
@@ -34,18 +38,34 @@ public class UserServiceTest {
 	@Mock
 	private UserDAO userDAO;
 
+	@Mock
+	private LoginRepository loginRepository;
+
+	@Mock
+	private UserRepository userRepository;
+
+	@Mock
+	private ValidateUserService validateUserService;
+
 	@BeforeEach
 	void beforeEach() {
 		initMocks(this);
 	}
 
-	@Test
-	void createUser_ok() {
-		final User user = createUser();
+	@Nested
+	class createUser {
 
-		sut.createUser(user);
+		@Test
+		void happyflow() {
+			final Login login = createLogin();
+			final User user = createUser();
 
-		verify(userDAO).persist(user);
+			sut.createUser(login, user);
+
+			verify(loginRepository).create(login);
+			verify(userRepository).create(user);
+		}
+
 	}
 
 	@Test

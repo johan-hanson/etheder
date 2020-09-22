@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 
 import se.webinfostudio.game.etheder.api.model.player.PlayerModel;
-import se.webinfostudio.game.etheder.api.transformer.player.PlayerTransformer;
 import se.webinfostudio.game.etheder.entity.player.Player;
 
 /**
@@ -29,8 +28,9 @@ public class PlayerTransformerTest {
 		final Player result = sut.apply(playerModel);
 
 		assertThat(result.getCountry()).isEqualTo(playerModel.getCountry());
-		assertThat(result.getId().toString()).isEqualTo(playerModel.getPlayerId());
-		assertThat(result.getUser().getId().toString()).isEqualTo(playerModel.getUserId());
+		assertThat(result.getName()).isEqualTo(playerModel.getName());
+//		assertThat(result.getId().toString()).isEqualTo(playerModel.getPlayerId());
+		assertThat(result.getUserId().toString()).isEqualTo(playerModel.getUserId());
 	}
 
 	@Test
@@ -39,8 +39,9 @@ public class PlayerTransformerTest {
 		final Player result = sut.apply(playerModel);
 
 		assertThat(result.getCountry()).isEqualTo(playerModel.getCountry());
-		assertThat(result.getId()).isNull();
-		assertThat(result.getUser().getId().toString()).isEqualTo(playerModel.getUserId());
+		assertThat(result.getName()).isEqualTo(playerModel.getName());
+//		assertThat(result.getId()).isNull();
+		assertThat(result.getUserId().toString()).isEqualTo(playerModel.getUserId());
 	}
 
 	@BeforeEach

@@ -7,8 +7,12 @@ import java.util.Optional;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import ru.vyarus.guicey.jdbi3.tx.InTransaction;
 import se.webinfostudio.game.etheder.dao.user.UserDAO;
+import se.webinfostudio.game.etheder.entity.user.Login;
 import se.webinfostudio.game.etheder.entity.user.User;
+import se.webinfostudio.game.etheder.repository.user.LoginRepository;
+import se.webinfostudio.game.etheder.repository.user.UserRepository;
 
 /**
  *
@@ -19,18 +23,38 @@ public class UserService {
 
 	private final UserDAO userDAO;
 
+	private final LoginRepository loginRepository;
+
+	private final UserRepository userRepository;
+
+	private final ValidateUserService validateUserService;
+
 	@Inject
-	public UserService(final UserDAO userDAO) {
+	public UserService(
+			final UserDAO userDAO,
+			final LoginRepository loginRepository,
+			final UserRepository userRepository,
+			final ValidateUserService validateUserService) {
 		this.userDAO = userDAO;
+		this.loginRepository = loginRepository;
+		this.userRepository = userRepository;
+		this.validateUserService = validateUserService;
 	}
 
-	public User createUser(final User user) {
+	@InTransaction
+	public User createUser(final Login login, final User user) {
+		validate(login);
 		validate(user);
 
-		// validation against db, if username already exist, email already exist
-		// validate password
+		validateUserService.validateNewUser(login, user);
 
-		return userDAO.persist(user);
+		// validate password in transformer
+
+		loginRepository.create(login);
+		user.setLoginId(login.getId());
+		userRepository.create(user);
+
+		return user;
 	}
 
 	public void updatePassword(final String userName, final String oldPassword, final String newPassword) {

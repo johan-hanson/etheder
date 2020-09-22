@@ -17,13 +17,13 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import se.webinfostudio.game.etheder.dao.player.PlayerDAO;
-import se.webinfostudio.game.etheder.dao.research.ResearchDAO;
-import se.webinfostudio.game.etheder.dao.research.ResearchQueueDAO;
 import se.webinfostudio.game.etheder.entity.player.Player;
 import se.webinfostudio.game.etheder.entity.research.Research;
 import se.webinfostudio.game.etheder.entity.research.ResearchQueue;
 import se.webinfostudio.game.etheder.entity.util.EntityTestFactory;
+import se.webinfostudio.game.etheder.repository.player.PlayerRepository;
+import se.webinfostudio.game.etheder.repository.research.ResearchQueueRepository;
+import se.webinfostudio.game.etheder.repository.research.ResearchRepository;
 import se.webinfostudio.game.etheder.service.WalletService;
 
 /**
@@ -33,13 +33,13 @@ import se.webinfostudio.game.etheder.service.WalletService;
 public class ResearchQueueServiceTest {
 
 	@Mock
-	private ResearchDAO researchDAO;
+	private ResearchRepository researchRepository;
 
 	@Mock
-	private ResearchQueueDAO researchQueueDAO;
+	private ResearchQueueRepository researchQueueRepository;
 
 	@Mock
-	private PlayerDAO playerDAO;
+	private PlayerRepository playerRepository;
 
 	@Mock
 	private WalletService walletService;
@@ -58,7 +58,7 @@ public class ResearchQueueServiceTest {
 		final UUID userId = randomUUID();
 		final ResearchQueue researchQueue = EntityTestFactory.createResearchQueue();
 
-		when(playerDAO.findByUserId(userId)).thenReturn(empty());
+		when(playerRepository.findByUserId(userId)).thenReturn(empty());
 
 		assertThatThrownBy(() -> sut.createResearchQueue(researchQueue, userId));
 	}
@@ -69,7 +69,7 @@ public class ResearchQueueServiceTest {
 		final Player player = createPlayer();
 		final ResearchQueue researchQueue = EntityTestFactory.createResearchQueue();
 
-		when(playerDAO.findByUserId(userId)).thenReturn(of(player));
+		when(playerRepository.findByUserId(userId)).thenReturn(of(player));
 
 		assertThatThrownBy(() -> sut.createResearchQueue(researchQueue, userId));
 	}
@@ -81,16 +81,16 @@ public class ResearchQueueServiceTest {
 		final Research research = createResearch();
 		final Player player = createPlayer();
 		final ResearchQueue researchQueue = EntityTestFactory.createResearchQueue();
-		researchQueue.setPlayer(player.toRef());
+		researchQueue.setPlayerId(player.getId());
 
-		when(playerDAO.findByUserId(userId)).thenReturn(of(player));
-		when(researchDAO.findById(researchId)).thenReturn(of(research));
+		when(playerRepository.findByUserId(userId)).thenReturn(of(player));
+		when(researchRepository.findById(researchId)).thenReturn(research);
 
 		final ResearchQueue result = sut.createResearchQueue(researchQueue, userId);
 
-		assertThat(result.getResearch().getId()).isEqualTo(researchId);
+		assertThat(result.getResearchId()).isEqualTo(researchId);
 		assertThat(result.getTicks()).isEqualTo(research.getTicks());
-		assertThat(result.getPlayer().getId()).isEqualTo(player.getId());
+		assertThat(result.getPlayerId()).isEqualTo(player.getId());
 	}
 
 	@Test

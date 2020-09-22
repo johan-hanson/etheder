@@ -16,10 +16,10 @@ public class ResearchQueueModelTransformer implements Function<ResearchQueue, Re
 	public ResearchQueueModel apply(final ResearchQueue researchQueue) {
 		return ResearchQueueModel.newBuilder()
 				.withResearchQueueId(researchQueue.getId().toString())
-				.withResearchId(researchQueue.getResearch().getId())
-				.withResearchName(researchQueue.getResearch().getName())
-				.withPlayerId(researchQueue.getPlayer().getId().toString())
-				.withDescription(researchQueue.getResearch().getDescription())
+				.withResearchId(researchQueue.getResearchId())
+//				.withResearchName(researchQueue.getResearch().getName())
+//				.withPlayerId(researchQueue.getPlayer().getId().toString())
+//				.withDescription(researchQueue.getResearch().getDescription())
 				.build();
 	}
 

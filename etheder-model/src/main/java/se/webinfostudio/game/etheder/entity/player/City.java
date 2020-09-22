@@ -2,8 +2,10 @@ package se.webinfostudio.game.etheder.entity.player;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import se.webinfostudio.game.etheder.entity.AbstractGameEntity;
 import se.webinfostudio.game.etheder.entity.HasReference;
@@ -21,15 +23,15 @@ public class City extends AbstractGameEntity implements HasReference<CityRef> {
 
 	private String name;
 
-	private PlayerRef player;
+	@NotNull
+	private UUID playerId;
 
 	private Set<BuildingRef> buildingList = new HashSet<>();
 
 	/**
 	 * Default army where new units will be added to.
 	 */
-//	@NotNull
-	private ArmyRef defaultArmy;
+	private UUID defaultArmy;
 
 	private Set<ArmyRef> armyList = new HashSet<>();
 
@@ -74,7 +76,7 @@ public class City extends AbstractGameEntity implements HasReference<CityRef> {
 		return cityLevel;
 	}
 
-	public ArmyRef getDefaultArmy() {
+	public UUID getDefaultArmy() {
 		return defaultArmy;
 	}
 
@@ -84,6 +86,10 @@ public class City extends AbstractGameEntity implements HasReference<CityRef> {
 
 	public Integer getIronminers() {
 		return ironminers;
+	}
+
+	public Integer getLevel() {
+		return cityLevel.getLevel();
 	}
 
 	public Integer getLumberjacks() {
@@ -99,7 +105,7 @@ public class City extends AbstractGameEntity implements HasReference<CityRef> {
 	}
 
 	public PlayerRef getPlayer() {
-		return player;
+		return new PlayerRef(playerId);
 	}
 
 	public Long getPopulation() {
@@ -130,7 +136,7 @@ public class City extends AbstractGameEntity implements HasReference<CityRef> {
 		this.cityLevel = cityLevel;
 	}
 
-	public void setDefaultArmy(final ArmyRef defaultArmy) {
+	public void setDefaultArmy(final UUID defaultArmy) {
 		this.defaultArmy = defaultArmy;
 	}
 
@@ -154,10 +160,6 @@ public class City extends AbstractGameEntity implements HasReference<CityRef> {
 		this.name = name;
 	}
 
-	public void setPlayer(final PlayerRef player) {
-		this.player = player;
-	}
-
 	public void setPopulation(final Long population) {
 		this.population = population;
 	}
@@ -169,5 +171,13 @@ public class City extends AbstractGameEntity implements HasReference<CityRef> {
 	@Override
 	public CityRef toRef() {
 		return new CityRef(id);
+	}
+
+	public UUID getPlayerId() {
+		return playerId;
+	}
+
+	public void setPlayerId(final UUID playerId) {
+		this.playerId = playerId;
 	}
 }

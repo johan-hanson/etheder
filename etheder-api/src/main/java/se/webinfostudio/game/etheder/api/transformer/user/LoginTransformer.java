@@ -6,7 +6,8 @@ import se.webinfostudio.game.etheder.api.model.user.LoginModel;
 import se.webinfostudio.game.etheder.entity.user.Login;
 
 /**
- *
+ * For the login form
+ * 
  * @author Johan Hanson
  *
  */

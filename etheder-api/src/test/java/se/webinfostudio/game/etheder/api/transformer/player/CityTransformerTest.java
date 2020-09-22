@@ -37,7 +37,7 @@ public class CityTransformerTest {
 		final CityModel cityModel = createCityModelNew();
 		final City result = sut.apply(cityModel);
 
-		assertThat(result.getId()).isNull();
+		assertThat(result.getId()).isNotNull();
 		assertThat(result.getName()).isEqualTo(cityModel.getName());
 		assertThat(result.getPlayer().getId().toString()).isEqualTo(cityModel.getPlayerId());
 	}

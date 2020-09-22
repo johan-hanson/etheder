@@ -1,5 +1,6 @@
 package se.webinfostudio.game.etheder.service.player;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createPlayer;
 
@@ -8,8 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import se.webinfostudio.game.etheder.dao.player.PlayerDAO;
 import se.webinfostudio.game.etheder.entity.player.Player;
+import se.webinfostudio.game.etheder.repository.player.PlayerRepository;
 
 /**
  *
@@ -18,7 +19,7 @@ import se.webinfostudio.game.etheder.entity.player.Player;
 public class PlayerServiceTest {
 
 	@Mock
-	private PlayerDAO playerDAO;
+	private PlayerRepository playerRepository;
 
 	@InjectMocks
 	private PlayerService sut;
@@ -28,6 +29,8 @@ public class PlayerServiceTest {
 		final Player player = createPlayer();
 		player.setCountry("La grande");
 		sut.createPlayer(player);
+
+		verify(playerRepository).create(player);
 	}
 
 	@Test

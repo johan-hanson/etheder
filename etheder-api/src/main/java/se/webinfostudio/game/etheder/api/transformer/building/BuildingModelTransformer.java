@@ -16,7 +16,7 @@ public class BuildingModelTransformer implements Function<Building, BuildingMode
 	public BuildingModel apply(final Building building) {
 		return BuildingModel.newBuilder()
 				.withBuildingId(building.getId().toString())
-				.withName(building.getBuildingData().getName())
+//				.withName(building.getBuildingData().getName())
 				.build();
 	}
 

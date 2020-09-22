@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 
 import se.webinfostudio.game.etheder.api.model.building.BuildingQueueModel;
-import se.webinfostudio.game.etheder.api.transformer.building.BuildingQueueTransformer;
 import se.webinfostudio.game.etheder.entity.building.BuildingQueue;
 
 /**
@@ -27,9 +26,8 @@ public class BuildingQueueTransformerTest {
 		final BuildingQueueModel buildingQueueModel = createBuildingQueueModel();
 		final BuildingQueue result = sut.apply(buildingQueueModel);
 
-		assertThat(result.getCity().getId().toString()).isEqualTo(buildingQueueModel.getCityId());
-		assertThat(result.getBuilding().getName()).isEqualTo(buildingQueueModel.getBuildingName());
-		assertThat(result.getBuilding().getDescription()).isEqualTo(buildingQueueModel.getDescription());
+		assertThat(result.getCityId().toString()).isEqualTo(buildingQueueModel.getCityId());
+		assertThat(result.getBuildingId()).isEqualTo(buildingQueueModel.getBuildingId());
 	}
 
 	@BeforeEach

@@ -82,6 +82,7 @@ public final class ModelTestFactory {
 	private static PlayerModel createPlayerModel(final String id) {
 		return PlayerModel.newBuilder()
 				.withCountry("Spain")
+				.withName("John")
 				.withPlayerId(id)
 				.withUserId(randomUUID().toString())
 				.build();

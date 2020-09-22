@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
-import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createUser;
+import static se.webinfostudio.game.etheder.entity.util.EntityTestFactory.createLogin;
 import static se.webinfostudio.game.etheder.util.ModelTestFactory.createLoginModel;
 
 import javax.ws.rs.core.Response;
@@ -49,7 +49,7 @@ public class LoginResourceTest {
 
 	@Test
 	void login() {
-		final Login login = createUser().getLogin();
+		final Login login = createLogin();
 		final LoginModel loginModel = createLoginModel();
 
 		when(loginService.login(any(Login.class))).thenReturn(of(login));

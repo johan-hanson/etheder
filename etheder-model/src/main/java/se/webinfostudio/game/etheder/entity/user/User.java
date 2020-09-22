@@ -2,6 +2,8 @@ package se.webinfostudio.game.etheder.entity.user;
 
 import static java.lang.String.format;
 
+import java.util.UUID;
+
 import se.webinfostudio.game.etheder.entity.AbstractGameEntity;
 import se.webinfostudio.game.etheder.entity.HasReference;
 
@@ -13,7 +15,7 @@ public class User extends AbstractGameEntity implements HasReference<UserRef> {
 
 	private static final long serialVersionUID = 7089932666191926795L;
 
-	private Login login;
+	private UUID loginId;
 
 	private String firstName;
 	private String lastName;
@@ -41,8 +43,8 @@ public class User extends AbstractGameEntity implements HasReference<UserRef> {
 		return lastName;
 	}
 
-	public Login getLogin() {
-		return login;
+	public UUID getLoginId() {
+		return loginId;
 	}
 
 	public String getName() {
@@ -69,8 +71,8 @@ public class User extends AbstractGameEntity implements HasReference<UserRef> {
 		this.lastName = lastName;
 	}
 
-	public void setLogin(final Login login) {
-		this.login = login;
+	public void setLoginId(final UUID loginId) {
+		this.loginId = loginId;
 	}
 
 	@Override

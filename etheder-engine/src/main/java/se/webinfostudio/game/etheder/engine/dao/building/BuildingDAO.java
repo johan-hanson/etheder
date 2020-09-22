@@ -18,7 +18,7 @@ public class BuildingDAO {
 	 */
 	public Building createBuilding(final BuildingData buildingData) {
 		final Building building = new Building();
-		building.setBuildingData(buildingData);
+		building.setBuildingDataId(buildingData.getId());
 //		persist(building);
 		return building;
 	}

@@ -58,7 +58,7 @@ public class BuildingResourceTest {
 	@Test
 	void getBuilding() {
 		final UUID id = randomUUID();
-		final Building building = createBuilding(id, "Barrack");
+		final Building building = createBuilding(id);
 		when(buildingService.findById(id.toString())).thenReturn(Optional.of(building));
 
 		final Response response = sut.getBuilding(id.toString());

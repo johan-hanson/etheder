@@ -1,5 +1,7 @@
 package se.webinfostudio.game.etheder.api.model.user;
 
+import javax.validation.Valid;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -36,9 +38,11 @@ public class UserChangePasswordModel {
 		return new Builder();
 	}
 
+	@Valid
 	@JsonProperty
 	private String oldPassword;
 
+	@Valid
 	@JsonProperty
 	private String newPassword;
 

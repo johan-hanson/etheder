@@ -1,6 +1,7 @@
 package se.webinfostudio.game.etheder.service.research;
 
 import static java.lang.String.format;
+import static java.util.Optional.ofNullable;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,13 +10,13 @@ import java.util.UUID;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import se.webinfostudio.game.etheder.dao.player.PlayerDAO;
-import se.webinfostudio.game.etheder.dao.research.ResearchDAO;
-import se.webinfostudio.game.etheder.dao.research.ResearchQueueDAO;
 import se.webinfostudio.game.etheder.entity.building.BuildingQueue;
 import se.webinfostudio.game.etheder.entity.player.Player;
 import se.webinfostudio.game.etheder.entity.research.Research;
 import se.webinfostudio.game.etheder.entity.research.ResearchQueue;
+import se.webinfostudio.game.etheder.repository.player.PlayerRepository;
+import se.webinfostudio.game.etheder.repository.research.ResearchQueueRepository;
+import se.webinfostudio.game.etheder.repository.research.ResearchRepository;
 import se.webinfostudio.game.etheder.service.WalletService;
 
 /**
@@ -26,13 +27,13 @@ import se.webinfostudio.game.etheder.service.WalletService;
 public class ResearchQueueService {
 
 	@Inject
-	private ResearchDAO researchDAO;
+	private ResearchRepository researchRepository;
 
 	@Inject
-	private ResearchQueueDAO researchQueueDAO;
+	private ResearchQueueRepository researchQueueRepository;
 
 	@Inject
-	private PlayerDAO playerDAO;
+	private PlayerRepository playerRepository;
 
 	@Inject
 	private WalletService walletService;
@@ -45,21 +46,20 @@ public class ResearchQueueService {
 	 * @return A {@link ResearchQueue}
 	 */
 	public ResearchQueue createResearchQueue(final ResearchQueue researchQueue, final UUID userId) {
-		final UUID playerId = researchQueue.getPlayer().getId();
+		final UUID playerId = researchQueue.getPlayerId();
 		final Player player = findPlayer(userId);
 
 		validatePlayerIsPlayer(playerId, player);
 
-		final Research research = findResearch(researchQueue.getResearch().getId());
+		final Research research = findResearch(researchQueue.getResearchId());
 
-		// Check if building can be built techlevel stuff, to decided
+		// Check if research can be researched techlevel stuff, to decided
 
 		walletService.pay(player, research);
 
 		researchQueue.setTicks(research.getTicks());
-		researchQueue.setResearch(research);
-		researchQueueDAO.persist(researchQueue);
-		playerDAO.persist(player);
+		researchQueueRepository.create(researchQueue);
+		playerRepository.update(player);
 		return researchQueue;
 	}
 
@@ -75,7 +75,7 @@ public class ResearchQueueService {
 	}
 
 	private Player findPlayer(final UUID userId) {
-		final Optional<Player> player = playerDAO.findByUserId(userId);
+		final Optional<Player> player = playerRepository.findByUserId(userId);
 
 		if (!player.isPresent()) {
 			throw new RuntimeException("Player not found for user: " + userId);
@@ -84,7 +84,7 @@ public class ResearchQueueService {
 	}
 
 	private Research findResearch(final Long researchId) {
-		final Optional<Research> resarch = researchDAO.findById(researchId);
+		final Optional<Research> resarch = ofNullable(researchRepository.findById(researchId));
 
 		if (!resarch.isPresent()) {
 			throw new RuntimeException("Research not found: " + researchId);

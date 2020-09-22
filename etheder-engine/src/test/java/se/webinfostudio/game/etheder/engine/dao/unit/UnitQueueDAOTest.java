@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
-import se.webinfostudio.game.etheder.dao.TestDAO;
+import se.webinfostudio.game.etheder.engine.dao.TestDAO;
 import se.webinfostudio.game.etheder.entity.unit.UnitData;
 import se.webinfostudio.game.etheder.entity.unit.UnitQueue;
 

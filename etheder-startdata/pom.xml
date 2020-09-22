@@ -22,13 +22,13 @@
 
 		<dependency>
 			<groupId>se.webinfostudio.game</groupId>
-			<artifactId>etheder-engine</artifactId>
+			<artifactId>etheder-jdbi</artifactId>
 		</dependency>
 
 		<!-- test -->
 		<dependency>
 			<groupId>se.webinfostudio.game</groupId>
-			<artifactId>etheder-engine</artifactId>
+			<artifactId>etheder-jdbi</artifactId>
 			<version>${project.version}</version>
 			<classifier>tests</classifier>
 			<scope>test</scope>

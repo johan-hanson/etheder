@@ -1,41 +1,40 @@
 package se.webinfostudio.game.etheder.entity.research;
 
+import java.util.UUID;
+
 import javax.validation.constraints.NotNull;
 
 import se.webinfostudio.game.etheder.entity.AbstractQueueEntity;
-import se.webinfostudio.game.etheder.entity.player.PlayerRef;
 
 /**
  *
  * @author Johan Hanson
  */
-//@NamedQueries({
-//		@NamedQuery(name = "ResearchQueue.findAllFinished", query = "select rq from ResearchQueue rq WHERE rq.ticks=0"),
-//		@NamedQuery(name = "ResearchQueue.decreaseTicks", query = "UPDATE ResearchQueue rq SET rq.ticks = rq.ticks-1 WHERE rq.ticks>0"),
-//		@NamedQuery(name = "ResearchQueue.findByPlayer", query = "select rq from ResearchQueue rq WHERE rq.player.playerId=?1") })
 public class ResearchQueue extends AbstractQueueEntity {
 
 	private static final long serialVersionUID = 3120070565934790623L;
 
 	@NotNull
-	private Research research;
+	private Long researchId;
 
 	@NotNull
-	private PlayerRef player;
+	private UUID playerId;
 
-	public PlayerRef getPlayer() {
-		return player;
+	// TODO: What is indexid in the database?
+
+	public UUID getPlayerId() {
+		return playerId;
 	}
 
-	public Research getResearch() {
-		return research;
+	public Long getResearchId() {
+		return researchId;
 	}
 
-	public void setPlayer(final PlayerRef player) {
-		this.player = player;
+	public void setPlayerId(final UUID playerId) {
+		this.playerId = playerId;
 	}
 
-	public void setResearch(final Research research) {
-		this.research = research;
+	public void setResearchId(final Long researchId) {
+		this.researchId = researchId;
 	}
 }

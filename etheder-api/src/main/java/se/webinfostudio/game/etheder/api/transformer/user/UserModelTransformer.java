@@ -16,7 +16,6 @@ public class UserModelTransformer implements Function<User, UserModel> {
 	public UserModel apply(final User user) {
 		return UserModel.newBuilder()
 				.withUserId(user.getId().toString())
-				.withUserName(user.getLogin().getUserName())
 				.withFirstName(user.getFirstName())
 				.withLastName(user.getLastName())
 				.withAge(user.getAge())

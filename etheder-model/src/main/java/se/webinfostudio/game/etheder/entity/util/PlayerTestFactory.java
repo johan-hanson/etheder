@@ -5,7 +5,6 @@ import static java.util.UUID.randomUUID;
 import java.util.UUID;
 
 import se.webinfostudio.game.etheder.entity.player.Player;
-import se.webinfostudio.game.etheder.entity.user.UserRef;
 
 /**
  *
@@ -17,7 +16,7 @@ public class PlayerTestFactory {
 	public static final class Builder {
 		private UUID id = randomUUID();
 		private String country = "Sweden";
-		private UserRef userRef = new UserRef(randomUUID());
+		private UUID userId = randomUUID();
 		private Long food = 1000L;
 		private Long wood = 1000L;
 		private Long gold = 1000L;
@@ -28,7 +27,7 @@ public class PlayerTestFactory {
 			final Player player = new Player();
 			player.setId(id);
 			player.setCountry(country);
-			player.setUser(userRef);
+			player.setUserId(userId);
 			player.setFood(food);
 			player.setWood(wood);
 			player.setGold(gold);
@@ -67,8 +66,8 @@ public class PlayerTestFactory {
 			return this;
 		}
 
-		public Builder withUser(final UserRef user) {
-			userRef = user;
+		public Builder withUser(final UUID userId) {
+			this.userId = userId;
 			return this;
 		}
 

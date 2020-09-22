@@ -1,6 +1,6 @@
 package se.webinfostudio.game.etheder.api.model.player;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,18 +10,25 @@ public class PlayerModel {
 
 		private String playerId;
 		private String country;
+		private String name;
 		private String userId;
 
 		public PlayerModel build() {
 			final PlayerModel playerModel = new PlayerModel();
 			playerModel.playerId = playerId;
 			playerModel.country = country;
+			playerModel.name = name;
 			playerModel.userId = userId;
 			return playerModel;
 		}
 
 		public Builder withCountry(final String country) {
 			this.country = country;
+			return this;
+		}
+
+		public Builder withName(final String name) {
+			this.name = name;
 			return this;
 		}
 
@@ -49,6 +56,10 @@ public class PlayerModel {
 
 	@JsonProperty
 	@NotEmpty
+	private String name;
+
+	@JsonProperty
+	@NotEmpty
 	private String userId;
 
 	public String getCountry() {
@@ -61,6 +72,10 @@ public class PlayerModel {
 
 	public String getUserId() {
 		return userId;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 }

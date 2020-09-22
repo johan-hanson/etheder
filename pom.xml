@@ -11,6 +11,7 @@
 
 	<modules>
 		<module>etheder-api</module>
+		<module>etheder-jdbi</module>
 		<module>etheder-engine</module>
 		<module>etheder-model</module>
 		<module>etheder-startdata</module>
@@ -18,17 +19,18 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- defines version we use in the project -->
 		<jdk.version>11</jdk.version>
-        <java.version>11</java.version>
+		<java.version>11</java.version>
 
-		<dropwizard.version>2.0.12</dropwizard.version>
-		<guicey.version>5.0.1</guicey.version>
-		<guicey.bom.version>5.0.1-1</guicey.bom.version>
+		<dropwizard.version>2.0.13</dropwizard.version>
+		<guicey.version>5.1.0</guicey.version>
+		<guicey.bom.version>5.1.0-2</guicey.bom.version>
 		<dropwizard.jobs.version>3.0.0</dropwizard.jobs.version>
 
-		<postgres.version>42.2.5</postgres.version>
+		<postgres.version>42.2.16</postgres.version>
+		<jdbi3.version>3.12.2</jdbi3.version>
 		<apache.common.lang3.version>3.8.1</apache.common.lang3.version>
 
 		<validation.api.version>2.0.1.Final</validation.api.version>
@@ -72,6 +74,11 @@
 			</dependency>
 			<dependency>
 				<groupId>io.dropwizard</groupId>
+				<artifactId>dropwizard-jersey</artifactId>
+				<version>${dropwizard.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.dropwizard</groupId>
 				<artifactId>dropwizard-testing</artifactId>
 				<version>${dropwizard.version}</version>
 			</dependency>
@@ -81,11 +88,11 @@
 				<version>${guicey.version}</version>
 			</dependency>
 			<dependency>
-				 <groupId>ru.vyarus.guicey</groupId>
-            	<artifactId>guicey-bom</artifactId>
-            	<version>${guicey.bom.version}</version>
-            	<type>pom</type>
-            	<scope>import</scope>
+				<groupId>ru.vyarus.guicey</groupId>
+				<artifactId>guicey-bom</artifactId>
+				<version>${guicey.bom.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
 			<dependency>
 				<groupId>de.spinscale.dropwizard</groupId>
@@ -98,6 +105,11 @@
 				<version>${dropwizard.jobs.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>se.webinfostudio.game</groupId>
+				<artifactId>etheder-jdbi</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>se.webinfostudio.game</groupId>
 				<artifactId>etheder-engine</artifactId>
@@ -119,6 +131,11 @@
 				<groupId>org.postgresql</groupId>
 				<artifactId>postgresql</artifactId>
 				<version>${postgres.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.jdbi</groupId>
+			    <artifactId>jdbi3-postgres</artifactId>
+			    <version>${jdbi3.version}</version>
 			</dependency>
 
 			<!-- common -->

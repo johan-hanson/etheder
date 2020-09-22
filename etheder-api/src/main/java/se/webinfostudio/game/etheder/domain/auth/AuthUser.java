@@ -1,9 +1,11 @@
 package se.webinfostudio.game.etheder.domain.auth;
 
 import static java.lang.String.format;
+import static java.util.UUID.fromString;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -81,6 +83,10 @@ public class AuthUser implements Principal {
 
 	public String getUserId() {
 		return userId;
+	}
+
+	public UUID getUserIdAsUUID() {
+		return fromString(userId);
 	}
 
 	public String getUserName() {
