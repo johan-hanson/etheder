@@ -1,0 +1,30 @@
+#----------------------------------------------------------------------------
+# This is a docker-compose file for running Etheder dependencies locally
+#----------------------------------------------------------------------------
+#
+version: '3.8'
+services:
+  postgresql:
+      image: postgres
+      container_name: postgresql
+      ports:
+        - "5432:5432"
+      volumes:
+        - postgres-vol:/var/lib/pgsql/data
+      env_file:
+        - database.env
+  pgadmin:
+      image: dpage/pgadmin4
+      container_name: pgadmin4
+      env_file:
+        - pgadmin.env
+      ports:
+        - "8060:80"
+      volumes:
+        - pgadmin-vol:/var/lib/pgadmin
+      links:
+        - "postgresql:pgsql-server"
+
+volumes:
+  postgres-vol:
+  pgadmin-vol:

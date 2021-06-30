@@ -1,0 +1,5 @@
+first time or if adding new service
+docker-compose.exe pull
+
+then
+docker-compose.exe up -d
