@@ -29,7 +29,7 @@
 		<guicey.bom.version>5.1.0-2</guicey.bom.version>
 		<dropwizard.jobs.version>3.0.0</dropwizard.jobs.version>
 
-		<postgres.version>42.3.3</postgres.version>
+		<postgres.version>42.4.1</postgres.version>
 		<jdbi3.version>3.12.2</jdbi3.version>
 		<apache.common.lang3.version>3.8.1</apache.common.lang3.version>
 
