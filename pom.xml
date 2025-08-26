@@ -31,7 +31,7 @@
 
 		<postgres.version>42.7.2</postgres.version>
 		<jdbi3.version>3.12.2</jdbi3.version>
-		<apache.common.lang3.version>3.8.1</apache.common.lang3.version>
+		<apache.common.lang3.version>3.18.0</apache.common.lang3.version>
 
 		<validation.api.version>2.0.1.Final</validation.api.version>
 		<jbcrypt.version>0.4</jbcrypt.version>
